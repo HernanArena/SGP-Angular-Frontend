@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit,OnDestroy{
+export class SearchComponent implements OnInit{
 
 
   termino:string;
@@ -119,8 +119,8 @@ export class SearchComponent implements OnInit,OnDestroy{
 
 
 
-  ngOnDestroy(): void {
-    this.moduloSubscription.unsubscribe();
-    this.storeSubscription.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   this.moduloSubscription.unsubscribe();
+  //   this.storeSubscription.unsubscribe();
+  // }
 }

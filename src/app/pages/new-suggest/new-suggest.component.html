@@ -3,63 +3,49 @@
                 fontawsome = "fa fa-2x fa-lightbulb-o"
                 colorRibbon = "ribbon ribbon-corner ribbon-right ribbon-warning"
                 ></app-title-page>
+<div class="row" style="margin-top:25px;">
+  <div class="col-md-12">
+    <app-step-bystep [steps] = "step" [progress] = "valor"></app-step-bystep>
+  </div>
+</div>
 <form class="form-material m-t-40" id="msform">
   <div id="carouselExampleControls" class="carousel slide" data-interval="false" data-ride="carousel" data-pause="hover">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <ul id="progressbar">
-          <li class="active">Cliente</li>
-          <li>Version</li>
-          <li>Sugenrencia</li>
-        </ul>
         <div class="form-group">
-          <h2 >Datos del Cliente</h2>
-          <h3 >Ingrese los datos de su empresa</h3>
+          <h4 style="font-weight:500;">Datos del Cliente</h4>
+          <h5 >Ingrese los datos de su empresa</h5>
           <input type="text" class="form-control form-control-line" placeholder="Razon social">
           <input type="text" class="form-control form-control-line" placeholder="Nombre">
           <input type="text" class="form-control form-control-line" placeholder="Sector">
-          <a class="padd"  href="#carouselExampleControls" role="button" data-slide="next">
-            <button type="submit" class="btn btn-info next" name="next" value="Siguiente">Siguiente</button>
-          </a>
         </div>
       </div>
       <div class="carousel-item">
-        <ul id="progressbar">
-          <li class="active">Cliente</li>
-          <li class="active">Version</li>
-          <li>Sugenrencia</li>
-        </ul>
         <div class="form-group">
-          <h2 >Datos del Sistema</h2>
-          <h3 >Ingrese los datos sobre su versión</h3>
+          <h4 style="font-weight:500;">Datos del Sistema</h4>
+          <h5 >Ingrese los datos sobre su versión</h5>
           <input type="text" class="form-control form-control-line" placeholder="Producto">
           <input type="text" class="form-control form-control-line" placeholder="Versión">
           <input type="text" class="form-control form-control-line" placeholder="Módulo">
-          <a class="padd" href="#carouselExampleControls" role="button" data-slide="prev">
-            <button type="submit" class="btn btn-info next" name="previous">Anterior</button>
-          </a>
-          <a class="padd" href="#carouselExampleControls" role="button" data-slide="next">
-            <button type="submit" class="btn btn-info previous" name="next">Siguiente</button>
-          </a>
         </div>
       </div>
       <div class="carousel-item">
-        <ul id="progressbar">
-          <li class="active">Cliente</li>
-          <li class="active">Version</li>
-          <li class="active">Sugenrencia</li>
-        </ul>
         <div class="form-group">
-          <h2 >Sugerencia</h2>
-          <h3 >Ingrese la sugerencia</h3>
+          <h4 style="font-weight:500;">Sugerencia</h4>
+          <h5 >Ingrese la sugerencia</h5>
           <input type="text" class="form-control form-control-line" placeholder="Asunto">
           <textarea name="address" placeholder="Describa sus comentarios aqui"></textarea>
-          <a class="padd" href="#carouselExampleControls" role="button" data-slide="prev">
-            <button type="submit" class="btn btn-info previous" name="previous">Anterior</button>
-          </a>
           <button type="submit" name="submit" class="btn btn-success submit">Enviar</button>
         </div>
       </div>
     </div>
   </div>
 </form>
+  <button style="margin:10px;" *ngIf="valor!=0"(click)="anteriorStep()" type="button" class="btn btn-info"><i class="fa fa-chevron-left" aria-hidden="true"></i> Anterior</button>
+  <button style="margin:10px;" *ngIf="valor<step-1"(click)="siguienteStep()" type="button" class="btn btn-info">Siguiente <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+  <button style="margin:10px;" *ngIf="valor==step-1"(click)="enviar()" type="button" class="btn btn-success">Enviar <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+  <!-- <a data-slide="prev" role="button" href="#carouselExampleControls" >
+  </a>
+  <a data-slide="next" role="button" href="#carouselExampleControls" >
+  </a>   -->

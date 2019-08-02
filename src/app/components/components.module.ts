@@ -28,7 +28,8 @@ import { PipesModule } from '../pipes/pipes.module';
     FinderComponent,
     FloatingInputComponent,
     TitlePageComponent,
-    ModalWizardComponent
+    ModalWizardComponent,
+    StepBystepComponent
   ]
 })
 export class ComponentsModule { }
