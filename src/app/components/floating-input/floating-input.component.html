@@ -1,5 +1,6 @@
 <form [formGroup] = "forma"
       novalidate = "novalidate"
+      autocomplete="off"
       class="m-t-40 " [ngClass]="{'floating-labels': floating }">
     <div class="form-group has-feedback floating-labels" [ngClass]="{'has-danger': !forma.get('inputFloating').valid && forma.get('inputFloating').dirty,
                                                      'has-error': !forma.get('inputFloating').valid && forma.get('inputFloating').dirty,

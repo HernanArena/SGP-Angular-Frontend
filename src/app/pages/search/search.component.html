@@ -11,8 +11,7 @@
 
     </div>
     <div class="col-md-5">
-      <app-floating-input nombre ="dll" disabled="true"></app-floating-input>
-
+      <app-floating-input nombre ="dll" disabled="true" placeholder="DLL asociada..."></app-floating-input>
     </div>
     <div class="col-md-1"></div>
   </div>
@@ -21,7 +20,7 @@
     <div class="col-md-1"></div>
     <div class="col-md-10">
       <app-floating-input nombre ="modulo"  (actualizaValor)="termino = $event" minLength = "2" (valorSeleccionado) = "modulo = $event"
-                        requerido = "true" placeholder="EJ: CJ- Seleccione un módulo.."
+                        requerido = "true" placeholder="Seleccione un módulo... - EJ: Tesorería"
                         [array] = "modulos" (keyup)="getModulos(termino)"(click)="cargarModulo(modulo)"></app-floating-input>
     </div>
     <div class="col-md-1">
@@ -33,8 +32,8 @@
     </div>
     <div class="col-md-10">
       <app-floating-input nombre ="objeto"  (actualizaValor)="termino = $event"  minLength = "4"
-                          requerido = "true" placeholder="EJ: Tesorerìa - Complete con un objeto.."
-                          [array] = "objetos" (keyup)="getObjetos(termino)" ></app-floating-input>
+                          requerido = "true" placeholder="Indique el objeto... - EJ: Cuentas corrientes por fecha"
+                          [array] = "objetos" (keyup)="getObjetos(modulo,termino)" ></app-floating-input>
     </div>
     <div class="col-md-1"></div>
   </div>

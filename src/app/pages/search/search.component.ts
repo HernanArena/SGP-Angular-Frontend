@@ -52,9 +52,9 @@ export class SearchComponent implements OnInit,OnDestroy{
   ngOnInit() {
 
   };
-  getModulos(value:any){
-    if(value){
-      this.moduloSubscription = this._sp.getmodulos(value).subscribe(data => {
+  getModulos(termino:any){
+    if(termino){
+      this.moduloSubscription = this._sp.getmodulos(termino).subscribe(data => {
         this.modulos = data
       });
     }else{
@@ -65,23 +65,22 @@ export class SearchComponent implements OnInit,OnDestroy{
       this._sp.cargarFiltrosStore(filtros);
     }
   }
-  cargarModulo(value){
+  cargarModulo(value:string){
     if(value){
+      this.modulo = value;
       if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
         let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
         this._sp.cargarFiltrosStore(filtros);
       }
-     this.moduloFilter = value;
     }
   }
-  getObjetos(value:any){
-    if(value){
-      console.log(value)
-      this.ObjetoSubscription = this._sp.getObjetosConFiltro(value).subscribe(data => {
-        this.objetos = data.filter((data:any) => {return data.modulo === this.moduloFilter});
+  getObjetos(modulo:string,termino:string){
+    if(modulo && termino){
+      this.ObjetoSubscription = this._sp.getObjetosConFiltro(modulo, termino).subscribe(data => {
+        this.objetos = data;
       });
     }else{
-        this.modulos = [];
+        this.objetos = [];
     }
   }
   recuperarVersion(version:number){
@@ -118,9 +117,9 @@ export class SearchComponent implements OnInit,OnDestroy{
   }
 
 
-
+//A pedido de her
   ngOnDestroy(): void {
-    this.moduloSubscription.unsubscribe();
-    this.storeSubscription.unsubscribe();
+  //  this.moduloSubscription.unsubscribe();
+    //this.storeSubscription.unsubscribe();
   }
 }
