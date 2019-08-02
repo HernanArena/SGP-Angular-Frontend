@@ -5,7 +5,10 @@
       <div  class="modal-sp-content">
         <div  *ngIf="!pasarPresentacion">
           <div  class="modal-sp-header">
-            <h4><span style="color:#eb0f1c;">{{codigo}}: </span> {{ descripcion | truncate: 20}}</h4>
+            <button (click)="cerrarModal()" type="button" class="close-sp" aria-label="Close-sp">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h4><span style="color:#eb0f1c;">{{codigo}}: </span> {{ descripcion | truncate: 50}}</h4>
           </div>
           <div class="modal-sp-body-vacio" align="center">
             <p>qwerqwer qwerqwerqwe qwer</p>

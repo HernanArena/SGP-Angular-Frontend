@@ -8,7 +8,7 @@ import { ModalWizardService } from 'src/app/services/modal-wizard/modal-wizard.s
   styleUrls: ['./modal-wizard.component.css']
 })
 export class ModalWizardComponent implements OnInit {
-  descripcion:string ="Hola mi vida como estas?"
+  descripcion:string ="Esto es un string largo recortado en 50 caracteres recortados en 50"
   codigo:string = "GR0003"
 
   valor:number = 0;

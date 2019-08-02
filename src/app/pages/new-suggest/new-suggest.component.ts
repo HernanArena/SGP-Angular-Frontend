@@ -9,6 +9,7 @@ export class NewSuggestComponent implements OnInit {
 
   valor:number = 0;
   step:number = 3;
+  disabled:boolean = false;
 
   constructor() { }
 
@@ -17,8 +18,8 @@ export class NewSuggestComponent implements OnInit {
   siguienteStep(){
     if(this.valor<3 && this.valor>=0){
       this.valor = this.valor + 1;
-      console.log(this.valor)
     }
+
   }
   anteriorStep(){
     if(this.valor <= 3 && this.valor>0){
