@@ -1,0 +1,17 @@
+<app-title-page titulo = "Ingrese el código o mensaje de error"
+                descrip ="Luego seleccione de la lista desplegable el error encontrado"
+                fontawsome = "fa fa-2x fa-book"
+                colorRibbon = "ribbon ribbon-corner ribbon-right ribbon-info">
+</app-title-page>
+
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <app-floating-input nombre ="codigo"  (actualizaValor)="errorCode = $event" minLength = "6" (valorSeleccionado) = "codigo = $event"
+                      requerido = "true" placeholder="EJ: GR000016 -  Mensaje de error.."
+                      [array] = "codigoSelect" (keyup)="getError(errorCode)"></app-floating-input>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<button (click) = "mostrarModal()" class="btn btn-info">Buscar</button>

@@ -1,0 +1,16 @@
+.listas {
+  cursor: pointer;
+}
+.will {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+  padding: 10px;
+}
+.will p {
+  font-size: 14px;
+}
+.listas li:hover{
+  color:#67757c;;
+  background-color: #d8dbdc;
+}

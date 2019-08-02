@@ -1,0 +1,45 @@
+<div class="row center-block" style="margin-top:5px;" >
+  <div [ngClass]="{'col-md-4': steps<=3,'col-md-3': steps == 4, 'col-md-2': steps == 5, 'col-md-1': steps == 6}"></div>
+  <div [ngClass]="{'col-md-4': steps<=3,'col-md-6': steps == 4,'col-md-8': steps == 5, 'col-md-10': steps == 6}">
+    <a href="#" >
+      <span class="bs-stepper-circle empty" [ngClass]="{'empty': progress<1,
+                                                        'selected': progress>=1}"
+                  *ngIf="step1.active" id="stepCircle1" [style.left] = "step1.position + '%'">1</span>
+    </a>
+    <a href="#" >
+      <span class="bs-stepper-circle" [ngClass]="{'noSelected': progress<1,
+                                                  'empty': progress<2,
+                                                  'selected': progress>=2}"
+            *ngIf="step2.active" id="stepCircle2" [style.left] = "step2.position + '%'">2</span>
+    </a>
+    <a href="#" >
+      <span class="bs-stepper-circle" [ngClass]="{'noSelected': progress<2,
+                                                  'empty': progress<3,
+                                                  'selected': progress>=3}"
+                  *ngIf="step3.active" id="stepCircle3" [style.left] = "step3.position + '%'">3</span>
+    </a>
+    <a href="#" >
+      <span class="bs-stepper-circle" [ngClass]="{'noSelected': progress<3,
+                                                  'empty': progress<4,
+                                                  'selected': progress>=4}"
+                  *ngIf="step4.active" id="stepCircle4" [style.left] = "step4.position + '%'">4</span>
+    </a>
+    <a href="#" >
+      <span class="bs-stepper-circle" [ngClass]="{'noSelected': progress<4,
+                                                  'empty': progress<5,
+                                                  'selected': progress>=5 }"
+                  *ngIf="step5.active" id="stepCircle5" [style.left] = "step5.position + '%'">5</span>
+    </a>
+    <a href="#" >
+      <span class="bs-stepper-circle" [ngClass]="{'noSelected': progress<5,
+                                                  'empty': progress<6,
+                                                  'selected': progress == 6 }"
+                  *ngIf="step6.active" id="stepCircle6" [style.left] = "step6.position + '%'">6</span>
+    </a>
+
+    <div class="progress" style="height: 5px;" >
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" [style.width]=" progress * (100/(this.steps-1)) +'%'"></div>
+    </div>
+  </div>
+    <div [ngClass]="{'col-md-4': steps<=3,'col-md-3': steps == 4, 'col-md-2': steps == 5, 'col-md-1': steps == 6}"></div>
+</div>

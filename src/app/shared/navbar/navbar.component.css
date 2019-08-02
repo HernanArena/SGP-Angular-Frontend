@@ -1,0 +1,27 @@
+.navbar{
+  background:#FFF;
+  padding:0;
+  height:60px;
+  margin:0;
+  z-index:999;
+  border-radius:0;
+  border:none;
+  margin:auto;
+  position:relative;
+  -webkit-box-shadow:0 5px 5px -5px rgba(0,0,0,0.1);
+  -moz-box-shadow:0 5px 5px -5px rgba(0,0,0,0.1);
+  box-shadow:0 5px 5px -5px rgba(0,0,0,0.1)
+}
+.topmenu-outer{
+  height:60px;
+  background:#fff;
+  margin-left:160px
+}
+.navbar-image{
+  margin-left:20px;
+  width:12%;
+  height:60px;
+  background:url('../../../assets/images/logo-sar.png') no-repeat center center;
+  background-size:contain
+}
+ .glyphicon-log-out:before{content:"\e163"}

@@ -1,0 +1,59 @@
+
+.progress{
+    position: relative;
+    top: -250%;
+    left:2%;
+}
+
+#stepCircle1{
+   position: absolute;
+   z-index: 50;
+   top: -650%;
+
+}
+#stepCircle2{
+   position: absolute;
+   z-index: 50;
+   top: -650%;
+}
+
+#stepCircle3{
+   position: absolute;
+   z-index: 50;
+   top: -650%;
+}
+
+#stepCircle4{
+   position: absolute;
+   z-index: 50;
+   top: -650%;
+}
+
+#stepCircle5{
+   position: absolute;
+   z-index: 50;
+   top: -650%;
+}
+#stepCircle6{
+   position: absolute;
+   z-index: 50;
+   top: -650%;
+}
+.empty{
+  color:#398bf7;
+  /* font-weight: bold; */
+  border: 3px solid #398bf7;
+  background: #fff;
+}
+.selected{
+  color:#fff;
+  /* font-weight: bold; */
+  border: 3px solid #398bf7;
+  background: #398bf7;
+}
+.noSelected{
+  color:#625e5e;
+  /* font-weight: bold; */
+  border: 3px solid #F3F3F3;
+  background: #fff;
+}

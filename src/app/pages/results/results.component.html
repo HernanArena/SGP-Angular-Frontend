@@ -1,0 +1,25 @@
+
+<app-finder></app-finder>
+<h4 class="card-title">Partes encontrados</h4>
+<h6 class="card-subtitle">Se encontraron {{1}} resultados</h6>
+<ul class="search-listing">
+    <li *ngFor="let parte of partespaginados">
+        <h3><a href="javacript:void(0)">Parte: {{parte.codigo}} - {{parte.numero}}</a></h3>
+        <h4><a href="javacript:void(0)">Version: {{parte.version}}</a></h4>
+        <a href="javascript:void(0)" class="search-links">Fecha de liberacion: {{parte.fecha_de_liberacion}}</a>
+        <p>{{parte.descripcion}}</p>
+    </li>
+</ul>
+<nav aria-label="Page navigation example" class="m-t-40">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+
+        <li *ngFor="let idx of paginas" class="page-item"><a class="page-link" href="javascript:void(0)" (click)=cambiodePagina(idx)>{{idx}}</a></li>
+
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>

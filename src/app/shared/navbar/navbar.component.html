@@ -1,0 +1,57 @@
+<header class="topbar">
+    <nav class="navbar top-navbar navbar-expand-md navbar-light">
+      <!-- ============================================================== -->
+      <!-- Logo -->
+      <!-- ============================================================== -->
+      <div class="navbar-header">
+          <a class="navbar-brand">
+              <img *ngIf="mostrar" src="assets/images/avatar6.png" alt="homepage" class="dark-logo profile-pic" />
+              <span><img src="assets/images/logo-sar.png" alt="homepage" class="dark-logo" /></span>
+          </a>
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Logo -->
+      <!-- ============================================================== -->
+      <div class="navbar-collapse">
+          <!-- ============================================================== -->
+          <!-- toggle and nav items -->
+          <!-- ============================================================== -->
+          <ul   class="navbar-nav mr-auto">
+              <!-- This is  -->
+              <li (click)="mostrar = !mostrar" class="nav-item"> <a class="nav-link hidden-md-up waves-effect waves-dark" href="javascript:void(0)" ><i class="ti-menu"></i></a> </li>
+              <li (click)="mostrar = !mostrar" class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark"  href="javascript:void(0)" ><i class="ti-menu"></i></a> </li>
+              <li class="nav-item hidden-sm-down"></li>
+          </ul>
+          <!-- ============================================================== -->
+          <!-- User profile and search -->
+          <!-- ============================================================== -->
+          <ul class="navbar-nav my-lg-0">
+            <!-- ============================================================== -->
+            <!-- Messages -->
+            <!-- ============================================================== -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-email"></i>
+                  <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+              </a>
+            </li>
+            <!-- ============================================================== -->
+            <!-- End Messages -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Profile -->
+            <!-- ============================================================== -->
+            <li class="nav-item ">
+                <a class="nav-link waves-effect waves-dark" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/avatar1.png" alt="user" class="profile-pic" /></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect waves-dark" (click)="Logout()">
+                <span><i class="fa fa-1.5x fa-sign-out"></i>Salir</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+    </nav>
+</header>
+<!-- ============================================================== -->
+<!-- End Topbar header -->
+<!-- ============================================================== -->

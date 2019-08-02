@@ -1,0 +1,93 @@
+<app-title-page titulo = "Inicie su consulta"
+                descrip ="Seleccione una opción para comenzar"></app-title-page>
+<section class="index-cards">
+    <div>
+      <a [routerLink] = "['/controlados']" class="card azul floating" >
+        <span class="icon"><i class="fa fa-5x fa fa-book"></i></span>
+      </a>
+      <h4>Tengo un código de Error</h4>
+      <div>Si conoce el código de error ingrese aquí para
+          ver las posibles soluciones a su problema</div>
+    </div>
+
+    <div>
+      <a [routerLink] = "['/busqueda']"  class="card rojo floating">
+        <span class="icon"><i class="fa fa-5x fa fa-question-circle-o"></i></span>
+      </a>
+      <h4>No tengo código de Error</h4>
+      <div class="texto">Si no aparece un error en pantalla,
+          ingrese aquí para cargar un nuevo ticket</div>
+    </div>
+
+    <div>
+      <a [routerLink] = "['/sugerencias']" class="card amarillo floating">
+        <span class="icon"><i class="fa fa-5x fa fa-lightbulb-o"></i></span>
+      </a>
+      <h4>Enviar una sugerencia</h4>
+      <div id="tooltipsoftland" >Ingrese aquí para enviar una sugerencia
+          sobre el uso del sistema</div>
+    </div>
+</section>
+<section class="rowcentral">
+  <div>¿Dónde encuentro el código de error?
+  <button class="btn btn-info" (click)="mostrarlo()">clic aquí</button></div>
+
+  <div *ngIf="mostrar" id="tooltipfoto" class="divoculto" >
+    <div class="row">
+
+      <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Barra superior</h4>
+                El <a class="mytooltip" href="javascript:void(0)">
+                  error <span class="tooltip-content5">
+                          <span class="tooltip-text3">
+                            <span class="tooltip-inner2">
+                              <img src="../assets/images/tooltip/errores3.png" />
+                            </span>
+                          </span>
+                        </span>
+                    </a> aparece en el recuadro superior de la ventana actual
+            </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                 <h4 class="card-title">Barra inferior</h4>
+                El <a class="mytooltip" href="javascript:void(0)">
+                  error <span class="tooltip-content5">
+                          <span class="tooltip-text3">
+                            <span class="tooltip-inner2">
+                              <img src="../assets/images/tooltip/errores2.png" />
+                            </span>
+                          </span>
+                        </span>
+                    </a> aparece en el recuadro inferior de la ventana actual
+            </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Ventana de mensajes</h4>
+                El <a class="mytooltip" href="javascript:void(0)">
+                  error <span class="tooltip-content5">
+                          <span class="tooltip-text3">
+                            <span class="tooltip-inner2">
+                              <img src="../assets/images/tooltip/errores1.png" />
+                            </span>
+                          </span>
+                        </span>
+                    </a> aparece en la ventana de mensajes emergentes
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,9 @@
+
+<div class="input-group">
+  <textarea  type="textarea" class="form-control" placeholder="Ingrese un término de busqueda..."
+  name = "termino"
+  [(ngModel)] = "_termino"
+  #termino = "ngModel"> </textarea>
+</div>
+<br>
+  <button class="btn btn-info" (click) ="navegararesultsyguardarstorage()" type="button">Buscar</button>

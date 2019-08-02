@@ -1,0 +1,51 @@
+<app-title-page titulo = "Busqueda Avanzada"
+                descrip = "Elija la versión de Softland, módulo y objeto, si es necesario indique el componente Dll"
+                fontawsome = "fa fa-2x fa-search"
+                colorRibbon = "ribbon ribbon-corner ribbon-right ribbon-danger"></app-title-page>
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      <app-floating-input  (actualizaValor)="termino = $event"  (valorSeleccionado) = "version = $event"
+                          nombre ="version"  requerido = "true" placeholder="EJ: 4.3.0- Indique una versión.."></app-floating-input>
+
+    </div>
+    <div class="col-md-5">
+      <app-floating-input nombre ="dll" disabled="true"></app-floating-input>
+
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <app-floating-input nombre ="modulo"  (actualizaValor)="termino = $event" minLength = "2" (valorSeleccionado) = "modulo = $event"
+                        requerido = "true" placeholder="EJ: CJ- Seleccione un módulo.."
+                        [array] = "modulos" (keyup)="getModulos(termino)"(click)="cargarModulo(modulo)"></app-floating-input>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+      <app-floating-input nombre ="objeto"  (actualizaValor)="termino = $event"  minLength = "4"
+                          requerido = "true" placeholder="EJ: Tesorerìa - Complete con un objeto.."
+                          [array] = "objetos" (keyup)="getObjetos(termino)" ></app-floating-input>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+</div>
+<br>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <app-finder></app-finder>
+  </div>
+  <div class="col-md-1"></div>
+</div>
