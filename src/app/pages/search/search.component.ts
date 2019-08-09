@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { SearchService } from 'src/app/services/search/search.service';
 import { Subscription } from 'rxjs';
 import { Filtro } from 'src/app/models/filtro.model'
@@ -30,9 +30,14 @@ export class SearchComponent implements OnInit{
   objeto:string;
   moduloFilter:string;
 
+  versionValida:boolean;
+  moduloValido:boolean;
+  objetoValido:boolean;
+
   constructor(public _sp:SearchService,
               public store:Store<AppState>,
-              private router:Router) {
+              private router:Router,
+              private cd: ChangeDetectorRef) {
     // this.moduloSubscription = this._sp.getmodulos().subscribe(modulos=>{
     //   this.modulos = modulos;
     // });
@@ -50,14 +55,14 @@ export class SearchComponent implements OnInit{
   }
 
   ngOnInit() {
-
   };
-  getModulos(value:any){
-    if(value){
-      this.moduloSubscription = this._sp.getmodulos(value).subscribe(data => {
+  getModulos(termino:any){
+    if(termino){
+      this.moduloSubscription = this._sp.getmodulos(termino).subscribe(data => {
         this.modulos = data
       });
     }else{
+
         this.modulos = [];
     }
     if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
@@ -65,23 +70,24 @@ export class SearchComponent implements OnInit{
       this._sp.cargarFiltrosStore(filtros);
     }
   }
-  cargarModulo(value){
+  cargarModulo(value:string){
     if(value){
+      this.cd.markForCheck();
+      this.modulo = value;
+      this.cd.detectChanges();
       if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
         let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
         this._sp.cargarFiltrosStore(filtros);
       }
-     this.moduloFilter = value;
     }
   }
-  getObjetos(value:any){
-    if(value){
-      console.log(value)
-      this.ObjetoSubscription = this._sp.getObjetosConFiltro(value).subscribe(data => {
-        this.objetos = data.filter((data:any) => {return data.modulo === this.moduloFilter});
+  getObjetos(modulo:string,termino:string){
+    if(modulo && termino){
+      this.ObjetoSubscription = this._sp.getObjetosConFiltro(modulo, termino).subscribe(data => {
+        this.objetos = data;
       });
     }else{
-        this.modulos = [];
+        this.objetos = [];
     }
   }
   recuperarVersion(version:number){
@@ -118,9 +124,9 @@ export class SearchComponent implements OnInit{
   }
 
 
-
-  // ngOnDestroy(): void {
-  //   this.moduloSubscription.unsubscribe();
-  //   this.storeSubscription.unsubscribe();
-  // }
+//A pedido de her
+  ngOnDestroy(): void {
+  //  this.moduloSubscription.unsubscribe();
+    //this.storeSubscription.unsubscribe();
+  }
 }

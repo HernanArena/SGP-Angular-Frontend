@@ -6,4 +6,4 @@
   #termino = "ngModel"> </textarea>
 </div>
 <br>
-  <button class="btn btn-info" (click) ="navegararesultsyguardarstorage()" type="button">Buscar</button>
+  <button [attr.disabled]="botonValido?true:null" class="btn btn-info" (click) ="navegararesultsyguardarstorage()" type="button">Buscar</button>

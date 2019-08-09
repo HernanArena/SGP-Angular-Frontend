@@ -37,7 +37,8 @@ export class SearchcodeComponent implements OnInit {
   mostrarModal(){
     this._ms.mostrarModal('','');
   }
-  // ngOnDestroy(): void {
-  //   this.codigoSubscription.unsubscribe();
-  // }
+  //A pedido de her
+  ngOnDestroy(): void {
+  //  this.codigoSubscription.unsubscribe();
+  }
 }

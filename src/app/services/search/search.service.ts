@@ -164,105 +164,18 @@ export class SearchService {
                     Gracias `
     }
   ];
-  modulos:modulo[] =[
-    {   codigo: "AG", descripcion: "Gestión Agropecuaria"},
-    {   codigo: "AU", descripcion: "Autorizaciones"},
-    {   codigo: "CB", descripcion: "Conciliación Bancaria"},
-    {   codigo: "CF", descripcion: "Cash Flow"},
-    {   codigo: "CG", descripcion: "Contabilidad"},
-    {   codigo: "CJ", descripcion: "Tesorería"},
-    {   codigo: "CO", descripcion: "Compras"},
-    {   codigo: "CP", descripcion: "Control Presupuestario"},
-    {   codigo: "CT", descripcion: "Costos"},
-    {   codigo: "CV", descripcion: "Facturación de Contratos"},
-    {   codigo: "DG", descripcion: "Impuestos"},
-    {   codigo: "DP", descripcion: "Depuraciones"},
-    {   codigo: "DY", descripcion: "Tabla de Migracion con el Sistema America"},
-    {   codigo: "EC", descripcion: "E-Commerce"},
-    {   codigo: "ED", descripcion: "Gestión Educativa"},
-    {   codigo: "EO", descripcion: "Análisis de Gestión Financiera (EOAF)"},
-    {   codigo: "FC", descripcion: "Facturación"},
-    {   codigo: "GC", descripcion: "Gestión Comercial"},
-    {   codigo: "GP", descripcion: "Gestión de Proyectos"},
-    {   codigo: "GR", descripcion: "General"},
-    {   codigo: "IG", descripcion: "Informes Gerenciales"},
-    {   codigo: "IM", descripcion: "Importaciones"},
-    {   codigo: "IN", descripcion: "Interfases"},
-    {   codigo: "ME", descripcion: "Mantenimiento de Equipos y Vehículos"},
-    {   codigo: "PD", descripcion: "Producción"},
-    {   codigo: "PM", descripcion: "Administración de Proyectos"},
-    {   codigo: "PV", descripcion: "Proveedores"},
-    {   codigo: "RH", descripcion: "Recursos Humanos"},
-    {   codigo: "RP", descripcion: "Repartos"},
-    {   codigo: "RV", descripcion: "Activo Fijo"},
-    {   codigo: "SJ", descripcion: "Sueldos y Jornales"},
-    {   codigo: "SP", descripcion: "Seguimiento de Proyectos"},
-    {   codigo: "ST", descripcion: "Stock"},
-    {   codigo: "TR", descripcion: "Transferencias"},
-    {   codigo: "VT", descripcion: "Clientes"},
-    {   codigo: "WA", descripcion: "Autorización"},
-    {   codigo: "WG", descripcion: "Wizard Generator"}
-  ];
-  objetos:any[] = [
-    {   codigo: "ACTSTWIZ", descripcion: "Contabilización de Costos", modulo: "ST"},
-    {   codigo: "ADMIN - GRAERH", descripcion: "Entidad Relacional", modulo: "GR"},
-    {   codigo: "AE_DEPURACION", descripcion: "AE - Depuración de Compras", modulo: "AE"},
-    {   codigo: "AE_DEPURACIONFC", descripcion: "AE - Depuración de Facturación", modulo: "AE"},
-    {   codigo: "AG_PEN_ANU_EXE", descripcion: "AG - Pendientes de anulación (Grupo)", modulo: "AE"},
-    {   codigo: "AG_PEN_ANU_PAR", descripcion: "AG - Pendientes de anulación (Grupo)", modulo: "AG"},
-    {   codigo: "AG_PEN_COS", descripcion: "AG - Pendientes de cosecha", modulo: "AG"},
-    {   codigo: "AG_PEN_DET", descripcion: "AG - Pendientes de siembra (Detalle)", modulo: "AG"},
-    {   codigo: "AG_PEN_GEN", descripcion: "AG - Pendientes de generación de consumos", modulo: "AG"},
-    {   codigo: "AG_PEN_GRP", descripcion: "AG - Pendientes de siembra (Grupo)", modulo: "AE"},
-    {   codigo: "AG_PEN_INF", descripcion: "AG - Pendientes para informes de servicio de compras (Sin req. en AG)", modulo: "AG"},
-    {   codigo: "AG_PEN_INF_FOR", descripcion: "AG - Pendientes para informes de servicio de compras (Con req. en AG)", modulo: "AG"},
-    {   codigo: "AG_PEN_ORD_DET", descripcion: "AG - Pendientes de simulación (Detalle)", modulo: "AG"},
-    {   codigo: "AG_PEN_ORD_GRP", descripcion: "AG - Planes de siembra (Grupo)", modulo: "AG"},
-    {   codigo: "AG_PEN_REQ", descripcion: "AG - Pendientes para requerimientos de compras", modulo: "AG"},
-    {   codigo: "AG_PEN_SIE_DET", descripcion: "AG - Pendientes de siembra (Detalle)", modulo: "AG"},
-    {   codigo: "AG_PEN_SIE_GRP", descripcion: "AG - Pendientes de siembra (Grupo)", modulo: "AG"},
-    {   codigo: "AG_PEN_SIM_DET", descripcion: "AG - Pendientes de simulación (Detalle)", modulo: "AG"},
-    {   codigo: "AG_PEN_SIM_GRP", descripcion: "AG - Pendientes de simulación (Grupo)", modulo: "AG"},
-    {   codigo: "AG_STK_DET", descripcion: "AG - Pendientes de productos (Detalle)", modulo: "AG"},
-    {   codigo: "AG_STK_GRP", descripcion: "AG - Pendientes de productos (Grupo)", modulo: "AG"},
-    {   codigo: "AGC_CBH_LST", descripcion: "AG - Comprobantes de agro", modulo: "AG"},
-    {   codigo: "AGCCBH", descripcion: "Comprobantes de agro", modulo: "AG"},
-    {   codigo: "AGCORMVHWIZ", descripcion: "Generación de requerimientos de compras", modulo: "AG"},
-    {   codigo: "AGINFSERWIZ", descripcion: "Generación de informes de servicios de compras", modulo: "AG"},
-    {   codigo: "AGM_CAH_LST", descripcion: "AG - Establecimientos", modulo: "AG"},
-    {   codigo: "AGMCAH", descripcion: "Maestro de Establecimientos", modulo: "AG"},
-    {   codigo: "AGPARAMWIZ", descripcion: "Definición de parametros de gestión agropecuaria", modulo: "AG"},
-    {   codigo: "AGR_APL_LST", descripcion: "AG - Aplicaciones de Agro", modulo: "AG"},
-    {   codigo: "AGR_MVH_LST", descripcion: "AG - Movimientos de Agro", modulo: "AG"},
-    {   codigo: "AGR_MVH_PCI", descripcion: "AG - Ordenes de siembra pendientes de cierre (Grupo)", modulo: "AG"},
-    {   codigo: "AGR_MVH_PRV", descripcion: "AG - Ordenes de siembra finalizadas (Grupo)", modulo: "AG"},
-    {   codigo: "AGRMVH", descripcion: "Registración de Gestión Agropecuaria", modulo: "AG"},
-    {   codigo: "AGRMVHAPLUPDWIZ", descripcion: "Modificación de aplicaciones de Gestión Agropecuaria", modulo: "AG"},
-    {   codigo: "AGRMVHUPD", descripcion: "Modificación de comprobantes de Gestión Agropecuaria", modulo: "AG"},
-    {   codigo: "AGRMVHWIZ", descripcion: "Registración de gestión agropecuaria", modulo: "AG"},
-    {   codigo: "AGT_ACT_LST", descripcion: "AG - Labores", modulo: "AG"},
-    {   codigo: "AGT_ATH_LST", descripcion: "AG - Atributos", modulo: "AG"},
-    {   codigo: "AGT_CAH_LST", descripcion: "AG - Campañas", modulo: "AG"},
-    {   codigo: "AGT_CIH_LST", descripcion: "AG - Circuitos de agro", modulo: "AG"},
-    {   codigo: "AGT_CIR_LST", descripcion: "AG - Códigos de circuitos de agro", modulo: "AG"},
-    {   codigo: "AGT_FOH_LST", descripcion: "AG - Composición de Recetas", modulo: "AG"},
-    {   codigo: "AGT_FOI_LST", descripcion: "AG - Composición de receta", modulo: "AG"},
-    {   codigo: "AGT_FOR_LST", descripcion: "AG - Tipo de Recetas", modulo: "AG"},
-    {   codigo: "AGT_REH_LST", descripcion: "AG - Responsables", modulo: "AG"},
-    {   codigo: "AGT_TCH_LST", descripcion: "AG - Tipo de Establecimiento", modulo: "AG"},
-    {   codigo: "AGT_TEH_LST", descripcion: "AG - Tipo de Explotación", modulo: "AG"},
-    {   codigo: "AGT_VAR_LST", descripcion: "AG - Variedad", modulo: "AG"},
-    {   codigo: "AGTACT", descripcion: "Labores", modulo: "AG"},
-    {   codigo: "AGTATH", descripcion: "Atributos", modulo: "AG"}
-  ];
+  modulos:modulo[] =[];
+  objetos:objeto[] =[];
   urlAPI = URL_SERVICESTEST;
   constructor(public http:HttpClient,public store:Store<AppState>) { }
 
-  getmodulos(valor:string):Observable<any>{
+  getmodulos(termino:string):Observable<any>{
 
-    return this.http.get(`${this.urlAPI}/modulo`)
-      .pipe(map((resp:any) =>console.log(resp)))
-     // let resultados=null;
+    return this.http.get(`${this.urlAPI}/modulo/${termino}`)
+      .pipe(map((resp:any) => resp.payload))
+
+
+    // let resultados=null;
     // let regex = new RegExp(valor,'i');
     //
     // resultados = this.modulos.filter( data => regex.test(data.descripcion) || regex.test(data.codigo) )
@@ -273,13 +186,17 @@ export class SearchService {
   }
 
 
-  getObjetosConFiltro(valor:string):Observable<any> {
-    let resultados=null;
-    let regex = new RegExp(valor,'i');
-    resultados = this.objetos.filter( data => regex.test(data.descripcion) || regex.test(data.codigo) || regex.test(data.modulo));
-    return new Observable(res =>{
-      res.next(resultados);
-    });
+  getObjetosConFiltro(modulo:string,termino:string):Observable<any> {
+    return this.http.get(`${this.urlAPI}/objeto/${modulo}/${termino}/`)
+    .pipe(map((resp:any) => resp.payload))
+
+
+    // let resultados=null;
+    // let regex = new RegExp(valor,'i');
+    // resultados = this.objetos.filter( data => regex.test(data.descripcion) || regex.test(data.codigo) || regex.test(data.modulo));
+    // return new Observable(res =>{
+    //   res.next(resultados);
+    // });
   }
 
   getPartesConFiltro(termino:string):Observable<any>{
@@ -319,6 +236,11 @@ export class SearchService {
 
 }
 interface modulo{
+  codigo:string,
+  descripcion:string
+}
+
+interface objeto{
   codigo:string,
   descripcion:string
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FinderService } from 'src/app/services/finder/finder.service';
 import { Parte } from 'src/app/models/parte.model';
 import { Store } from '@ngrx/store';
@@ -14,6 +14,9 @@ import { Subscription } from 'rxjs';
 })
 
 export class FinderComponent implements OnInit,OnDestroy {
+
+
+  @Input('botonvalido')  public botonValido:boolean;
 
   partes:Parte[];
   _termino:string;
