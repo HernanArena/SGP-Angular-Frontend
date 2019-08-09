@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { SearchService } from 'src/app/services/search/search.service';
 import { Subscription } from 'rxjs';
 import { Filtro } from 'src/app/models/filtro.model'
@@ -30,9 +30,14 @@ export class SearchComponent implements OnInit,OnDestroy{
   objeto:string;
   moduloFilter:string;
 
+  versionValida:boolean;
+  moduloValido:boolean;
+  objetoValido:boolean;
+
   constructor(public _sp:SearchService,
               public store:Store<AppState>,
-              private router:Router) {
+              private router:Router,
+              private cd: ChangeDetectorRef) {
     // this.moduloSubscription = this._sp.getmodulos().subscribe(modulos=>{
     //   this.modulos = modulos;
     // });
@@ -50,7 +55,6 @@ export class SearchComponent implements OnInit,OnDestroy{
   }
 
   ngOnInit() {
-
   };
   getModulos(termino:any){
     if(termino){
@@ -58,6 +62,7 @@ export class SearchComponent implements OnInit,OnDestroy{
         this.modulos = data
       });
     }else{
+
         this.modulos = [];
     }
     if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
@@ -67,7 +72,9 @@ export class SearchComponent implements OnInit,OnDestroy{
   }
   cargarModulo(value:string){
     if(value){
+      this.cd.markForCheck();
       this.modulo = value;
+      this.cd.detectChanges();
       if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
         let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
         this._sp.cargarFiltrosStore(filtros);

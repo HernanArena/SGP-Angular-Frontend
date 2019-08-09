@@ -7,6 +7,7 @@
     <div class="col-md-1"></div>
     <div class="col-md-5">
       <app-floating-input  (actualizaValor)="termino = $event"  (valorSeleccionado) = "version = $event"
+                          (actualizaEstado) = "versionValida = $event"
                           nombre ="version"  requerido = "true" placeholder="EJ: 4.3.0- Indique una versión.."></app-floating-input>
 
     </div>
@@ -20,6 +21,7 @@
     <div class="col-md-1"></div>
     <div class="col-md-10">
       <app-floating-input nombre ="modulo"  (actualizaValor)="termino = $event" minLength = "2" (valorSeleccionado) = "modulo = $event"
+                        (actualizaEstado) = "moduloValido = $event"
                         requerido = "true" placeholder="Seleccione un módulo... - EJ: Tesorería"
                         [array] = "modulos" (keyup)="getModulos(termino)"(click)="cargarModulo(modulo)"></app-floating-input>
     </div>
@@ -32,8 +34,9 @@
     </div>
     <div class="col-md-10">
       <app-floating-input nombre ="objeto"  (actualizaValor)="termino = $event"  minLength = "4"
+                          (actualizaEstado) = "objetoValido = $event"
                           requerido = "true" placeholder="Indique el objeto... - EJ: Cuentas corrientes por fecha"
-                          [array] = "objetos" (keyup)="getObjetos(modulo,termino)" ></app-floating-input>
+                          [array] = "objetos" (keyup)="getObjetos(modulo,termino)"></app-floating-input>
     </div>
     <div class="col-md-1"></div>
   </div>
@@ -44,7 +47,7 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <app-finder></app-finder>
+    <app-finder botonvalido = " moduloValido && objetoValido?true:false"></app-finder>
   </div>
   <div class="col-md-1"></div>
 </div>
