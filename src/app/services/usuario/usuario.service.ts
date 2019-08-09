@@ -7,7 +7,12 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { Subscription, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { ActivarLoadingAction, DesactivarLoadingAction, CargarUsuario, LimpiarPartesAction, LimpiarUsuario, LimpiarFilterAction } from 'src/app/store/actions';
+import { ActivarLoadingAction,
+         DesactivarLoadingAction,
+         CargarUsuario,
+         LimpiarPartesAction,
+         LimpiarUsuario,
+         LimpiarFilterAction } from 'src/app/store/actions';
 
 
 @Injectable({

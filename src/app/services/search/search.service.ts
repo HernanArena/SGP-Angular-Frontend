@@ -262,9 +262,7 @@ export class SearchService {
 
     return this.http.get(`${this.urlAPI}/modulo`)
       .pipe(map((resp:any) =>console.log(resp)))
-
-
-    // let resultados=null;
+     // let resultados=null;
     // let regex = new RegExp(valor,'i');
     //
     // resultados = this.modulos.filter( data => regex.test(data.descripcion) || regex.test(data.codigo) )

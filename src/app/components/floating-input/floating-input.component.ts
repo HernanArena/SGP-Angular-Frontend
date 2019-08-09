@@ -32,9 +32,11 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   @Output('actualizaValor') public cambioValor:EventEmitter<string> = new EventEmitter()
   @Output('valorSeleccionado') public valorFinal:EventEmitter<string> = new EventEmitter()
+  @Output('estado') public estado:EventEmitter<boolean> = new EventEmitter()
 
   constructor(public _vs:ValidationService,private changeDetector : ChangeDetectorRef,private router:Router) {
     this.init();
+    this.estado.emit(this.forma.get('inputFloating').valid);
     this.changeDetector.markForCheck();
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -49,7 +51,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   }
 
   ngOnInit() {
-        this.changeDetector.markForCheck();
+    this.changeDetector.markForCheck();
     this.createValidation();
     this.placeholderOlder = this.placeholder;
     this.valorSeleccionado = false;
@@ -65,12 +67,14 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     this.valorFinal.emit(data.codigo)
     this.placeholder = ""
     this.valorSeleccionado = true;
+    this.estado.emit(this.forma.get('inputFloating').valid);
   }
 
   private init(){
     this.forma = new FormGroup({
       'inputFloating': new FormControl('')
     });
+        this.estado.emit(this.forma.get('inputFloating').valid);
   }
   private invalid(){
     return this.texto === this.forma.controls['inputFloating'].value;
@@ -86,7 +90,6 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
                               .filter((data)=>{
                                   return data.nombre == this.nombre})
                               .map((data)=> data.validation);
-    this.forma.controls['inputFloating'].setValidators(validation);
   }
   private onChanges(newValue:any) {
     if(newValue.length >= this.minLength){
@@ -95,6 +98,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
       this.placeholder = this.placeholderOlder
       this.cambioValor.emit(null);
     }
+    this.estado.emit(this.forma.get('inputFloating').valid);
   }
   ngOnDestroy() {
     if (this.mySubscription) {

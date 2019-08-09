@@ -1,14 +1,14 @@
 <form [formGroup] = "forma"
       novalidate = "novalidate"
-      class="m-t-40 " [ngClass]="{'floating-labels': floating }">
+      class="m-t-40 " [ngClass]="{'floating-labels': floating }"autocomplete="off">
     <div class="form-group has-feedback floating-labels" [ngClass]="{'has-danger': !forma.get('inputFloating').valid && forma.get('inputFloating').dirty,
-                                                     'has-error': !forma.get('inputFloating').valid && forma.get('inputFloating').dirty,
-                                                     'has-success': forma.get('inputFloating').valid && invalid() && forma.get('inputFloating').dirty}">
+                                                                     'has-error': !forma.get('inputFloating').valid && forma.get('inputFloating').dirty,
+                                                                     'has-success': forma.get('inputFloating').valid && invalid() && forma.get('inputFloating').dirty}">
       <div class="select-code p-0">
         <input (ngModelChange)="onChanges($event)"
                class="form-control form-control-line" [ngClass]="{'form-control-danger': !forma.get('inputFloating').valid && forma.get('inputFloating').touched && !forma.get('inputFloating').pristine ,
-                                                'form-control-success': forma.get('inputFloating').valid && invalid() && forma.get('inputFloating').touched && !forma.get('inputFloating').pristine,
-                                              'disabled':isenabledparam } "
+                                                                  'form-control-success': forma.get('inputFloating').valid && invalid() && forma.get('inputFloating').touched && !forma.get('inputFloating').pristine,
+                                                                  'disabled':isenabledparam } "
                type="text"
                formControlName = "inputFloating"
                id="input1"
