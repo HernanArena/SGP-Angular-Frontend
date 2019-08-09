@@ -49,7 +49,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   }
 
   ngOnInit() {
-        this.changeDetector.markForCheck();
+    this.changeDetector.markForCheck();
     this.createValidation();
     this.placeholderOlder = this.placeholder;
     this.valorSeleccionado = false;
