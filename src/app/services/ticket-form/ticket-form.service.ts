@@ -13,17 +13,9 @@ export class TicketFormService {
   constructor(public http:HttpClient,public _sp:SearchService) { }
   urlAPI = URL_SERVICESTEST;
 
-  getContacto(valor:string):Observable<any>{
-    return this.http.get(`${this.urlAPI}/contacto`)
-      .pipe(map((resp:any) =>console.log(resp)))
-    // let resultados=null;
-    // let regex = new RegExp(valor,'i');
-    //
-    // resultados = this.modulos.filter( data => regex.test(data.descripcion) || regex.test(data.codigo) )
-    //
-    // return new Observable(res =>{
-    //   res.next(resultados);
-    // });
+  getContacto(nrocta:string,termino:string):Observable<any>{
+    return this.http.get(`${this.urlAPI}/contacto/${nrocta}/${termino}`)
+      .pipe(map((resp:any) => {return resp.payload;}))
   }
   getmodulo(value:string){
     this._sp.getmodulos(value);

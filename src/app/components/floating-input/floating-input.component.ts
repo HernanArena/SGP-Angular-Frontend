@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,  AfterViewChecked,EventEmitter, Output, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input,  AfterViewChecked,EventEmitter, Output, ChangeDetectorRef, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Codigo } from 'src/app/models/codigo.model';
 import { ValidationService } from 'src/app/services/validation/validation.service';
@@ -21,6 +21,8 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   @Input('email')  public email:string;
   @Input('nombre')  public nombre:string;
   @Input('disabled')  public isenabledparam:boolean = false;
+  @Input('valor')  public valor:string ="";
+  @ViewChild('inputFloating') inputFloating:ElementRef;
 
   @Input('') public floating:boolean = true;
   @Input('placeholder') public  placeholder:string;
@@ -51,6 +53,9 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   }
 
   ngOnInit() {
+    if(this.valor!=""){
+      this.forma.controls['inputFloating'].setValue(this.valor);
+    }
     this.changeDetector.markForCheck();
     this.createValidation();
     this.placeholderOlder = this.placeholder;
@@ -74,7 +79,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     this.forma = new FormGroup({
       'inputFloating': new FormControl('')
     });
-        this.estado.emit(this.forma.get('inputFloating').valid);
+    this.estado.emit(this.forma.get('inputFloating').valid);
   }
   private invalid(){
     return this.texto === this.forma.controls['inputFloating'].value;
@@ -90,8 +95,11 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
                               .filter((data)=>{
                                   return data.nombre == this.nombre})
                               .map((data)=> data.validation);
+    this.forma.controls['inputFloating'].setValidators(validation);
   }
   private onChanges(newValue:any) {
+    // console.log(this.inputFloating.nativeElement['focus']);
+
     if(newValue.length >= this.minLength){
       this.cambioValor.emit(newValue)
     }else{
@@ -104,5 +112,8 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();
     }
+  }
+  focusid(){
+    this.arrayItem = [];
   }
 }
