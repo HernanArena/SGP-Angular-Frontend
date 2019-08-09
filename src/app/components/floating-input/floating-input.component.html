@@ -24,7 +24,7 @@
             Se necesitan al menos {{minLength}} caracteres.
         </div>
 
-        <label for="input1"  *ngIf="floating" >{{placeholder}} </label>
+        <label for="input1"  *ngIf="floating" [ngClass]="{'disabled':isenabledparam}">{{placeholder}} </label>
         <div [ngClass]="{'listas': arrayItem.length>0}">
           <ul *ngFor="let item of arrayItem" class="list-group">
             <li (click)="recupera(item)" class="list-group-item" style="border:none; border-bottom:1px;" routerLinkActive = "active">
