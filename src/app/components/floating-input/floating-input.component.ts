@@ -1,9 +1,10 @@
 import { Component, OnInit, Input,  AfterViewChecked,EventEmitter, Output, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { Codigo } from 'src/app/models/codigo.model';
 import { ValidationService } from 'src/app/services/validation/validation.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Router, NavigationEnd } from '@angular/router';
+
 
 
 
@@ -16,22 +17,25 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   private forma:FormGroup;
 
-  @Input('requerido') public  required:boolean = false;
-  @Input('minLength') public  minLength:number;
+  @Input('requerido') public required:boolean = false;
+  @Input('minLength') public minLength:number;
   @Input('email')  public email:string;
   @Input('nombre')  public nombre:string;
   @Input('disabled')  public isenabledparam:boolean = false;
 
   @Input('') public floating:boolean = true;
-  @Input('placeholder') public  placeholder:string;
-  @Input('array') public arrayItem:Codigo[]=[];
+  @Input('placeholder') public placeholder:string;
+  @Input('array') public arrayItem:Codigo[];
+
   private placeholderOlder:string;
   private valorSeleccionado:boolean = false;
+  private valorValido:boolean;
   private texto:string = "";
   mySubscription:Subscription;
 
   @Output('actualizaValor') public cambioValor:EventEmitter<string> = new EventEmitter()
   @Output('valorSeleccionado') public valorFinal:EventEmitter<string> = new EventEmitter()
+  @Output('actualizaEstado') public estado:EventEmitter<boolean> = new EventEmitter()
 
   constructor(public _vs:ValidationService,private changeDetector : ChangeDetectorRef,private router:Router) {
     this.init();
@@ -60,7 +64,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   private recupera(data:any){
     this.texto = data.codigo+" - "+data.descripcion
-    this.arrayItem = [];
+    this.arrayItem = undefined;
     this.forma.controls['inputFloating'].setValue(this.texto);
     this.valorFinal.emit(data.codigo)
     this.placeholder = ""
@@ -72,7 +76,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
       'inputFloating': new FormControl('')
     });
   }
-  private invalid(){
+  private valid(){
     return this.texto === this.forma.controls['inputFloating'].value;
   }
 
@@ -86,16 +90,56 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
                               .filter((data)=>{
                                   return data.nombre == this.nombre})
                               .map((data)=> data.validation);
+
     this.forma.controls['inputFloating'].setValidators(validation);
+
   }
   private onChanges(newValue:any) {
+    this.changeDetector.detectChanges();
+    this.valorValidoenArray()
+    console.log(this.arrayItem)
+    //Emito valor al padre
     if(newValue.length >= this.minLength){
-      this.cambioValor.emit(newValue)
+        this.cambioValor.emit(newValue)
     }else{
       this.placeholder = this.placeholderOlder
       this.cambioValor.emit(null);
     }
+
+    //Emito estado valido o no al padre
+    if (this.forma.controls['inputFloating'].valid){
+      if (this.valorValido) {
+
+        this.estado.emit(true);
+      }
+      else {
+
+        this.estado.emit(false);
+      }
+    }
+    else {
+
+      this.estado.emit(false)
+    }
   }
+
+  private valorValidoenArray(){
+
+    //Devuelve true si el valor elegido en el array es válido, false si no lo es
+    if (this.arrayItem) {
+      if (this.arrayItem.length==0){
+          this.valorValido = false
+      }
+      else {
+        this.valorValido = true
+      }
+    }
+    else {
+      this.valorValido = true
+    }
+
+  }
+
   ngOnDestroy() {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();
