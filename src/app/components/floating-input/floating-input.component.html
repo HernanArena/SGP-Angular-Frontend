@@ -2,14 +2,16 @@
       novalidate = "novalidate"
       autocomplete="off"
       class="m-t-40 " [ngClass]="{'floating-labels': floating }">
-    <div class="form-group has-feedback floating-labels" [ngClass]="{'has-danger': (!forma.get('inputFloating').valid || !valorValido) && forma.get('inputFloating').dirty,
-                                                     'has-error': (!forma.get('inputFloating').valid || !valorValido)  && forma.get('inputFloating').dirty,
-                                                     'has-success': forma.get('inputFloating').valid && valid() && forma.get('inputFloating').dirty}">
-      <div class="select-code p-0">
-        <input #inputFloating focusout="focusid()" (ngModelChange)="onChanges($event)"
-               class="form-control form-control-line" [ngClass]="{'form-control-danger': !forma.get('inputFloating').valid && forma.get('inputFloating').touched && !forma.get('inputFloating').pristine ,
-                                                'form-control-success': forma.get('inputFloating').valid && valid() && forma.get('inputFloating').touched && !forma.get('inputFloating').pristine,
-                                                'disabled':isenabledparam } "
+    <div class="form-group has-feedback floating-labels"
+         [ngClass]="{'has-danger': (!forma.get('inputFloating').valid || !valorValido) && forma.get('inputFloating').dirty,
+                     'has-error': (!forma.get('inputFloating').valid || !valorValido)  && forma.get('inputFloating').dirty,
+                     'has-success': forma.get('inputFloating').valid && valid() && forma.get('inputFloating').dirty}">
+    <div class="select-code p-0">
+      <input #inputFloating focusout="focusid()" (ngModelChange)="onChanges($event)"
+             class="form-control form-control-line"
+             [ngClass]="{'form-control-danger': !forma.get('inputFloating').valid && forma.get('inputFloating').touched && !forma.get('inputFloating').pristine ,
+                         'form-control-success': forma.get('inputFloating').valid && valid() && forma.get('inputFloating').touched && !forma.get('inputFloating').pristine,
+                         'disabled':isenabledparam } "
                type="text"
                formControlName = "inputFloating"
                id="input1"
@@ -29,7 +31,7 @@
             Valor inválido
         </div>
         <label for="input1"  *ngIf="floating" >{{placeholder}} </label>
-        <div [ngClass]="{'listas': arrayItem}">
+        <div [ngClass]="{'listas': arrayItem.length > 0}">
           <ul *ngFor="let item of arrayItem" class="list-group">
             <li (click)="recupera(item)" class="list-group-item" style="border:none; border-bottom:1px;" routerLinkActive = "active">
               <p>{{item.codigo}} - {{item.descripcion}}</p>

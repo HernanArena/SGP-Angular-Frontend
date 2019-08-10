@@ -27,7 +27,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   @Input('') public floating:boolean = true;
   @Input('placeholder') public placeholder:string;
-  @Input('array') public arrayItem:Codigo[];
+  @Input('array') public arrayItem:Codigo[]=[];
 
   private placeholderOlder:string;
   private valorSeleccionado:boolean = false;
@@ -70,7 +70,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   private recupera(data:any){
     this.texto = data.codigo+" - "+data.descripcion
-    this.arrayItem = undefined;
+    this.arrayItem = [];
     this.forma.controls['inputFloating'].setValue(this.texto);
     this.valorFinal.emit(data.codigo)
     this.placeholder = ""
