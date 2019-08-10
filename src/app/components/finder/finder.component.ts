@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 export class FinderComponent implements OnInit,OnDestroy {
 
 
-  @Input('botonvalido')  public botonValido:boolean;
+  @Input('botonvalido')  public botonValido:boolean = false;
 
   partes:Parte[];
   _termino:string;

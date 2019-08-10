@@ -23,15 +23,16 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   @Input('nombre')  public nombre:string;
   @Input('disabled')  public isenabledparam:boolean = false;
   @Input('valor')  public valor:string ="";
+  @Input('validar')  public validar:boolean = false;
+
   @ViewChild('inputFloating') inputFloating:ElementRef;
 
   @Input('') public floating:boolean = true;
   @Input('placeholder') public placeholder:string;
-  @Input('array') public arrayItem:Codigo[];
+  @Input('array') public arrayItem:Codigo[]=[];
 
   private placeholderOlder:string;
   private valorSeleccionado:boolean = false;
-  private valorValido:boolean;
   private texto:string = "";
   mySubscription:Subscription;
 
@@ -68,14 +69,14 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     this.changeDetector.detectChanges();
   }
 
-  private recupera(data:any){
+  private seleccionaItem(data:any){
     this.texto = data.codigo+" - "+data.descripcion
-    this.arrayItem = undefined;
+    this.arrayItem = [];
     this.forma.controls['inputFloating'].setValue(this.texto);
     this.valorFinal.emit(data.codigo)
     this.placeholder = ""
     this.valorSeleccionado = true;
-    this.estado.emit(this.forma.get('inputFloating').valid);
+    this.estado.emit(true);
   }
 
   private init(){
@@ -85,7 +86,13 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     this.estado.emit(this.forma.get('inputFloating').valid);
   }
   private valid(){
-    return this.texto === this.forma.controls['inputFloating'].value;
+    if (this.texto &&  this.forma.controls['inputFloating'].value){
+        return this.texto === this.forma.controls['inputFloating'].value;
+    }
+    else  {
+      return false
+    }
+
   }
 
   private createValidation(){
@@ -103,9 +110,6 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   }
   private onChanges(newValue:any) {
-    this.changeDetector.detectChanges();
-    this.valorValidoenArray()
-    console.log(this.arrayItem)
     //Emito valor al padre
     if(newValue.length >= this.minLength){
         this.cambioValor.emit(newValue)
@@ -114,36 +118,11 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
       this.cambioValor.emit(null);
     }
 
-    //Emito estado valido o no al padre
-    if (this.forma.controls['inputFloating'].valid){
-      if (this.valorValido) {
-
-        this.estado.emit(true);
-      }
-      else {
-
-        this.estado.emit(false);
-      }
+    if ((this.validar && this.valid()) || (!this.validar && this.forma.controls['inputFloating'].value)){
+      this.estado.emit(true)
     }
     else {
-
       this.estado.emit(false)
-    }
-  }
-
-  private valorValidoenArray(){
-
-    //Devuelve true si el valor elegido en el array es válido, false si no lo es
-    if (this.arrayItem) {
-      if (this.arrayItem.length==0){
-          this.valorValido = false
-      }
-      else {
-        this.valorValido = true
-      }
-    }
-    else {
-      this.valorValido = true
     }
 
   }
@@ -155,5 +134,8 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   }
   focusid(){
     this.arrayItem = [];
+  }
+  limpioTexto(){
+    this.texto = '';
   }
 }

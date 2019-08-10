@@ -20,8 +20,8 @@ export class TicketFormService {
   getmodulo(value:string){
     this._sp.getmodulos(value);
   }
-  getObejto(value:string){
-    this._sp.getObjetosConFiltro(value);
-  }
+  // getObejto(value:string){
+  //   this._sp.getObjetosConFiltro(value);
+  // }
 
 }

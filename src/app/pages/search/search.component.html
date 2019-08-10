@@ -8,16 +8,13 @@
     <div class="col-md-5">
       <app-floating-input  (actualizaValor)="termino = $event"  (valorSeleccionado) = "version = $event"
                           (actualizaEstado) = "versionValida = $event"
-                          nombre ="version"  requerido = "true" placeholder="EJ: 4.3.0- Indique una versión.."></app-floating-input>
+                          nombre ="version"  requerido = "true" placeholder="EJ: 4.3.0- Indique una versión.."
+                          (keyup)="getVersiones(termino)" [array] = "versiones" validar="true"
+                          (actualizaValor)="termino = $event" minLength = "1" (valorSeleccionado) = "version = $event"></app-floating-input>
 
     </div>
     <div class="col-md-5">
-<<<<<<< HEAD
-      <app-floating-input nombre ="dll" placeholder="Dll" disabled="true"></app-floating-input>
-
-=======
       <app-floating-input nombre ="dll" disabled="true" placeholder="DLL asociada..."></app-floating-input>
->>>>>>> 3860ebff79f193ab2808227d2a1e08739be17a93
     </div>
     <div class="col-md-1"></div>
   </div>
@@ -27,8 +24,9 @@
     <div class="col-md-10">
       <app-floating-input nombre ="modulo"  (actualizaValor)="termino = $event" minLength = "2" (valorSeleccionado) = "modulo = $event"
                         (actualizaEstado) = "moduloValido = $event"
+                        validar = "true" [disabled] = "objetoValido?true:null"
                         requerido = "true" placeholder="Seleccione un módulo... - EJ: Tesorería"
-                        [array] = "modulos" (keyup)="getModulos(termino)"(click)="cargarModulo(modulo)"></app-floating-input>
+                        [array] = "modulos" (keyup)="getModulos(termino)"(click)="seleccionaModulo(modulo)"></app-floating-input>
     </div>
     <div class="col-md-1">
     </div>
@@ -40,8 +38,10 @@
     <div class="col-md-10">
       <app-floating-input nombre ="objeto"  (actualizaValor)="termino = $event"  minLength = "4"
                           (actualizaEstado) = "objetoValido = $event"
+                          validar = "true"
+                          [disabled] = "moduloValido==true?null:true"
                           requerido = "true" placeholder="Indique el objeto... - EJ: Cuentas corrientes por fecha"
-                          [array] = "objetos" (keyup)="getObjetos(modulo,termino)"></app-floating-input>
+                          [array] = "objetos" (keyup)="getObjetos(modulo,termino)" ></app-floating-input>
     </div>
     <div class="col-md-1"></div>
   </div>
@@ -52,7 +52,7 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <app-finder botonvalido = " moduloValido && objetoValido?true:false"></app-finder>
+    <app-finder [botonvalido] = " moduloValido==true && objetoValido==true && versionValida==true?true:null"></app-finder>
   </div>
   <div class="col-md-1"></div>
 </div>

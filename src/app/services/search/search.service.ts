@@ -169,6 +169,13 @@ export class SearchService {
   urlAPI = URL_SERVICESTEST;
   constructor(public http:HttpClient,public store:Store<AppState>) { }
 
+
+  getVersiones(termino:string):Observable<any>{
+
+    return this.http.get(`${this.urlAPI}/version/${termino}`)
+      .pipe(map((resp:any) => resp.payload))
+  }
+  
   getmodulos(termino:string):Observable<any>{
 
     return this.http.get(`${this.urlAPI}/modulo/${termino}`)
