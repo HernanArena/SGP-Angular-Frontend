@@ -7,7 +7,7 @@
                      'has-error': (!forma.get('inputFloating').valid || !valorValido)  && forma.get('inputFloating').dirty,
                      'has-success': forma.get('inputFloating').valid && valid() && forma.get('inputFloating').dirty}">
     <div class="select-code p-0">
-      <input #inputFloating focusout="focusid()" (ngModelChange)="onChanges($event)"
+      <input #inputFloating (focus)="onFocus()" (blur)="outFocus()" (ngModelChange)="onChanges($event)"
              class="form-control form-control-line"
              [ngClass]="{'form-control-danger': !forma.get('inputFloating').valid && forma.get('inputFloating').touched && !forma.get('inputFloating').pristine ,
                          'form-control-success': forma.get('inputFloating').valid && valid() && forma.get('inputFloating').touched && !forma.get('inputFloating').pristine,
@@ -18,22 +18,24 @@
                [attr.disabled]="isenabledparam?true:null" >
 
         <span class="bar" [ngClass]="{'disabledbar':isenabledparam } " ></span>
-        <div  *ngIf="forma.controls['inputFloating'].errors?.required && forma.get('inputFloating').dirty"
+        <div  *ngIf="forma.controls['inputFloating'].errors?.required && forma.get('inputFloating').dirty && !focus"
             class="form-control-feedback">
             {{nombre}} es necesario
         </div>
-        <div #txtInputLength *ngIf="forma.get('inputFloating').errors?.minlength"
+        <div #txtInputLength *ngIf="forma.get('inputFloating').errors?.minlength && !focus"
             class="form-control-feedback">
             Se necesitan al menos {{minLength}} caracteres.
         </div>
-        <div *ngIf="!valorValido && forma.get('inputFloating').dirty"
+        <div *ngIf="!valorValido && forma.get('inputFloating').dirty && !focus"
             class="form-control-feedback">
             Valor inválido
         </div>
         <label for="input1"  *ngIf="floating" >{{placeholder}} </label>
-        <div [ngClass]="{'listas': arrayItem.length > 0}">
-          <ul *ngFor="let item of arrayItem" class="list-group">
-            <li (click)="recupera(item)" class="list-group-item" style="border:none; border-bottom:1px;" routerLinkActive = "active">
+        <div *ngIf="focus && (texto.length == 0 || arrayItem.length>0)"[ngClass]="{'listas': arrayItem}" data-spy="scroll" data-offset="0" class="scrollspy-example combo">
+            <span style="margin-left: 10px;" *ngIf="focus && termino.length>0 && arrayItem.length == 0"><i class="fa fa-refresh fa-spin"></i> Cargando...</span>
+            <span style="margin-left: 10px;" *ngIf="focus && termino.length==0 && arrayItem.length == 0"> ......  </span>
+          <ul *ngFor="let item of arrayItem" class="list-group ">
+            <li *ngFor="let item of arrayItem"  (click)="recupera(item)" class="list-group-item" style="border:none; border-bottom:1px;" routerLinkActive = "active">
               <p>{{item.codigo}} - {{item.descripcion}}</p>
             </li>
           </ul>

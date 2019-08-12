@@ -23,21 +23,21 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   @Input('nombre')  public nombre:string;
   @Input('disabled')  public isenabledparam:boolean = false;
   @Input('valor')  public valor:string ="";
-  @ViewChild('inputFloating') inputFloating:ElementRef;
-
   @Input('') public floating:boolean = true;
   @Input('placeholder') public placeholder:string;
   @Input('array') public arrayItem:Codigo[]=[];
+  @Output('actualizaValor') public cambioValor:EventEmitter<string> = new EventEmitter()
+  @Output('valorSeleccionado') public valorFinal:EventEmitter<string> = new EventEmitter()
+  @Output('actualizaEstado') public estado:EventEmitter<boolean> = new EventEmitter()
 
   private placeholderOlder:string;
   private valorSeleccionado:boolean = false;
   private valorValido:boolean;
   private texto:string = "";
-  mySubscription:Subscription;
+  private mySubscription:Subscription;
+  private focus:boolean = false;
+  private termino:string = "";
 
-  @Output('actualizaValor') public cambioValor:EventEmitter<string> = new EventEmitter()
-  @Output('valorSeleccionado') public valorFinal:EventEmitter<string> = new EventEmitter()
-  @Output('actualizaEstado') public estado:EventEmitter<boolean> = new EventEmitter()
 
   constructor(public _vs:ValidationService,private changeDetector : ChangeDetectorRef,private router:Router) {
     this.init();
@@ -75,6 +75,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     this.valorFinal.emit(data.codigo)
     this.placeholder = ""
     this.valorSeleccionado = true;
+    this.focus=false;
     this.estado.emit(this.forma.get('inputFloating').valid);
   }
 
@@ -103,9 +104,9 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   }
   private onChanges(newValue:any) {
-    this.changeDetector.detectChanges();
     this.valorValidoenArray()
-    console.log(this.arrayItem)
+    console.log(this.termino.length);
+    this.termino = newValue;
     //Emito valor al padre
     if(newValue.length >= this.minLength){
         this.cambioValor.emit(newValue)
@@ -113,37 +114,21 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
       this.placeholder = this.placeholderOlder
       this.cambioValor.emit(null);
     }
-
     //Emito estado valido o no al padre
-    if (this.forma.controls['inputFloating'].valid){
-      if (this.valorValido) {
-
+    if (this.valorValido) {
         this.estado.emit(true);
-      }
-      else {
-
-        this.estado.emit(false);
-      }
-    }
-    else {
-
+    }else {
       this.estado.emit(false)
     }
   }
 
   private valorValidoenArray(){
-
     //Devuelve true si el valor elegido en el array es válido, false si no lo es
-    if (this.arrayItem) {
-      if (this.arrayItem.length==0){
-          this.valorValido = false
-      }
-      else {
-        this.valorValido = true
-      }
-    }
-    else {
+
+    if (this.valid() && this.forma.controls['inputFloating'].valid) {
       this.valorValido = true
+    }else {
+      this.valorValido = false
     }
 
   }
@@ -153,7 +138,17 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
       this.mySubscription.unsubscribe();
     }
   }
-  focusid(){
-    this.arrayItem = [];
+  onFocus(){
+    this.focus = true;
+    console.log(this.arrayItem.length)
+    // if(this.arrayItem.length<=0){
+    //     this.arrayItem = []
+    // }
+  }
+  outFocus(){
+    if(this.arrayItem.length<=0){
+        this.focus=false;
+        this.arrayItem = []
+    }
   }
 }

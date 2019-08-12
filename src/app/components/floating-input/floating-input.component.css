@@ -174,3 +174,10 @@
   position: absolute;
   background: #EEE;
   width: 100%;}
+
+.combo{
+  position: relative;
+    height: 150px;
+    overflow-y: scroll;
+    
+}
