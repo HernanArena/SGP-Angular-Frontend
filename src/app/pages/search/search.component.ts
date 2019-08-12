@@ -12,13 +12,14 @@ import { Router } from '@angular/router';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit,OnDestroy{
+export class SearchComponent implements OnInit{
 
 
   termino:string;
   partes:any = "";
   modulos:any[] = [];
   objetos:any[] = [];
+  versiones:any[] = [];
   filtroCargados:any;
 
   moduloSubscription:Subscription;
@@ -30,9 +31,9 @@ export class SearchComponent implements OnInit,OnDestroy{
   objeto:string;
   moduloFilter:string;
 
-  versionValida:boolean;
-  moduloValido:boolean;
-  objetoValido:boolean;
+  versionValida:boolean = false;
+  moduloValido:boolean = false;
+  objetoValido:boolean = false;
 
   constructor(public _sp:SearchService,
               public store:Store<AppState>,
@@ -57,7 +58,7 @@ export class SearchComponent implements OnInit,OnDestroy{
   ngOnInit() {
   };
   getModulos(termino:any){
-    if(termino){
+    if(termino && termino.length >= 2){
       this.moduloSubscription = this._sp.getmodulos(termino).subscribe(data => {
         this.modulos = data
       });
@@ -70,7 +71,7 @@ export class SearchComponent implements OnInit,OnDestroy{
       this._sp.cargarFiltrosStore(filtros);
     }
   }
-  cargarModulo(value:string){
+  seleccionaModulo(value:string){
     if(value){
       this.cd.markForCheck();
       this.modulo = value;
@@ -88,6 +89,15 @@ export class SearchComponent implements OnInit,OnDestroy{
       });
     }else{
         this.objetos = [];
+    }
+  }
+  getVersiones(termino:string){
+    if(termino){
+      this.ObjetoSubscription = this._sp.getVersiones(termino).subscribe(data => {
+        this.versiones = data;
+      });
+    }else{
+        this.versiones = [];
     }
   }
   recuperarVersion(version:number){
@@ -122,7 +132,6 @@ export class SearchComponent implements OnInit,OnDestroy{
     }
     this._sp.AgregarObjetoStore(this.modulo, objeto);
   }
-
 
 //A pedido de her
   ngOnDestroy(): void {

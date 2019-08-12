@@ -7,7 +7,7 @@ import { TitlePageComponent } from './title-page/title-page.component';
 import { ModalWizardComponent } from './modal-wizard/modal-wizard.component';
 import { StepBystepComponent } from './step-bystep/step-bystep.component';
 import { PipesModule } from '../pipes/pipes.module';
-
+import { TicketFormComponent } from './ticket-form/ticket-form.component';
 
 
 @NgModule({
@@ -16,7 +16,8 @@ import { PipesModule } from '../pipes/pipes.module';
     FloatingInputComponent,
     TitlePageComponent,
     ModalWizardComponent,
-    StepBystepComponent
+    StepBystepComponent,
+    TicketFormComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +29,9 @@ import { PipesModule } from '../pipes/pipes.module';
     FinderComponent,
     FloatingInputComponent,
     TitlePageComponent,
-    ModalWizardComponent
+    ModalWizardComponent,
+    StepBystepComponent,
+    TicketFormComponent
   ]
 })
 export class ComponentsModule { }

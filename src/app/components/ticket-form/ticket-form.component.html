@@ -1,0 +1,76 @@
+<div class="row" style="margin-top:25px;">
+  <div class="col-md-12" *ngIf="valor!=3">
+    <app-step-bystep [steps] = "step" [progress] = "valor"></app-step-bystep>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="form-material m-t-40"  id="carouselExampleControls" class="carousel slide" data-interval="false" data-ride="carousel"  data-pause="hover">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="form-group">
+            <h4 style="font-weight:500;">Datos del Cliente</h4>
+            <h5 >Ingrese los datos de su empresa</h5>
+            <app-floating-input [valor] = "razonSocial" nombre ="Razón social" disabled="true" (actualizaValor)="razonSocial = $event" requerido = "true" placeholder="Razón social"></app-floating-input>
+            <app-floating-input nombre ="Contacto"  (actualizaValor)="termino = $event" (valorSeleccionado) = "contacto = $event"
+                                requerido = "true" placeholder="Contacto" (estado)="contactoValid = $event"
+                                [array] = "contactos" (keyup) = "getContacto(termino)"></app-floating-input>
+            <app-floating-input nombre ="Sector" placeholder="Sector"></app-floating-input>
+            <button style="margin:10px;" href="#carouselExampleControls" data-slide="prev" *ngIf="valor!=0 && valor<=2"(click)="anteriorStep()" class="btn btn-info" ><i class="fa fa-chevron-left"></i> Anterior</button>
+            <button style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                    *ngIf="valor<step-1" (click)="siguienteStep()" class="btn btn-info" [attr.disabled]="!contactoValid?true:null"> Siguiente <i class="fa fa-chevron-right"></i></button>
+            <button style="margin:10px;" href="#carouselExampleControls" data-slide="next" *ngIf="valor==step-1"(click)="enviar()" class="btn btn-success">Enviar <i class="fa fa-paper-plane"></i></button>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="form-group">
+            <h4 style="font-weight:500;">Datos del Sistema</h4>
+            <h5 >Ingrese los datos sobre su versión</h5>
+            <app-floating-input nombre ="Version"  (actualizaValor)="termino = $event"
+                                requerido = "true" placeholder="Versión" (estado)="versionValid = $event"></app-floating-input>
+                                <!-- [array] = "versiones" (keyup)="getVersion(termino)"></app-floating-input> -->
+            <app-floating-input nombre ="Módulo"  (actualizaValor)="termino = $event"
+                                placeholder="Módulo"></app-floating-input>
+            <app-floating-input nombre ="Objeto"  (actualizaValor)="termino = $event"
+                                placeholder="Objeto"></app-floating-input>
+                                <button style="margin:10px;" href="#carouselExampleControls" data-slide="prev" *ngIf="valor!=0 && valor<=2"(click)="anteriorStep()" class="btn btn-info" ><i class="fa fa-chevron-left"></i> Anterior</button>
+                                <button style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                                        *ngIf="valor<step-1" (click)="siguienteStep()" class="btn btn-info" [attr.disabled]="!versionValid?true:null"> Siguiente <i class="fa fa-chevron-right"></i></button>
+                                <button style="margin:10px;" href="#carouselExampleControls" data-slide="next" *ngIf="valor==step-1"(click)="enviar()" class="btn btn-success">Enviar <i class="fa fa-paper-plane"></i></button>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="form-group">
+            <h4 style="font-weight:500;">{{titulo}}</h4>
+            <h5 >{{subtitulo}}</h5>
+            <app-floating-input nombre ="Asunto"  (actualizaValor)="termino = $event"
+                                placeholder="Asunto"></app-floating-input>
+                                <div class="mb-3">
+                                <label for="validationTextarea">Textarea</label>
+          <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+          <div class="invalid-feedback">
+            Please enter a message in the textarea.
+            </div>
+                <button style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
+                        *ngIf="valor!=0 && valor<=2"(click)="anteriorStep()" class="btn btn-info" ><i class="fa fa-chevron-left"></i> Anterior</button>
+                <button style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                        *ngIf="valor<step-1" (click)="siguienteStep()" class="btn btn-info" > Siguiente <i class="fa fa-chevron-right"></i></button>
+                 <button style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                         *ngIf="valor==step-1"(click)="enviar()" class="btn btn-success"
+                        >Enviar <i class="fa fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="form-group">
+            <i *ngIf="valor==3" class="fa fa-3x fa-check-circle faa-bounce animated text-success"></i>
+            <h5 ></h5>
+            <h4 style="font-weight:500;">{{mensajeFinal}}</h4><!-- Gracias por enviarnos una sugerencia -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>

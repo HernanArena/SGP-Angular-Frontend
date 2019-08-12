@@ -158,9 +158,17 @@
 }
 
 .disabled {
-  color:#ccc;
+  color:#333;
 }
 .disabled:disabled {
-  color:#ccc;
+  color:#333;
   background-color: #FFF;
+  border-bottom: 2px solid #333;
 }
+.disabledbar {
+  content: '';
+  height: 1px;
+  bottom: 1px;
+  position: absolute;
+  background: #EEE;
+  width: 100%;}

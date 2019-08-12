@@ -164,6 +164,8 @@
 
 
 .close-sp {
+  top:-25px;
+  margin-right:20px;
   float: right;
   font-size: 1.5rem;
   font-weight: bold;
@@ -181,6 +183,7 @@
 }
 
 button.close-sp {
+
   padding: 0;
   background: transparent;
   border: 0;

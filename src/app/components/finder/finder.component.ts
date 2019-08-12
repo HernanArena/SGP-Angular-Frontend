@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 export class FinderComponent implements OnInit,OnDestroy {
 
 
-  @Input('botonvalido')  public botonValido:boolean;
+  @Input('botonvalido')  public botonValido:boolean = false;
 
   partes:Parte[];
   _termino:string;
@@ -25,11 +25,10 @@ export class FinderComponent implements OnInit,OnDestroy {
   constructor(public _fs:FinderService,
               public store:Store<AppState>) {
     this.storeSubscription = this.store.select('filtro').subscribe( data => {
-      if(data.filtro != null) {
-        this._termino = data.filtro.termino
-       }
-     }
-      )
+      if(data.filtro != null){
+          this._termino = data.filtro.termino;
+      }
+    })
   }
 
   ngOnInit() {

@@ -7,6 +7,7 @@ import { FinderService } from './finder/finder.service';
 import { SearchcodeService } from './searchcode/searchcode.service';
 import { ValidationService } from './validation/validation.service';
 import { ModalWizardService } from './modal-wizard/modal-wizard.service';
+import { TicketFormService } from './ticket-form/ticket-form.service';
 
 
 
@@ -21,7 +22,8 @@ import { ModalWizardService } from './modal-wizard/modal-wizard.service';
     FinderService,
     SearchcodeService,
     ValidationService,
-    ModalWizardService
+    ModalWizardService,
+    TicketFormService
   ]
 })
 export class ServicesModule { }
