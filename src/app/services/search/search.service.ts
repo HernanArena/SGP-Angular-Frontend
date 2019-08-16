@@ -219,7 +219,8 @@ export class SearchService {
       objeto = data.filtro.objeto;
     })
 
-    resultados = this.partes.filter(data=> data.modulo == modulo && data.version == version && data.objeto == objeto);
+    // resultados = this.partes.filter(data=> data.modulo == modulo && data.version == version && data.objeto == objeto);
+    resultados = this.partes
     console.log(resultados);
     if(termino){
       resultados = resultados.filter(data=> regex.test(data.descripcion));

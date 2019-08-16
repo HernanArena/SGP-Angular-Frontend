@@ -33,6 +33,9 @@
   border: none;
 }
 
+.floating-labels input{
+  z-index: 100;
+}
 .floating-labels label {
   color: #67757c;
   position: absolute;
@@ -41,7 +44,15 @@
   -o-transition: 0.2s ease all;
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
-  -webkit-transition: 0.2s ease all; }
+  -webkit-transition: 0.2s ease all;
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+  z-index: 1;
+  }
 
 .floating-labels .focused label {
   top: -20px;
@@ -179,5 +190,5 @@
   position: relative;
     height: 150px;
     overflow-y: scroll;
-    
+
 }
