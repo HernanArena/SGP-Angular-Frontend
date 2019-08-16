@@ -14,7 +14,7 @@
   border: none;
   font-family: "Montserrat", sans-serif;
   border-radius: 0px;
-  border-bottom: 1px solid #e9edf2; }
+}
 
 .floating-labels select.form-control > option {
   font-size: 14px; }
@@ -46,7 +46,8 @@
 .floating-labels .focused label {
   top: -20px;
   font-size: 12px;
-  color: #263238; }
+  color: #263238;
+}
 
 .floating-labels .bar {
   position: relative;
@@ -54,7 +55,8 @@
   -o-transition: 0.2s ease all;
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
-  -webkit-transition: 0.2s ease all;}
+  -webkit-transition: 0.2s ease all;
+}
 
 .floating-labels .bar:before,
 .floating-labels .bar:after {
@@ -172,3 +174,10 @@
   position: absolute;
   background: #EEE;
   width: 100%;}
+
+.combo{
+  position: relative;
+    height: 150px;
+    overflow-y: scroll;
+    
+}

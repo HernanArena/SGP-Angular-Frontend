@@ -30,15 +30,17 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   @Input('') public floating:boolean = true;
   @Input('placeholder') public placeholder:string;
   @Input('array') public arrayItem:Codigo[]=[];
+  @Output('actualizaValor') public cambioValor:EventEmitter<string> = new EventEmitter()
+  @Output('valorSeleccionado') public valorFinal:EventEmitter<string> = new EventEmitter()
+  @Output('actualizaEstado') public estado:EventEmitter<boolean> = new EventEmitter()
 
   private placeholderOlder:string;
   private valorSeleccionado:boolean = false;
   private texto:string = "";
-  mySubscription:Subscription;
+  private mySubscription:Subscription;
+  private focus:boolean = false;
+  private termino:string = "";
 
-  @Output('actualizaValor') public cambioValor:EventEmitter<string> = new EventEmitter()
-  @Output('valorSeleccionado') public valorFinal:EventEmitter<string> = new EventEmitter()
-  @Output('actualizaEstado') public estado:EventEmitter<boolean> = new EventEmitter()
 
   constructor(public _vs:ValidationService,private changeDetector : ChangeDetectorRef,private router:Router) {
     this.init();
@@ -76,7 +78,12 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     this.valorFinal.emit(data.codigo)
     this.placeholder = ""
     this.valorSeleccionado = true;
+<<<<<<< HEAD
     this.estado.emit(true);
+=======
+    this.focus=false;
+    this.estado.emit(this.forma.get('inputFloating').valid);
+>>>>>>> ae4238c8da32c0e0e4c3e2dcd5bb205c4af66b17
   }
 
   private init(){
@@ -110,7 +117,13 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   }
   private onChanges(newValue:any) {
+<<<<<<< HEAD
     console.log(this.arrayItem);
+=======
+    this.valorValidoenArray()
+    console.log(this.termino.length);
+    this.termino = newValue;
+>>>>>>> ae4238c8da32c0e0e4c3e2dcd5bb205c4af66b17
     //Emito valor al padre
     if(newValue.length >= this.minLength){
         this.cambioValor.emit(newValue)
@@ -118,6 +131,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
       this.placeholder = this.placeholderOlder
       this.cambioValor.emit(null);
     }
+<<<<<<< HEAD
 
     if ((this.validar && this.valid()) || (!this.validar && this.forma.controls['inputFloating'].value)){
       this.estado.emit(true)
@@ -125,6 +139,24 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     else {
       this.estado.emit(false)
     }
+=======
+    //Emito estado valido o no al padre
+    if (this.valorValido) {
+        this.estado.emit(true);
+    }else {
+      this.estado.emit(false)
+    }
+  }
+
+  private valorValidoenArray(){
+    //Devuelve true si el valor elegido en el array es válido, false si no lo es
+
+    if (this.valid() && this.forma.controls['inputFloating'].valid) {
+      this.valorValido = true
+    }else {
+      this.valorValido = false
+    }
+>>>>>>> ae4238c8da32c0e0e4c3e2dcd5bb205c4af66b17
 
   }
 
@@ -133,8 +165,18 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
       this.mySubscription.unsubscribe();
     }
   }
-  focusid(){
-    this.arrayItem = [];
+  onFocus(){
+    this.focus = true;
+    console.log(this.arrayItem.length)
+    // if(this.arrayItem.length<=0){
+    //     this.arrayItem = []
+    // }
+  }
+  outFocus(){
+    if(this.arrayItem.length<=0){
+        this.focus=false;
+        this.arrayItem = []
+    }
   }
   limpioTexto(){
     this.texto = '';
