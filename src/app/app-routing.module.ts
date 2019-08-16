@@ -10,7 +10,7 @@ const ROUTES: Routes = [
     {
       path: '',
       component: PagesComponent,
-      loadChildren: './pages/pages.module#PagesModule',
+      loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
       canLoad:[LoginGuard]
     },
     { path: '**', redirectTo: '/login' }

@@ -25,7 +25,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   @Input('valor')  public valor:string ="";
   @Input('validar')  public validar:boolean = false;
 
-  @ViewChild('inputFloating') inputFloating:ElementRef;
+  @ViewChild('inputFloating', { static: true }) inputFloating:ElementRef;
 
   @Input('') public floating:boolean = true;
   @Input('placeholder') public placeholder:string;
