@@ -78,12 +78,8 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     this.valorFinal.emit(data.codigo)
     this.placeholder = ""
     this.valorSeleccionado = true;
-<<<<<<< HEAD
-    this.estado.emit(true);
-=======
     this.focus=false;
-    this.estado.emit(this.forma.get('inputFloating').valid);
->>>>>>> ae4238c8da32c0e0e4c3e2dcd5bb205c4af66b17
+    this.estado.emit(true);
   }
 
   private init(){
@@ -117,13 +113,9 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   }
   private onChanges(newValue:any) {
-<<<<<<< HEAD
-    console.log(this.arrayItem);
-=======
-    this.valorValidoenArray()
-    console.log(this.termino.length);
+
     this.termino = newValue;
->>>>>>> ae4238c8da32c0e0e4c3e2dcd5bb205c4af66b17
+
     //Emito valor al padre
     if(newValue.length >= this.minLength){
         this.cambioValor.emit(newValue)
@@ -131,7 +123,6 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
       this.placeholder = this.placeholderOlder
       this.cambioValor.emit(null);
     }
-<<<<<<< HEAD
 
     if ((this.validar && this.valid()) || (!this.validar && this.forma.controls['inputFloating'].value)){
       this.estado.emit(true)
@@ -139,25 +130,6 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     else {
       this.estado.emit(false)
     }
-=======
-    //Emito estado valido o no al padre
-    if (this.valorValido) {
-        this.estado.emit(true);
-    }else {
-      this.estado.emit(false)
-    }
-  }
-
-  private valorValidoenArray(){
-    //Devuelve true si el valor elegido en el array es válido, false si no lo es
-
-    if (this.valid() && this.forma.controls['inputFloating'].valid) {
-      this.valorValido = true
-    }else {
-      this.valorValido = false
-    }
->>>>>>> ae4238c8da32c0e0e4c3e2dcd5bb205c4af66b17
-
   }
 
   ngOnDestroy() {
