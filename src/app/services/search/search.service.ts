@@ -175,9 +175,9 @@ export class SearchService {
     return this.http.get(`${this.urlAPI}/version/${termino}`)
       .pipe(map((resp:any) => resp.payload))
   }
-  
-  getmodulos(termino:string):Observable<any>{
 
+  getmodulos(termino:string):Observable<any>{
+    if(termino.indexOf(" - ") > 0) termino = termino.split(" - ")[1];
     return this.http.get(`${this.urlAPI}/modulo/${termino}`)
       .pipe(map((resp:any) => resp.payload))
 

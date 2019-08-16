@@ -110,6 +110,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
 
   }
   private onChanges(newValue:any) {
+    console.log(this.arrayItem);
     //Emito valor al padre
     if(newValue.length >= this.minLength){
         this.cambioValor.emit(newValue)
