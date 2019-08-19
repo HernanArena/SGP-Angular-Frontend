@@ -14,8 +14,13 @@ export class TicketFormService {
   urlAPI = URL_SERVICESTEST;
 
   getContacto(nrocta:string,termino:string):Observable<any>{
-    return this.http.get(`${this.urlAPI}/contacto/${nrocta}/${termino}`)
-      .pipe(map((resp:any) => {return resp.payload;}))
+    if(termino){
+      return this.http.get(`${this.urlAPI}/contacto/${nrocta}/${termino}`)
+        .pipe(map((resp:any) => {return resp.payload;}))
+    }else{
+      return this.http.get(`${this.urlAPI}/contacto/${nrocta}`)
+        .pipe(map((resp:any) => {return resp.payload;}))
+    }
   }
   getmodulo(value:string){
     this._sp.getmodulos(value);

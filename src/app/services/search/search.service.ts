@@ -171,39 +171,35 @@ export class SearchService {
 
 
   getVersiones(termino:string):Observable<any>{
-
-    return this.http.get(`${this.urlAPI}/version/${termino}`)
-      .pipe(map((resp:any) => resp.payload))
+    if(termino){
+      return this.http.get(`${this.urlAPI}/version/${termino}`)
+        .pipe(map((resp:any) => resp.payload))
+    }else{
+      return this.http.get(`${this.urlAPI}/version`)
+        .pipe(map((resp:any) => resp.payload))
+    }
   }
 
-  getmodulos(termino:string):Observable<any>{
-    if(termino.indexOf(" - ") > 0) termino = termino.split(" - ")[1];
-    return this.http.get(`${this.urlAPI}/modulo/${termino}`)
-      .pipe(map((resp:any) => resp.payload))
-
-
-    // let resultados=null;
-    // let regex = new RegExp(valor,'i');
-    //
-    // resultados = this.modulos.filter( data => regex.test(data.descripcion) || regex.test(data.codigo) )
-    //
-    // return new Observable(res =>{
-    //   res.next(resultados);
-    // });
+  getModulos(termino:string):Observable<any>{
+    if(termino){
+       if(termino.indexOf(" - ") > 0 )termino = termino.split(" - ")[1];
+       return this.http.get(`${this.urlAPI}/modulo/${termino}`)
+                  .pipe(map((resp:any) => resp.payload));
+    }else{
+      return this.http.get(`${this.urlAPI}/modulo`)
+        .pipe(map((resp:any) => resp.payload));
+    }
   }
 
 
   getObjetosConFiltro(modulo:string,termino:string):Observable<any> {
-    return this.http.get(`${this.urlAPI}/objeto/${modulo}/${termino}/`)
-    .pipe(map((resp:any) => resp.payload))
-
-
-    // let resultados=null;
-    // let regex = new RegExp(valor,'i');
-    // resultados = this.objetos.filter( data => regex.test(data.descripcion) || regex.test(data.codigo) || regex.test(data.modulo));
-    // return new Observable(res =>{
-    //   res.next(resultados);
-    // });
+    if(termino){
+      return this.http.get(`${this.urlAPI}/objeto/${modulo}/${termino}/`)
+      .pipe(map((resp:any) => resp.payload))
+    }else{
+      return this.http.get(`${this.urlAPI}/objeto/${modulo}`)
+        .pipe(map((resp:any) => resp.payload));
+    }
   }
 
   getPartesConFiltro(termino:string):Observable<any>{

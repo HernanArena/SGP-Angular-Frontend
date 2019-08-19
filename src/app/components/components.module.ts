@@ -8,6 +8,7 @@ import { ModalWizardComponent } from './modal-wizard/modal-wizard.component';
 import { StepBystepComponent } from './step-bystep/step-bystep.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { TicketFormComponent } from './ticket-form/ticket-form.component';
+import { ComboModuloObjetoComponent } from './combo-modulo-objeto/combo-modulo-objeto.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { TicketFormComponent } from './ticket-form/ticket-form.component';
     TitlePageComponent,
     ModalWizardComponent,
     StepBystepComponent,
-    TicketFormComponent
+    TicketFormComponent,
+    ComboModuloObjetoComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { TicketFormComponent } from './ticket-form/ticket-form.component';
     TitlePageComponent,
     ModalWizardComponent,
     StepBystepComponent,
-    TicketFormComponent
+    TicketFormComponent,
+    ComboModuloObjetoComponent
   ]
 })
 export class ComponentsModule { }

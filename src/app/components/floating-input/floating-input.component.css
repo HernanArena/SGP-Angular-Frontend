@@ -17,7 +17,7 @@
 }
 
 .floating-labels select.form-control > option {
-  font-size: 14px; }
+  font-size: 13px; }
 
 .floating-labels .has-error .form-control {
   border-bottom: 1px solid #ef5350; }
@@ -34,6 +34,7 @@
 }
 
 .floating-labels input{
+  font-size: 14px;
   z-index: 100;
 }
 .floating-labels label {
@@ -188,7 +189,7 @@
 
 .combo{
   position: relative;
-    height: 150px;
+    font-size: 12px;
+    max-height: 150px;
     overflow-y: scroll;
-
-}
+  }

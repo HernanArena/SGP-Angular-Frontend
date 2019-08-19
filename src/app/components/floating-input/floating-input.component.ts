@@ -18,9 +18,9 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   private forma:FormGroup;
 
   @Input('requerido') public required:boolean = false;
-  @Input('minLength') public minLength:number;
-  @Input('email')  public email:string;
-  @Input('nombre')  public nombre:string;
+  @Input('minLength') public minLength:number = 0;
+  @Input('email')  public email:string = "";
+  @Input('nombre')  public nombre:string = "";
   @Input('disabled')  public isenabledparam:boolean = false;
   @Input('valor')  public valor:string ="";
   @Input('validar')  public validar:boolean = false;
@@ -40,6 +40,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   private mySubscription:Subscription;
   private focus:boolean = false;
   private termino:string = "";
+
 
 
   constructor(public _vs:ValidationService,private changeDetector : ChangeDetectorRef,private router:Router) {
@@ -75,7 +76,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
     this.texto = data.codigo+" - "+data.descripcion
     this.arrayItem = [];
     this.forma.controls['inputFloating'].setValue(this.texto);
-    this.valorFinal.emit(data.codigo)
+    this.valorFinal.emit(data.codigo);
     this.placeholder = ""
     this.valorSeleccionado = true;
     this.focus=false;
@@ -139,7 +140,6 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
   }
   onFocus(){
     this.focus = true;
-    console.log(this.arrayItem.length)
     // if(this.arrayItem.length<=0){
     //     this.arrayItem = []
     // }
@@ -150,6 +150,7 @@ export class FloatingInputComponent implements OnInit,AfterViewChecked, OnDestro
         this.arrayItem = []
     }
   }
+
   limpioTexto(){
     this.texto = '';
   }

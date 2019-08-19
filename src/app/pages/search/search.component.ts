@@ -16,88 +16,48 @@ export class SearchComponent implements OnInit{
 
 
   termino:string;
-  partes:any = "";
-  modulos:any[] = [];
-  objetos:any[] = [];
+  modulo:string;
+  objeto:string;
   versiones:any[] = [];
   filtroCargados:any;
-
-  moduloSubscription:Subscription;
-  ObjetoSubscription:Subscription;
   storeSubscription:Subscription;
-
-  modulo:string;
   version:number;
-  objeto:string;
-  moduloFilter:string;
-
   versionValida:boolean = false;
-  moduloValido:boolean = false;
-  objetoValido:boolean = false;
 
   constructor(public _sp:SearchService,
               public store:Store<AppState>,
               private router:Router,
               private cd: ChangeDetectorRef) {
-    // this.moduloSubscription = this._sp.getmodulos().subscribe(modulos=>{
-    //   this.modulos = modulos;
-    // });
+
     this.storeSubscription = this.store.subscribe(data =>{
       this.filtroCargados = data.filtro.filtro
       if(data.cargaresults.oktonavigate){
            this.router.navigate(['/resultados']);
         }
-    })
-    // this.storeSubscription = this.store.select('cargaresults').subscribe(data=>{
-    //   if(data.oktonavigate){
-    //      this.router.navigate(['/resultados']);
-    //   }
-    // });
+    });
   }
 
   ngOnInit() {
   };
-  getModulos(termino:any){
-    if(termino && termino.length >= 2){
-      this.moduloSubscription = this._sp.getmodulos(termino).subscribe(data => {
-        this.modulos = data
-      });
-    }else{
-
-        this.modulos = [];
-    }
-    if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
-      let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
-      this._sp.cargarFiltrosStore(filtros);
-    }
-  }
-  seleccionaModulo(value:string){
-    if(value){
-      this.cd.markForCheck();
-      this.modulo = value;
-      this.cd.detectChanges();
-      if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
-        let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
-        this._sp.cargarFiltrosStore(filtros);
-      }
-    }
-  }
-  getObjetos(modulo:string,termino:string){
-    if(modulo && termino){
-      this.ObjetoSubscription = this._sp.getObjetosConFiltro(modulo, termino).subscribe(data => {
-        this.objetos = data;
-      });
-    }else{
-        this.objetos = [];
-    }
-  }
   getVersiones(termino:string){
     if(termino){
-      this.ObjetoSubscription = this._sp.getVersiones(termino).subscribe(data => {
+      this._sp.getVersiones(termino).subscribe(data => {
         this.versiones = data;
       });
     }else{
         this.versiones = [];
+    }
+  }
+  seleccionaVersion(value:any){
+    if(value){
+      this.cd.markForCheck();
+      this.version = value;
+      this.cd.detectChanges();
+      let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
+      this._sp.cargarFiltrosStore(filtros);
+    }else{
+      this._sp.getVersiones(null)
+      .subscribe(data => {this.versiones = data;});
     }
   }
   recuperarVersion(version:number){
@@ -105,14 +65,6 @@ export class SearchComponent implements OnInit{
       this.version = version;
     }
   }
-  // recuperarModulos(modulo:string){
-  //   this.modulo = modulo;
-  //   this.objetos = this._sp.getObjetosConFiltro(modulo);
-  // }
-  recuperarObjeto(objeto:string){
-    this.objeto = objeto;
-  }
-
   grabaFiltroVersion(version:number){
     this.recuperarVersion(version);
 
@@ -122,17 +74,6 @@ export class SearchComponent implements OnInit{
     }
     this._sp.AgregarVersionStore(version);
   }
-
-  grabaFiltroObjeto(objeto:string){
-    this.recuperarObjeto(objeto);
-
-    if (this.store.select('filtro') == null ) {
-        let filtros = new Filtro(this.version,this.modulo,objeto,"");
-        this._sp.cargarFiltrosStore(filtros);
-    }
-    this._sp.AgregarObjetoStore(this.modulo, objeto);
-  }
-
 //A pedido de her
   ngOnDestroy(): void {
   //  this.moduloSubscription.unsubscribe();

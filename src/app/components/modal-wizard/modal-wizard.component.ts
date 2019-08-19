@@ -8,20 +8,22 @@ import { ModalWizardService } from 'src/app/services/modal-wizard/modal-wizard.s
   styleUrls: ['./modal-wizard.component.css']
 })
 export class ModalWizardComponent implements OnInit {
-  descripcion:string ="Esto es un string largo recortado en 50 caracteres recortados en 50"
-  codigo:string = "GR0003"
 
-  valor:number = 0;
-  step:number = 4;
-  pasarPresentacion:boolean = false;
+  private descripcion:string;
+  private texto:string;
+  private codigo:string;
+  private valor:number = 0;
+  private step:number;
+  private pasarPresentacion:boolean;
+  private contenido:any[];
 
 
   constructor( public _mu:ModalWizardService) {
-
-
-   }
+    this.init();
+  }
 
   ngOnInit() {
+    this.init();
   }
   cerrarModal(){
     this.pasarPresentacion = false;
@@ -40,6 +42,14 @@ export class ModalWizardComponent implements OnInit {
   }
   iniciar(){
     this.pasarPresentacion = true;
+  }
+  init(){
+    this.pasarPresentacion = this._mu.getPasarPresentacion();
+    this.step = this._mu.getStep();
+    this.codigo = this._mu.getCodigo();
+    this.descripcion = this._mu.getDescripcion();
+    this.contenido = this._mu.getContenido(this.valor);
+    this.texto = this._mu.getTexto();
   }
 
 }

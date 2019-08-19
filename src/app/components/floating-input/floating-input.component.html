@@ -3,14 +3,14 @@
       autocomplete="off"
       class="m-t-40 " [ngClass]="{'floating-labels': floating }">
       <div class="form-group has-feedback floating-labels"
-          [ngClass]="{'has-danger': (!forma.get('inputFloating').valid || (arrayItem.length==0 && validar)) && !valid() && !forma.get('inputFloating').pristine,
+          [ngClass]="{'has-danger': (!forma.get('inputFloating').valid || (arrayItem.length==0 && validar)) && (!valid()|| !validar) ,
                                                        'has-error': (!forma.get('inputFloating').valid || (arrayItem.length==0 && validar)) && !valid() && !forma.get('inputFloating').pristine,
-                                                       'has-success': forma.get('inputFloating').valid && (valid() || !validar) && forma.get('inputFloating').dirty}">
+                                                       'has-success': forma.get('inputFloating').valid && (valid() || validar) }">
       <div class="select-code p-0">
         <input #inputFloating (focus)="onFocus()" (blur)="outFocus()" (ngModelChange)="onChanges($event)"
                class="form-control form-control-line"
                [ngClass]="{'form-control-danger': (!forma.get('inputFloating').valid || (arrayItem.length==0 && validar)) && !valid() && !forma.get('inputFloating').pristine ,
-                                                'form-control-success': forma.get('inputFloating').valid && (valid() || !validar) && forma.get('inputFloating').dirty,
+                                                'form-control-success': forma.get('inputFloating').valid && (valid() || !validar) ,
                                                 'disabled':isenabledparam } "
                type="text"
                formControlName = "inputFloating"
@@ -31,7 +31,7 @@
             Valor inválido
         </div>
         <label for="input1"  *ngIf="floating" >{{placeholder}} </label>
-        <div *ngIf="focus && (texto.length == 0 || arrayItem.length>0)"[ngClass]="{'listas': arrayItem}" data-spy="scroll" data-offset="0" class="scrollspy-example combo">
+        <div *ngIf="focus && arrayItem.length>0"[ngClass]="{'listas': arrayItem}" data-spy="scroll" data-offset="0" class="scrollspy-example combo">
             <span style="margin-left: 10px;" *ngIf="focus && termino.length>0 && arrayItem.length == 0"><i class="fa fa-refresh fa-spin"></i> Cargando...</span>
             <span style="margin-left: 10px;" *ngIf="focus && termino.length==0 && arrayItem.length == 0"> ......  </span>
           <ul *ngFor="let item of arrayItem" class="list-group ">

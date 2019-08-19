@@ -8,10 +8,10 @@
             <button (click)="cerrarModal()" type="button" class="close-sp" aria-label="Close-sp">
             <span aria-hidden="true">&times;</span>
             </button>
-            <h4><span style="color:#eb0f1c;">{{codigo}}: </span> {{ descripcion | truncate: 50}}</h4>
+            <h4><span style="color:#eb0f1c;">{{_mu.getCodigo()}}: </span> {{ _mu.getDescripcion() | truncate: 50}}</h4>
           </div>
           <div class="modal-sp-body-vacio" align="center">
-            <p>qwerqwer qwerqwerqwe qwer</p>
+            <p>{{_mu.getTexto()}}</p>
             <button (click)="iniciar()" type="button" class="btn btn-success">Iniciar <i class="fa fa-play-circle" aria-hidden="true"></i></button>
           </div>
         </div>
@@ -20,21 +20,17 @@
 
         <div  class="modal-sp-header">
           <div class="col-md-12">
-            <app-step-bystep [steps] = "step" [progress] = "valor"></app-step-bystep>
+            <app-step-bystep [steps] = "_mu.getStep()" [progress] = "valor"></app-step-bystep>
           </div>
         </div>
         <div class="modal-sp-body" align="center">
           <div class="modal-sp-pasos">
             <div class="row">
               <div class="col">
-                <h4>El total del comprobante o la cuenta contable, no coincide con lo ingresado en el módulo de Tesorería</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit risus libero, nec auctor magna consequat sed. Fusce maximus pulvinar ante sit amet ornare. Curabitur gravida ipsum risus, at cursus leo scelerisque non. Nam nec ex a ex egestas auctor. Proin magna tortor, facilisis et nulla a, tempus mollis lorem. Donec ut ex rutrum, bibendum enim sed</p>
+                <p>{{_mu.getContenido(valor).texto}}</p>
               </div>
-              <div class="col modal-sp-column">
-                    <h4>El total del comprobante o la cuenta contable, no coincide con lo ingresado en el módulo de Tesorería</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit risus libero, nec auctor magna consequat sed. Fusce maximus pulvinar ante sit amet ornare. Curabitur gravida ipsum risus, at cursus leo scelerisque non. Nam nec ex a ex egestas auctor. Proin magna tortor, facilisis et nulla a, tempus mollis lorem. Donec ut ex rutrum, bibendum enim sed,</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit risus libero, nec auctor magna consequat sed. Fusce maximus pulvinar ante sit amet ornare. Curabitur gravida ipsum risus, at cursus leo scelerisque non. Nam nec ex a ex egestas auctor. Proin magna tortor, facilisis et nulla a, tempus mollis lorem. Donec ut ex rutrum, bibendum enim sed,</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit risus libero, nec auctor magna consequat sed. Fusce maximus pulvinar ante sit amet ornare. Curabitur gravida ipsum risus, at cursus leo scelerisque non. Nam nec ex a ex egestas auctor. Proin magna tortor, facilisis et nulla a, tempus mollis lorem. Donec ut ex rutrum, bibendum enim sed,</p>
+              <div *ngIf="_mu.getContenido(valor).imagen"class="col modal-sp-column">
+                <img src="http://i41.tinypic.com/2e0mgk3.jpg" class="rounded img-fluid">
               </div>
             </div>
           </div>
@@ -43,7 +39,7 @@
       <div class="modal-sp-footer">
           <div><button (click)="cerrarModal()" type="button" class="btn btn-secondary">Cerrar <i class="fa fa-close" aria-hidden="true"></i></button></div>
           <button *ngIf="valor!=0"(click)="anteriorStep()" type="button" class="btn btn-info"><i class="fa fa-chevron-left" aria-hidden="true"></i> Anterior</button>
-          <button *ngIf="valor!=step"(click)="siguienteStep()" type="button" class="btn btn-info">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+          <button *ngIf="valor!=_mu.getStep()"(click)="siguienteStep()" type="button" class="btn btn-info">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
       </div>
       </div>
     </div>

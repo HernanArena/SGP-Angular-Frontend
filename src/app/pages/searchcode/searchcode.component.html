@@ -10,7 +10,8 @@
   <div class="col-md-10">
     <app-floating-input nombre ="codigo"  (actualizaValor)="errorCode = $event" minLength = "6" (valorSeleccionado) = "codigo = $event"
                       requerido = "true" placeholder="EJ: GR000016 -  Mensaje de error.."
-                      [array] = "codigoSelect" (keyup)="getError(errorCode)"></app-floating-input>
+                      [array] = "codigoSelect" (keyup)="getError(errorCode)"
+                      (click)="seleccionaError(codigo)"></app-floating-input>
   </div>
   <div class="col-md-1"></div>
 </div>
