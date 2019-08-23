@@ -35,9 +35,15 @@
                 </div>
               </div>
               <div *ngIf="_mu.getContenido(valor).imagen"class="col modal-sp-column">
-                    <div id="image-popups" class="row">
+                <!-- If video-->
+                <video width="100%" height="auto" controls autoplay>
+                  <source src="assets/videos/videoplayback.mp4" type="video/mp4">
+                  Presentación Softland.
+                </video>
+                <!-- If imagen-->
+                    <!-- <div id="image-popups" class="row">
                       <img src="assets/images/avatar3.jpg" class="img-responsive rounded" />
-                    </div>
+                    </div> -->
               </div>
                 <!-- <img src="https://softland.com.ar/wp-content/uploads/2017/06/img-textil-04.jpg" class="rounded img-fluid"> -->
           </div>
