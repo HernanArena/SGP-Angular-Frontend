@@ -7,7 +7,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { of } from 'rxjs/internal/observable/of';
 import {Usuario} from '../../models/usuario.model';
 import { FinderService } from 'src/app/services/finder/finder.service';
-import { Parte } from 'src/app/models/parte.model';
+import { PartePayload } from 'src/app/models/partepayload.model';
 
 @Injectable()
 export class UsuarioEffects {
@@ -34,9 +34,9 @@ export class UsuarioEffects {
       .pipe(
         ofType(searchTicketsActions.CARGAR_PARTES),
         switchMap(
-          (action:searchTicketsActions.CargarPartes) => this._fs.recuperarPartes(action.termino)
+          (action:searchTicketsActions.CargarPartes) => this._fs.recuperarPartes(action.termino, action.offset, action.limit)
           .pipe(
-            map((parte:Parte[]) => new searchTicketsActions.CargarPartesSuccess(parte)),
+            map((payload:PartePayload) => new searchTicketsActions.CargarPartesSuccess(payload)),
             catchError(error => of(new searchTicketsActions.CargarPartesFail(error))
           )
         )

@@ -24,7 +24,7 @@
     <div class="col-md-1">
     </div>
     <div class="col-md-10">
-        <app-combo-modulo-objeto (objeto)="objeto = $event" (modulo)="modulo = $event"
+        <app-combo-modulo-objeto (objeto)="objeto = $event" (modulo)="modulo = $event" (actualizaEstado) = "comboModuloObjetoValido = $event"
                                  moduloPlaceHolder ="Seleccione un módulo... - EJ: Tesorería"
                                  objetoPlaceHolder="Indique el objeto... - EJ: Cuentas corrientes por fecha"
                                  [version] = "version"></app-combo-modulo-objeto>
@@ -38,7 +38,7 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <app-finder [botonvalido] = " moduloValido==true && objetoValido==true && versionValida==true?true:null"></app-finder>
+    <app-finder [botonvalido] = " comboModuloObjetoValido==true && versionValida==true?true:null"></app-finder>
   </div>
   <div class="col-md-1"></div>
 </div>

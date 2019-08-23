@@ -1,5 +1,6 @@
 import {Action} from '@ngrx/store';
 import { Parte } from 'src/app/models/parte.model';
+import { PartePayload } from 'src/app/models/partepayload.model';
 
 export const CARGAR_PARTES = '[DownloadTickets buscadorPartes] buscar partes';
 export const CARGAR_PARTES_FAIL = '[DownloadTickets buscadorPartes] buscar partes FAIL';
@@ -9,7 +10,7 @@ export const LIMPIAR_PARTES = '[DownloadTickets buscadorPartes] buscar partes LI
 //buscar
 export class CargarPartes implements Action{
   readonly type = CARGAR_PARTES;
-  constructor(public termino?:string){}
+  constructor(public termino?:string, public offset?:number,public limit?:number){}
 }
 
 export class CargarPartesFail implements Action{
@@ -19,7 +20,7 @@ export class CargarPartesFail implements Action{
 
 export class CargarPartesSuccess implements Action{
   readonly type = CARGAR_PARTES_SUCCESS;
-  constructor(public parte:Parte[]){}
+  constructor(public payload:PartePayload){}
 }
 
 export class ModificarOkToNavigate implements Action{

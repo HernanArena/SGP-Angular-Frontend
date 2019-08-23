@@ -9,6 +9,7 @@ import { StepBystepComponent } from './step-bystep/step-bystep.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { ComboModuloObjetoComponent } from './combo-modulo-objeto/combo-modulo-objeto.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ComboModuloObjetoComponent } from './combo-modulo-objeto/combo-modulo-o
     ModalWizardComponent,
     StepBystepComponent,
     TicketFormComponent,
-    ComboModuloObjetoComponent
+    ComboModuloObjetoComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,9 @@ import { ComboModuloObjetoComponent } from './combo-modulo-objeto/combo-modulo-o
     ModalWizardComponent,
     StepBystepComponent,
     TicketFormComponent,
-    ComboModuloObjetoComponent
+    ComboModuloObjetoComponent,
+    PipesModule,
+    PaginationComponent
   ]
 })
 export class ComponentsModule { }

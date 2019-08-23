@@ -3,17 +3,20 @@
                 fontawsome = "fa fa-2x fa-tasks"
                 colorRibbon = "ribbon ribbon-corner ribbon-right ribbon-danger"></app-title-page>
 
-<!-- <h4 class="card-title">Partes encontrados</h4> -->
-<h6 class="card-subtitle">Se encontraron {{1}} resultados</h6>
+<h6 class="card-subtitle">Se encontraron {{cantidadPartes}} resultados</h6>
 <ul style="list-style: none; margin:10px; margin-left:-10px;">
-    <li *ngFor="let parte of partespaginados">
+    <li *ngFor="let parte of partes">
         <!-- <div class="row">
             <div class="col-12 m-t-30"> -->
               <div class="alert alert-dismissible box effect2">
                   <!--<p><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true"><small>Descartar esta solucion </small>&times;</span> </button></p>-->
-                  <h3 class="text-info"><img src="assets/images/avatar2.png" style="width:30px; height:auto;" alt="homepage" class="dark-logo profile-pic img-circle" /> Titulo Descriptivo {{parte.codigo}} - {{parte.numero}}</h3>
-                  <span class="card-subtitle">Parte: {{parte.codigo}} - {{parte.numero}} | Version: {{parte.version}} | Fecha de liberacion: {{parte.fecha_de_liberacion}}</span>
-                  <p >{{parte.descripcion}}</p>
+                  <h3 class="text-info">
+                    <img src="assets/images/avatar2.png"
+                         style="width:30px; height:auto;"
+                         alt="homepage"
+                         class="dark-logo profile-pic img-circle" /> {{parte.descripcion}}</h3>
+                  <span class="card-subtitle">Parte: {{parte.codfor}} - {{parte.nrofor}} | Version: {{parte.version}} | Fecha de liberacion: {{parte.fecha_de_liberacion}}</span>
+                  <p>{{ parte.texto | truncate: 200}}</p>
                   <button (click) = "mostrarModal()" class="btn btn-info">Ver soluciones <i class="fa fa-angle-double-right"></i></button>
               </div>
             <!-- </div>
@@ -21,18 +24,8 @@
 
     </li>
 </ul>
-<nav aria-label="Page navigation example" class="m-t-40">
-    <ul class="pagination">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Atras</a>
-        </li>
 
-        <li *ngFor="let idx of paginas" class="page-item"><a class="page-link" href="javascript:void(0)" (click)=cambiodePagina(idx)>{{idx}}</a></li>
+<app-pagination [tope] = 5 [cantidadResultados] = "cantidadPartes"></app-pagination>
 
-        <li class="page-item">
-            <a class="page-link" href="#">Siguiente</a>
-        </li>
-    </ul>
-</nav>
 
 <app-finder></app-finder>
