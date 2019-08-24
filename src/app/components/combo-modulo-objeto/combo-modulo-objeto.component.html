@@ -1,7 +1,7 @@
   <app-floating-input nombre ="Módulo" (actualizaValor)="termino = $event" minLength = "2"
                     (actualizaEstado) = "moduloValido = $event" (valorSeleccionado) = "modulo = $event"
                     validar = "true" [disabled] = "objetoValido?true:null"
-                    requerido = "true" placeholder = "{{moduloPlaceHolder}}"
+                    placeholder = "{{moduloPlaceHolder}}"
                     [array] = "modulos" (keyup)="getModulos(termino)"
                     (click)="seleccionaModulo(modulo)"></app-floating-input>
 
@@ -9,6 +9,6 @@
                       (actualizaEstado) = "objetoValido = $event"
                       validar = "true" (valorSeleccionado) = "objeto = $event"
                       [disabled] = "moduloValido==true?null:true"
-                      requerido = "true" placeholder= "{{objetoPlaceHolder}}"
+                      placeholder= "{{objetoPlaceHolder}}"
                       [array] = "objetos" (keyup)="getObjetos(modulo,termino)"
                       (click)="seleccionaObjeto(objeto)"></app-floating-input>

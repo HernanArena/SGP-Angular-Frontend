@@ -65,9 +65,9 @@ export class SearchService {
       objeto = data.filtro.objeto;
     })
 
-    if (termino==''){
-      termino = 'null'
-    }
+    termino= (termino==''?'null':termino)
+    modulo= (modulo=='' || !modulo ?'null':modulo)
+    objeto= (objeto=='' || !objeto ?'null':objeto)
 
     return this.http.get(`${this.urlAPI}/partepublico/P/${modulo}/${objeto}/${version}/${termino}/${offset}/${limit}`)
       .pipe(map((resp:any) => resp.payload))

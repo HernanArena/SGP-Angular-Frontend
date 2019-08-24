@@ -34,9 +34,7 @@ export class FinderComponent implements OnInit,OnDestroy {
   ngOnInit() {
   }
   navegararesultsyguardarstorage(){
-    if(this._termino){
-      this._fs.guardarTerminoStore(this._termino);
-    }
+    this._fs.guardarTerminoStore(this._termino);
     this.store.dispatch(new CargarPartes(this._termino, 0, 5));
   }
   ngOnDestroy(): void {

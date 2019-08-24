@@ -4,6 +4,9 @@
                 colorRibbon = "ribbon ribbon-corner ribbon-right ribbon-danger"></app-title-page>
 
 <h6 class="card-subtitle">Se encontraron {{cantidadPartes}} resultados</h6>
+
+<app-finder [botonvalido] = "true"></app-finder>
+
 <ul style="list-style: none; margin:10px; margin-left:-10px;">
     <li *ngFor="let parte of partes">
         <!-- <div class="row">
@@ -17,7 +20,7 @@
                          class="dark-logo profile-pic img-circle" /> {{parte.descripcion}}</h3>
                   <span class="card-subtitle">Parte: {{parte.codfor}} - {{parte.nrofor}} | Version: {{parte.version}} | Fecha de liberacion: {{parte.fecha_de_liberacion}}</span>
                   <p>{{ parte.texto | truncate: 200}}</p>
-                  <button (click) = "mostrarModal()" class="btn btn-info">Ver soluciones <i class="fa fa-angle-double-right"></i></button>
+                  <button (click) = "seleccionaParte(parte)" class="btn btn-info">Ver detalle del parte<i class="fa fa-angle-double-right"></i></button>
               </div>
             <!-- </div>
         </div> -->
@@ -25,7 +28,5 @@
     </li>
 </ul>
 
-<app-pagination [tope] = 5 [cantidadResultados] = "cantidadPartes"></app-pagination>
 
-
-<app-finder></app-finder>
+<app-pagination *ngIf="cantidadPartes > 0" [tope] = 5 [cantidadResultados] = "cantidadPartes"></app-pagination>

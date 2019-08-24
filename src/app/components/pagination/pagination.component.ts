@@ -29,7 +29,11 @@ export class PaginationComponent implements OnInit {
   }
 
   ngOnInit() {
+      this.paginas = [];
       let cantidadPaginas = Math.floor(this.cantidadResultados/this.tope) + 1
+      if (this.cantidadResultados == 0) {
+        cantidadPaginas = 0
+      }
       for (let i = 1; i <= cantidadPaginas; i++) {
           this.paginas.push(i)
       }
@@ -53,8 +57,6 @@ export class PaginationComponent implements OnInit {
 
   siguiente(){
     this.paginaActual = this.paginaActual+1;
-    console.log(this.offset)
-    console.log(this.limit)
     this.offset = this.offset + this.tope
     this.limit = this.limit + this.tope
     this.store.dispatch(new CargarPartes(this.termino, this.offset, this.limit))

@@ -17,7 +17,7 @@ export class ResultsComponent implements OnInit {
   partes:Parte[];
   storeSubscription:Subscription;
   cantidadPartes:number = 0;
-
+  parteAVisualizar:any;
 
   constructor(public store:Store<AppState>, public _ms:ModalWizardService) {
     this.initResults();
@@ -35,6 +35,21 @@ export class ResultsComponent implements OnInit {
 
   modificarOktonavigate(){
     this.store.dispatch(new ModificarOkToNavigate(false));
+  }
+
+  seleccionaParte(parteSeleccionado:any){
+    this.store.select('cargaresults').subscribe(data=>{
+       let indexvalue = data.parte.findIndex((parte)=> parte.codigo == parteSeleccionado.codigo)
+       this.parteAVisualizar = data.parte[indexvalue]
+    })
+
+    this._ms.setStep(this.parteAVisualizar.items.length);
+    this._ms.setCodigo(this.parteAVisualizar.codigo);
+    this._ms.setDescripcion(this.parteAVisualizar.descripcion);
+    this._ms.setTexto(this.parteAVisualizar.texto);
+    this._ms.setContenido(this.parteAVisualizar.items);
+
+    this.mostrarModal()
   }
 
   mostrarModal(){
