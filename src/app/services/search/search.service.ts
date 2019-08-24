@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Filtro } from 'src/app/models/filtro.model';
-import { CargarFilterAction, AgregarFilterVersionAction, AgregarFilterObjetoAction } from 'src/app/store/actions';
+import { CargarFilterAction, AgregarFilterVersionAction, AgregarFilterObjetoAction, LimpiarPartesAction } from 'src/app/store/actions';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICESTEST } from '../../config/config';
 import { map } from 'rxjs/operators';
@@ -75,6 +75,10 @@ export class SearchService {
 
   cargarFiltrosStore(filtros:Filtro){
     this.store.dispatch(new CargarFilterAction(filtros));
+  }
+
+  limpiarPartes(){
+    this.store.dispatch(new LimpiarPartesAction());
   }
 
   AgregarVersionStore(version:number){

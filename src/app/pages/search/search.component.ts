@@ -35,6 +35,7 @@ export class SearchComponent implements OnInit{
            this.router.navigate(['/resultados']);
         }
     });
+    this._sp.limpiarPartes();
   }
 
   ngOnInit() {
