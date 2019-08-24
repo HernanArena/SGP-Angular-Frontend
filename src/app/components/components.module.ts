@@ -9,7 +9,10 @@ import { StepBystepComponent } from './step-bystep/step-bystep.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { ComboModuloObjetoComponent } from './combo-modulo-objeto/combo-modulo-objeto.component';
-
+import {MatAutocompleteModule,
+        MatFormFieldModule,
+        MatInputModule} from '@angular/material';
+import { AngularAutocompleteComponent } from './angular-autocomplete/angular-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +22,17 @@ import { ComboModuloObjetoComponent } from './combo-modulo-objeto/combo-modulo-o
     ModalWizardComponent,
     StepBystepComponent,
     TicketFormComponent,
-    ComboModuloObjetoComponent
+    ComboModuloObjetoComponent,
+    AngularAutocompleteComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    PipesModule
+    PipesModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports:[
     FinderComponent,
@@ -34,7 +41,10 @@ import { ComboModuloObjetoComponent } from './combo-modulo-objeto/combo-modulo-o
     ModalWizardComponent,
     StepBystepComponent,
     TicketFormComponent,
-    ComboModuloObjetoComponent
+    ComboModuloObjetoComponent,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class ComponentsModule { }

@@ -19,6 +19,7 @@
                                 requerido = "true" placeholder="Contacto"
                                 [array] = "contactos" (keyup) = "getContactos(termino)"></app-floating-input>
             <app-floating-input nombre ="Sector" placeholder="Sector"></app-floating-input>
+            <app-angular-autocomplete></app-angular-autocomplete>
             <button style="margin:10px;" href="#carouselExampleControls" data-slide="prev" *ngIf="valor!=0 && valor<=2"(click)="anteriorStep()" class="btn btn-info" ><i class="fa fa-chevron-left"></i> Anterior</button>
             <button style="margin:10px;" href="#carouselExampleControls" data-slide="next"
                     *ngIf="valor<step-1" (click)="siguienteStep()" class="btn btn-info" [attr.disabled]="!contactoValid?true:null"> Siguiente <i class="fa fa-chevron-right"></i></button>
