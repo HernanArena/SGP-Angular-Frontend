@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Filtro } from 'src/app/models/filtro.model';
 import { NgForm } from '@angular/forms';
+import { Combo } from 'src/app/models/combo.model';
 
 @Component({
   selector: 'app-ticket-form',
@@ -37,7 +38,65 @@ export class TicketFormComponent implements OnInit {
   private objeto:string;
 
   //Valores devueltos de las peticiones
-  private contactos:contacto[] = [];
+  private contactos: Combo[] = [{
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }, {
+    codigo: 'A',
+    descripcion: 'Alabama'
+  }];
+  // private contactos:contacto[] = [];
   private versiones:any[] = [];
   private modulos:any[] = [];
 
@@ -48,7 +107,8 @@ export class TicketFormComponent implements OnInit {
   private objetoValid:boolean = false;
   private asuntoValid:boolean = false;
   private disabled:boolean = true;
-
+  private estadoValid:boolean = false;
+  private valorActual:string = "";
   constructor(public _tf:TicketFormService,
               public _sp:SearchService,
               private router:Router,
@@ -86,7 +146,9 @@ export class TicketFormComponent implements OnInit {
   private enviar(){
     this.valor = this.valor + 1;
   }
-
+  private getState(){
+    return this.contactos;
+  }
   private getContactos(termino:string){
       termino==null || termino =="" || termino==undefined?null:termino;
       return this._tf.getContacto(this.razonSocial,termino)

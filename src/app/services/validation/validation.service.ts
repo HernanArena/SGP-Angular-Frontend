@@ -10,7 +10,7 @@ export class ValidationService {
 
   constructor() { }
 
-  addValidation(validations:any, minLength:any){
+  addValidation(validations:any, minLength?:any){
     for(let validators of validations){
       switch(validators.validation){
         case "required":

@@ -25,6 +25,7 @@ import { PagesComponent } from './pages/pages.component';
 //Routes
 import { APP_ROUTING } from './app-routing.module';
 import { PipesModule } from './pipes/pipes.module';
+
 import {
   BrowserAnimationsModule
 } from '@angular/platform-browser/animations';

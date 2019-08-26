@@ -1,15 +1,30 @@
-<form [formGroup]="stateForm">
-  <mat-form-field>
-    <input class="form-control form-comtrol-line form-control-danger" type="text" matInput placeholder="States Group" formControlName="stateGroup" required [matAutocomplete]="autoGroup">
-      <mat-error *ngIf="stateForm.controls['stateGroup'].errors?.required">
-          Email is <strong>required</strong>
-      </mat-error>
-      <mat-autocomplete #autoGroup="matAutocomplete">
-        <mat-optgroup *ngFor="let group of stateGroupOptions | async" >
-          <mat-option *ngFor="let name of group.names" >
-            {{name}}
-          </mat-option>
-      </mat-optgroup>
-    </mat-autocomplete>
-  </mat-form-field>
+<form [formGroup]="forma"
+      novalidate = "novalidate"
+      autocomplete="off">
+  <div class="is-valid">
+    <mat-form-field class = "example-full-width">
+      <input class="form-control" [ngClass]="{'form-control-success': (forma.get('inputFloating').valid || valid()),
+                                              'form-control-danger':  (arrayItem.length > 0 && validar)&& !valid() && !forma.controls['inputFloating'].errors?.valid }"
+            type="text"
+             (ngModelChange)="onChanges($event)"
+             matInput placeholder={{placeholder}}
+             formControlName="inputFloating"
+             [matAutocomplete]="autoGroup"
+             [readonly]="disabled?true:null">
+        <mat-error *ngIf="forma.controls['inputFloating'].errors?.required"
+                    class="form-control-feedback">
+            {{nombre}} es necesario
+        </mat-error>
+        <mat-error *ngIf="forma.controls['inputFloating'].errors?.email"
+                    class="form-control-feedback">
+            No es una dirección de email correcta
+        </mat-error>
+        <mat-autocomplete #autoGroup="matAutocomplete">
+            <mat-option *ngFor="let item of arrayItem"
+                        [value]="item.descripcion">
+              {{item.codigo}} - {{item.descripcion}}
+            </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
 </form>

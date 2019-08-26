@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Codigo } from 'src/app/models/codigo.model';
 import { Observable } from 'rxjs';
 import {URL_SERVICESTEST} from '../../config/config';
 import { HttpClient } from '@angular/common/http';

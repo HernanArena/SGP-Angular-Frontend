@@ -14,7 +14,6 @@ import { HomeComponent } from './home/home.component';
 import { NewTicketComponent } from './new-ticket/new-ticket.component';
 import { ResultsComponent } from './results/results.component';
 import { SearchcodeComponent } from './searchcode/searchcode.component';
-import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { NewSuggestComponent } from './new-suggest/new-suggest.component';
 
@@ -27,6 +26,7 @@ import { NewSuggestComponent } from './new-suggest/new-suggest.component';
     ResultsComponent,
     SearchcodeComponent,
     NewSuggestComponent
+
   ],
   imports: [
     CommonModule,
@@ -42,6 +42,7 @@ import { NewSuggestComponent } from './new-suggest/new-suggest.component';
     SearchComponent,
     SearchcodeComponent,
     NewSuggestComponent
+    // SharedModule
   ]
 })
 export class PagesModule { }

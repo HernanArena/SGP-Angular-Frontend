@@ -1,116 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
-import { startWith } from 'rxjs/internal/operators/startWith';
-import { map } from 'rxjs/internal/operators/map';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, OnInit, Input, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Combo } from 'src/app/models/combo.model';
+import { ValidationService } from 'src/app/services/validation/validation.service';
 
-export interface StateGroup {
-  letter: string;
-  names: string[];
-}
-
-export const _filter = (opt: string[], value: string): string[] => {
-  const filterValue = value.toLowerCase();
-
-  return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
-};
 @Component({
   selector: 'app-angular-autocomplete',
   templateUrl: './angular-autocomplete.component.html',
   styleUrls: ['./angular-autocomplete.component.css']
 })
 export class AngularAutocompleteComponent implements OnInit {
-  stateForm: FormGroup;
-  stateGroupOptions: Observable<StateGroup[]>;
-  stateGroups: StateGroup[] = [{
-    letter: 'A',
-    names: ['Alabama', 'Alaska', 'Arizona', 'Arkansas']
-  }, {
-    letter: 'C',
-    names: ['California', 'Colorado', 'Connecticut']
-  }, {
-    letter: 'D',
-    names: ['Delaware']
-  }, {
-    letter: 'F',
-    names: ['Florida']
-  }, {
-    letter: 'G',
-    names: ['Georgia']
-  }, {
-    letter: 'H',
-    names: ['Hawaii']
-  }, {
-    letter: 'I',
-    names: ['Idaho', 'Illinois', 'Indiana', 'Iowa']
-  }, {
-    letter: 'K',
-    names: ['Kansas', 'Kentucky']
-  }, {
-    letter: 'L',
-    names: ['Louisiana']
-  }, {
-    letter: 'M',
-    names: ['Maine', 'Maryland', 'Massachusetts', 'Michigan',
-      'Minnesota', 'Mississippi', 'Missouri', 'Montana']
-  }, {
-    letter: 'N',
-    names: ['Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
-      'New Mexico', 'New York', 'North Carolina', 'North Dakota']
-  }, {
-    letter: 'O',
-    names: ['Ohio', 'Oklahoma', 'Oregon']
-  }, {
-    letter: 'P',
-    names: ['Pennsylvania']
-  }, {
-    letter: 'R',
-    names: ['Rhode Island']
-  }, {
-    letter: 'S',
-    names: ['South Carolina', 'South Dakota']
-  }, {
-    letter: 'T',
-    names: ['Tennessee', 'Texas']
-  }, {
-    letter: 'U',
-    names: ['Utah']
-  }, {
-    letter: 'V',
-    names: ['Vermont', 'Virginia']
-  }, {
-    letter: 'W',
-    names: ['Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
-  }];
+  private forma:FormGroup;
+  options: FormGroup;
 
+  //Data Input
+  @Input('array') public arrayItem:Combo [] = [];
+  @Input('nombre')  public nombre:string = "";
+  @Input('placeholder') public placeholder:string;
+  @Input('valor') public valor:string = "";
 
-  constructor(public _formBuilder:FormBuilder) {
+  //Validation input
+  @Input('email')  public email:string = "";
+  @Input('requerido') public required:boolean = false;
+  @Input('disabled') public disabled:boolean = false;
+  @Input('validar') public validar:boolean = true;
+  //Value Output
+  @Output('actualizaEstado') public estado:EventEmitter<boolean> = new EventEmitter()
+  @Output('actualizaValor') public cambioValor:EventEmitter<string> = new EventEmitter()
+  @Output('valorSeleccionado') public valorFinal:EventEmitter<string> = new EventEmitter()
+  //valores recuperados
+  private termino:string ="";
+  private valorSeleccionado: Combo;
 
-    this.stateForm = this._formBuilder.group({
-      stateGroup: new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ])
-    });
-console.log(this.stateForm);
+  constructor(public _vs:ValidationService,
+              private changeDetector : ChangeDetectorRef) {
+    this.init();
   }
 
   ngOnInit() {
-    this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filterGroup(value))
-      );
-  }
-  //metodo privado
-  private _filterGroup(value: string): StateGroup[] {
-    if (value) {
-      return this.stateGroups
-        .map(group => ({letter: group.letter, names: _filter(group.names, value)}))
-        .filter(group => group.names.length > 0);
+    if(this.valor!=""){
+      this.forma.controls['inputFloating'].setValue(this.valor);
     }
+    this.changeDetector.markForCheck();
+    this.createValidation();
+  }
 
-    return this.stateGroups;
+  private init(){
+    this.forma = new FormGroup({
+      inputFloating: new FormControl('')
+    });
+  }
+  private valid():boolean{
+    return this.arrayItem.length>0 && this.arrayItem.filter( data => {return data.descripcion == this.termino || data.codigo == this.termino}).length>0
+  }
+  private onChanges(newValue:any) {
+    this.termino = newValue;
+    if(this.valid() && this.forma.get('inputFloating').valid){
+      this.estado.emit(true);
+      this.valorFinal.emit(this.termino);
+    }else{
+      this.estado.emit(false);
+    }
+    //Emito valor al padre
+    this.cambioValor.emit(newValue)
+  }
+
+  private createValidation(){
+    let arrayValidations:any[] = [];
+    if(this.required) arrayValidations.push({nombre:this.nombre,validation:'required'});
+    if(this.email) arrayValidations.push({nombre:this.nombre,validation:'email'});
+
+    let validation = this._vs.addValidation(arrayValidations)
+                              .filter((data)=>{
+                                  return data.nombre == this.nombre})
+                              .map((data)=> data.validation);
+
+    this.forma.controls['inputFloating'].setValidators(validation);
   }
 
 }

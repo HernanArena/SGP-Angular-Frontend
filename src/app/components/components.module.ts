@@ -14,6 +14,7 @@ import {MatAutocompleteModule,
         MatInputModule} from '@angular/material';
 import { AngularAutocompleteComponent } from './angular-autocomplete/angular-autocomplete.component';
 
+
 @NgModule({
   declarations: [
     FinderComponent,
@@ -44,7 +45,9 @@ import { AngularAutocompleteComponent } from './angular-autocomplete/angular-aut
     ComboModuloObjetoComponent,
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    AngularAutocompleteComponent
+
   ]
 })
 export class ComponentsModule { }
