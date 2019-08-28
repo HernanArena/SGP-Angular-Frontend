@@ -10,14 +10,14 @@ import { ModalWizardService } from 'src/app/services/modal-wizard/modal-wizard.s
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
+
 })
 export class ResultsComponent implements OnInit {
 
   partes:Parte[];
   storeSubscription:Subscription;
-  partespaginados:Parte[];
-  paginas:any[] = [];
-
+  cantidadPartes:number = 0;
+  parteAVisualizar:any;
 
   constructor(public store:Store<AppState>, public _ms:ModalWizardService) {
     this.initResults();
@@ -29,57 +29,27 @@ export class ResultsComponent implements OnInit {
   initResults(){
     this.storeSubscription = this.store.select('cargaresults').subscribe( data =>{
       this.partes = data.parte;
-      this.paginas = this.calculoPaginaciones();
-      this.partespaginados = this.recuperarPartes(1);
+      this.cantidadPartes = data.count
     })
   }
 
-  cambiodePagina(pagina:number){
-    this.partespaginados =  this.recuperarPartes(pagina);
-  }
-
-  recuperarPartes(pagina:number){
-
-    let parteinicial:number;
-    let topepagina:number = 5;
-    let partespaginados:Parte[] = [];
-    let i:number = 0
-
-    parteinicial = pagina*topepagina-(topepagina)
-    i = parteinicial
-
-    do{
-      if (this.partes[i] !== undefined){
-          partespaginados.push(this.partes[i]);
-      }
-      i = i + 1
-    }
-    while(i<topepagina*pagina);
-
-    return partespaginados;
-  }
-
-  calculoPaginaciones() {
-    let cantidadpartes:number = this.partes.length
-    let topepagina:number = 5
-    let paginas:any[] = []
-    let i:number;
-    let paginasagregadas:number = 0;
-
-    paginas.push(1);
-    paginasagregadas = 1
-
-    for (i = 1; i <= cantidadpartes; i++) {
-      if (i%topepagina == 0) {
-        paginasagregadas = paginasagregadas + 1
-        paginas.push(paginasagregadas);
-      }
-    }
-
-    return paginas
-  };
   modificarOktonavigate(){
     this.store.dispatch(new ModificarOkToNavigate(false));
+  }
+
+  seleccionaParte(parteSeleccionado:any){
+    this.store.select('cargaresults').subscribe(data=>{
+       let indexvalue = data.parte.findIndex((parte)=> parte.codigo == parteSeleccionado.codigo)
+       this.parteAVisualizar = data.parte[indexvalue]
+    })
+
+    this._ms.setStep(this.parteAVisualizar.items.length);
+    this._ms.setCodigo(this.parteAVisualizar.codigo);
+    this._ms.setDescripcion(this.parteAVisualizar.descripcion);
+    this._ms.setTexto(this.parteAVisualizar.texto);
+    this._ms.setContenido(this.parteAVisualizar.items);
+
+    this.mostrarModal()
   }
 
   mostrarModal(){

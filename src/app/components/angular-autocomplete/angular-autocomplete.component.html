@@ -1,7 +1,6 @@
 <form [formGroup]="forma"
       novalidate = "novalidate"
       autocomplete="off">
-  <div class="is-valid">
     <mat-form-field class = "example-full-width">
       <input class="form-control" [ngClass]="{'form-control-success': (forma.get('inputFloating').valid || valid()),
                                               'form-control-danger':  (arrayItem.length > 0 && validar)&& !valid() && !forma.controls['inputFloating'].errors?.valid }"
@@ -10,7 +9,8 @@
              matInput placeholder={{placeholder}}
              formControlName="inputFloating"
              [matAutocomplete]="autoGroup"
-             [readonly]="disabled?true:null">
+             [readonly]="disabled?true:null" style = "caret-color:green">
+
         <mat-error *ngIf="forma.controls['inputFloating'].errors?.required"
                     class="form-control-feedback">
             {{nombre}} es necesario
@@ -21,10 +21,10 @@
         </mat-error>
         <mat-autocomplete #autoGroup="matAutocomplete">
             <mat-option *ngFor="let item of arrayItem"
-                        [value]="item.descripcion">
+                        [value]="item.codigo.toString().concat(' - ').concat(item.descripcion.toString())">
               {{item.codigo}} - {{item.descripcion}}
             </mat-option>
       </mat-autocomplete>
+
     </mat-form-field>
-  </div>
 </form>

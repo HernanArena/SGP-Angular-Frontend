@@ -54,14 +54,16 @@ export class AngularAutocompleteComponent implements OnInit {
   }
   private onChanges(newValue:any) {
     this.termino = newValue;
-    if(this.valid() && this.forma.get('inputFloating').valid){
-      this.estado.emit(true);
-      this.valorFinal.emit(this.termino);
-    }else{
-      this.estado.emit(false);
-    }
-    //Emito valor al padre
-    this.cambioValor.emit(newValue)
+      if(newValue.indexOf(" - ") > 0 ) this.termino = newValue.split(" - ")[0];
+        if(this.valid() && this.forma.get('inputFloating').valid){
+          this.estado.emit(true);
+          this.valorFinal.emit(this.termino);
+        }else{
+          this.estado.emit(false);
+        }
+        //Emito valor al padre
+        this.cambioValor.emit(newValue)
+
   }
 
   private createValidation(){

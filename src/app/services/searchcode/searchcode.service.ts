@@ -18,10 +18,10 @@ export class SearchcodeService {
   getCodigoError(error:string):Observable<any>{
     if(error){
       return this.http.get(`${this.urlAPI}/partepublico/e/${error}/`)
-      .pipe(map((resp:any) => resp.payload))
+      .pipe(map((resp:any) => resp.payload.partes))
     }else{
       return this.http.get(`${this.urlAPI}/partepublico/e`)
-        .pipe(map((resp:any) => resp.payload));
+        .pipe(map((resp:any) => resp.payload.partes));
     }
   }
 }

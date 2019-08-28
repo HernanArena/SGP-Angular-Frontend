@@ -20,7 +20,7 @@
 
         <div  class="modal-sp-header">
           <div class="col-md-12">
-            <app-step-bystep [steps] = "_mu.getStep()" [progress] = "valor"></app-step-bystep>
+            <app-step-bystep *ngIf="_mu.getStep()!=1" [steps] = "_mu.getStep()" [progress] = "valor"></app-step-bystep>
           </div>
         </div>
         <div class="modal-sp-body" align="center">
@@ -52,7 +52,7 @@
       <div class="modal-sp-footer">
           <div><button (click)="cerrarModal()" type="button" class="btn btn-secondary">Cerrar <i class="fa fa-close" aria-hidden="true"></i></button></div>
           <button *ngIf="valor!=0"(click)="anteriorStep()" type="button" class="btn btn-info"><i class="fa fa-chevron-left" aria-hidden="true"></i> Anterior</button>
-          <button *ngIf="valor!=_mu.getStep()"(click)="siguienteStep()" type="button" class="btn btn-info">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+          <button *ngIf="valor<_mu.getStep()-1"(click)="siguienteStep()" type="button" class="btn btn-info">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
       </div>
       </div>
     </div>

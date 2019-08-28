@@ -8,23 +8,15 @@
     <div class="col-md-5">
       <app-angular-autocomplete [array] = "versiones" requerido = "true"
                                 nombre ="Version" placeholder = "EJ: 4.3.0- Indique una versión.."
-                                (keyup)="getVersiones(termino)"
-                                (click)="seleccionaVersion(version)"
+                                (keyup)="getVersiones(termino,$event)"
+                                (click)="seleccionaVersion(termino)"
                                 (actualizaEstado)="versionValida = $event"
                                 (actualizaValor)="termino = $event"
                                 (valorSeleccionado) = "version = $event"></app-angular-autocomplete>
 
-      <!-- <app-floating-input  (actualizaValor)="termino = $event"  (valorSeleccionado) = "version = $event"
-                          (actualizaEstado) = "versionValida = $event"
-                          nombre ="version"  requerido = "true" placeholder="EJ: 4.3.0- Indique una versión.."
-                          (keyup)="getVersiones(termino)" [array] = "versiones" validar="true"
-                          (actualizaValor)="termino = $event" minLength = "1"
-                          (click)="seleccionaVersion(version)"></app-floating-input> -->
-
     </div>
     <div class="col-md-5">
       <app-angular-autocomplete nombre ="dll" disabled="true" placeholder="DLL asociada..."> </app-angular-autocomplete >
-      <!-- <app-floating-input nombre ="dll" disabled="true" placeholder="DLL asociada..."></app-floating-input> -->
     </div>
     <div class="col-md-1"></div>
   </div>
@@ -34,20 +26,19 @@
     </div>
     <div class="col-md-10">
         <app-combo-modulo-objeto (objeto)="objeto = $event" (modulo)="modulo = $event"
-                                 moduloPlaceHolder ="Seleccione un módulo... - EJ: Tesorería"
+                                 moduloPlaceHolder = "Seleccione un módulo... - EJ: Tesorería"
                                  objetoPlaceHolder="Indique el objeto... - EJ: Cuentas corrientes por fecha"
                                  [version] = "version"></app-combo-modulo-objeto>
     </div>
     <div class="col-md-1"></div>
   </div>
-
 </div>
 <br>
 <div class="row">
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <app-finder [botonvalido] = " moduloValido==true && objetoValido==true && versionValida==true?true:null"></app-finder>
+    <app-finder nombre = "Termino" requerido= "true" minLength ="5"></app-finder>
   </div>
   <div class="col-md-1"></div>
 </div>

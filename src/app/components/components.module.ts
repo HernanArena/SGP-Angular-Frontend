@@ -13,6 +13,7 @@ import {MatAutocompleteModule,
         MatFormFieldModule,
         MatInputModule} from '@angular/material';
 import { AngularAutocompleteComponent } from './angular-autocomplete/angular-autocomplete.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AngularAutocompleteComponent } from './angular-autocomplete/angular-aut
     StepBystepComponent,
     TicketFormComponent,
     ComboModuloObjetoComponent,
-    AngularAutocompleteComponent
+    AngularAutocompleteComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { AngularAutocompleteComponent } from './angular-autocomplete/angular-aut
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    AngularAutocompleteComponent
+    AngularAutocompleteComponent,
+    PaginationComponent
 
   ]
 })

@@ -1,0 +1,13 @@
+<nav aria-label="Page navigation example" class="m-t-40">
+    <ul class="pagination">
+        <li class="page-item" *ngIf="paginaActual != 1">
+            <a class="page-link" href="javascript:void(0)" tabindex="-1" (click) = anterior()>Anterior</a>
+        </li>
+
+        <li *ngFor="let idx of paginas" class="page-item"><a class="page-link" href="javascript:void(0)" (click)=cambiodePagina(idx)>{{idx}}</a></li>
+
+        <li class="page-item" *ngIf="paginaActual < paginas.length">
+            <a class="page-link" href="javascript:void(0)" (click)=siguiente()>Siguiente</a>
+        </li>
+    </ul>
+</nav>

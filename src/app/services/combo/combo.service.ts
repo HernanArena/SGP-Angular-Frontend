@@ -44,6 +44,7 @@ export class ComboService {
       return this.http.get(`${this.urlAPI}/objeto/${modulo}/${termino}/`)
       .pipe(map((resp:any) => resp.payload));
     }else{
+      console.log(`${this.urlAPI}/objeto/${modulo}`)
       return this.http.get(`${this.urlAPI}/objeto/${modulo}`)
         .pipe(map((resp:any) => resp.payload));
     }

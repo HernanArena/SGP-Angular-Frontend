@@ -8,21 +8,13 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <app-angular-autocomplete [array] = "codigoSelect" requerido = "true"
+    <app-angular-autocomplete [array] = "codigoSelect" requerido = "true"  (ngModelChange)="onChanges($event)"
                               nombre ="Código" placeholder = "EJ: GR000016 -  Mensaje de error.."
-
                               (valorSeleccionado) = "codigo = $event"
                               (actualizaValor)="termino = $event"
-                              (keyup)="getError(errorCode)"
+                              (keyup)="getError(errorCode,$event)"
                               (click)="seleccionaError(codigo)"></app-angular-autocomplete>
-                          <!-- (actualizaEstado)="errorValid = $event" -->
-    <!-- <app-floating-input nombre ="codigo"  [array] = "codigoSelect"
-                        requerido = "true" placeholder="EJ: GR000016 -  Mensaje de error.."
-                       (valorSeleccionado) = "codigo = $event"
-                      (actualizaValor)="errorCode = $event"
-                       (keyup)="getError(errorCode)"
-                      (click)="seleccionaError(codigo)"></app-floating-input> -->
   </div>
   <div class="col-md-1"></div>
 </div>
-<button (click) = "mostrarModal()" class="btn btn-info">Buscar</button>
+<button (click) = "mostrarModal()"  [attr.disabled] ="(termino==null||termino=='')?false:null"  class="btn btn-info">Buscar</button>

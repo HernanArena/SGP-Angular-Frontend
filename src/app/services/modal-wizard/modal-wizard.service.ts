@@ -52,8 +52,6 @@ export class ModalWizardService {
      console.log(this.contenido);
    }
    getContenido(value:number){
-     console.log(value);
-     console.log(this.contenido[value]);
      return this.contenido[value];
    }
    setTexto(value:string){

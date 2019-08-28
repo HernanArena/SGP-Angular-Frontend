@@ -16,6 +16,7 @@ import { ResultsComponent } from './results/results.component';
 import { SearchcodeComponent } from './searchcode/searchcode.component';
 import { SharedModule } from '../shared/shared.module';
 import { NewSuggestComponent } from './new-suggest/new-suggest.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NewSuggestComponent } from './new-suggest/new-suggest.component';
     PAGES_ROUTING,
     ComponentsModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    PipesModule
   ],
   exports:[
     DashboardComponent,
