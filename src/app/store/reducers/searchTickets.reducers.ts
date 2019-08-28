@@ -3,6 +3,7 @@ import { Parte } from 'src/app/models/parte.model';
 
 export interface BuscarPartesState{
   parte: Parte[];
+  count: number;
   termino: string;
   loaded: boolean;
   loading: boolean;
@@ -12,6 +13,7 @@ export interface BuscarPartesState{
 
 const estadoInicial:BuscarPartesState =  {
   parte: null,
+  count: 0,
   termino: null,
   loaded: false,
   loading: false,
@@ -36,7 +38,8 @@ export function buscarParteReducer(state = estadoInicial, action: fromBuscarPart
         loaded:true,
         loading:false,
         error: null,
-        parte:[...action.parte],
+        parte:[...action.payload.partes],
+        count: action.payload.count,
         oktonavigate: true
       };
     case fromBuscarPartes.CARGAR_PARTES_FAIL:
@@ -59,6 +62,7 @@ export function buscarParteReducer(state = estadoInicial, action: fromBuscarPart
     case fromBuscarPartes.LIMPIAR_PARTES:
         return {
           parte: null,
+          count: 0,
           termino: null,
           loaded: false,
           loading: false,

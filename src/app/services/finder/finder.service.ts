@@ -17,7 +17,7 @@ export class FinderService {
   guardarTerminoStore(termino:string){
     this.store.dispatch(new AgregarFilterTerminoAction(termino));
   }
-  recuperarPartes(termino:string){
-    return this._searchservice.getPartesConFiltro(termino).pipe();
+  recuperarPartes(termino:string, offset:number ,limit:number){
+    return this._searchservice.getPartesConFiltro(termino, offset, limit);
   }
 }

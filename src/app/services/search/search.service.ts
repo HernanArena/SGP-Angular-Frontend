@@ -3,8 +3,7 @@ import { Parte } from 'src/app/models/parte.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
-import { Filtro } from 'src/app/models/filtro.model';
-import { CargarFilterAction, AgregarFilterVersionAction, AgregarFilterObjetoAction } from 'src/app/store/actions';
+import { AgregarFilterVersionAction, AgregarFilterObjetoAction } from 'src/app/store/actions';
 import { HttpClient } from '@angular/common/http';
 import {URL_SERVICESTEST} from '../../config/config';
 import { map } from 'rxjs/operators';
@@ -52,12 +51,11 @@ export class SearchService {
     }
   }
 
-  getPartesConFiltro(termino:string):Observable<any>{
-    let resultados:any[];
+  getPartesConFiltro(termino:string, offset:number ,limit:number):Observable<any>{
+
     let modulo:string;
     let version:number;
     let objeto:string;
-    let regex = new RegExp(termino,'i');
 
     this.store.select('filtro').subscribe( data =>{
       modulo = data.filtro.modulo;
@@ -65,20 +63,13 @@ export class SearchService {
       objeto = data.filtro.objeto;
     })
 
-    // resultados = this.partes.filter(data=> data.modulo == modulo && data.version == version && data.objeto == objeto);
-    resultados = this.partes
-    console.log(resultados);
-    if(termino){
-      resultados = resultados.filter(data=> regex.test(data.descripcion));
-    }
-    return new Observable(res =>{
-      res.next(resultados);
-    });;
-  };
+    termino= (termino==''?'null':termino)
+    modulo= (modulo=='' || !modulo ?'null':modulo)
+    objeto= (objeto=='' || !objeto ?'null':objeto)
 
-  cargarFiltrosStore(filtros:Filtro){
-    this.store.dispatch(new CargarFilterAction(filtros));
-  }
+    return this.http.get(`${this.urlAPI}/partepublico/P/${modulo}/${objeto}/${version}/${termino}/${offset}/${limit}`)
+      .pipe(map((resp:any) => resp.payload))
+  };
 
   AgregarVersionStore(version:number){
     this.store.dispatch(new AgregarFilterVersionAction(version));
