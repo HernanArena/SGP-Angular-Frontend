@@ -3,12 +3,12 @@ import { TicketFormService } from 'src/app/services/ticket-form/ticket-form.serv
 import { contacto } from 'src/app/models/contacto.model';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
-import { SearchService } from 'src/app/services/search/search.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Filtro } from 'src/app/models/filtro.model';
 import { NgForm } from '@angular/forms';
 import { Combo } from 'src/app/models/combo.model';
+import { ComboService } from 'src/app/services/combo/combo.service';
 
 @Component({
   selector: 'app-ticket-form',
@@ -21,6 +21,14 @@ export class TicketFormComponent implements OnInit {
   @Input('titulo') public titulo:string = "Sugerencia";
   @Input('subtitulo') public subtitulo:string = "Ingrese la sugerencia";
   @Input('mensajeFinal') public mensajeFinal:string = "Gracias por enviarnos una sugerencia";
+  // private contactos:contacto[] = [];
+
+  //Valores devueltos de las peticiones
+  @Input('contactos') public contactos: Combo[] = [];
+  @Input('versiones') public versiones:any[] = [];
+  @Input('modulos') public modulos:any[] = [];
+
+
   private valor:number = 0;
   private step:number = 3;
 
@@ -37,68 +45,7 @@ export class TicketFormComponent implements OnInit {
   private modulo:string;
   private objeto:string;
 
-  //Valores devueltos de las peticiones
-  private contactos: Combo[] = [{
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }, {
-    codigo: 'A',
-    descripcion: 'Alabama'
-  }];
-  // private contactos:contacto[] = [];
-  private versiones:any[] = [];
-  private modulos:any[] = [];
+
 
   //Estados
   private contactoValid:boolean = false;
@@ -110,7 +57,7 @@ export class TicketFormComponent implements OnInit {
   private estadoValid:boolean = false;
   private valorActual:string = "";
   constructor(public _tf:TicketFormService,
-              public _sp:SearchService,
+              public _cb:ComboService,
               private router:Router,
               private store:Store<AppState>,
               private cd: ChangeDetectorRef) {
@@ -164,7 +111,7 @@ export class TicketFormComponent implements OnInit {
   }
   getVersiones(termino:string){
     if(termino){
-      this._sp.getVersiones(termino).subscribe(data => {
+      this._cb.getVersiones(termino).subscribe(data => {
         this.versiones = data;
       });
     }else{
@@ -177,9 +124,9 @@ export class TicketFormComponent implements OnInit {
       this.version = value;
       this.cd.detectChanges();
       let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
-      this._sp.cargarFiltrosStore(filtros);
+      this._cb.cargarFiltrosStore(filtros);
     }else{
-      this._sp.getVersiones(null)
+      this._cb.getVersiones(null)
       .subscribe(data => {this.versiones = data;});
     }
   }

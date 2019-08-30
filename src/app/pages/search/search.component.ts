@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { SearchService } from 'src/app/services/search/search.service';
 import { Subscription } from 'rxjs';
 import { Filtro } from 'src/app/models/filtro.model'
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Router } from '@angular/router';
+import { ComboService } from 'src/app/services/combo/combo.service';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit{
   versionValida:boolean = false;
 
 
-  constructor(public _sp:SearchService,
+  constructor(public _cb:ComboService,
               public store:Store<AppState>,
               private router:Router,
               private cd: ChangeDetectorRef) {
@@ -44,11 +44,11 @@ export class SearchComponent implements OnInit{
     let regex = new RegExp('^Arrow?','i');
     if(!regex.test(evento.key)){
       if(termino){
-        this._sp.getVersiones(termino).subscribe(data => {
+        this._cb.getVersiones(termino).subscribe(data => {
           this.versiones = data;
         });
       }else{
-        this._sp.getVersiones(null)
+        this._cb.getVersiones(null)
         .subscribe(data => {this.versiones = data;});
       }
     }
@@ -59,9 +59,9 @@ export class SearchComponent implements OnInit{
       this.version = value;
       this.cd.detectChanges();
       let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
-      this._sp.cargarFiltrosStore(filtros);
+      this._cb.cargarFiltrosStore(filtros);
     }else{
-      this._sp.getVersiones(null)
+      this._cb.getVersiones(null)
       .subscribe(data => {this.versiones = data;});
     }
   }
@@ -75,9 +75,9 @@ export class SearchComponent implements OnInit{
 
     if (this.store.select('filtro') == null ) {
         let filtros = new Filtro(version,this.modulo,this.objeto,"");
-        this._sp.cargarFiltrosStore(filtros);
+        this._cb.cargarFiltrosStore(filtros);
     }
-    this._sp.AgregarVersionStore(version);
+    this._cb.AgregarVersionStore(version);
   }
 //A pedido de her
   ngOnDestroy(): void {
