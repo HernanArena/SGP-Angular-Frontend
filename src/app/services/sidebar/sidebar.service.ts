@@ -24,6 +24,18 @@ export class SidebarService {
           titulo:'Escritorio',
           icono:'mdi mdi-folder-lock-open',
           url:'/escritorio'
+        },
+        {
+          titulo:'Licencias',
+          icono:'mdi mdi-key-plus',
+          url:'/licencias'
+        },
+        {
+          titulo:'Salir',
+          icono:'mdi mdi-logout',
+          url:'/salir'
         }
+
+
    ];
 }

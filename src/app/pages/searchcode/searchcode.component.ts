@@ -1,9 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Codigo } from 'src/app/models/codigo.model';
 import { SearchcodeService } from 'src/app/services/searchcode/searchcode.service';
 import { ModalWizardService } from 'src/app/services/modal-wizard/modal-wizard.service';
 import { Subscription } from 'rxjs';
-import { Filtro } from 'src/app/models/filtro.model';
 
 
 @Component({
@@ -17,10 +15,11 @@ export class SearchcodeComponent implements OnInit {
   codigoSelect: any[]=[];
   codigoSubscription:Subscription
   codigo:string;
+  termino:string = "";
 
-  constructor(public _scs:SearchcodeService,
-              public _ms:ModalWizardService,
-              private cd: ChangeDetectorRef) { }
+  constructor(public _scs: SearchcodeService,
+              public _ms:  ModalWizardService,
+              private cd:  ChangeDetectorRef) { }
 
 
   ngOnInit() {
@@ -29,20 +28,24 @@ export class SearchcodeComponent implements OnInit {
     this.cd.detectChanges();
   }
 
-  getError(value:any){
-    if(value){
-      this.codigoSubscription = this._scs.getCodigoError(value).subscribe(data => {
-        this.codigoSelect = data.partes
-      });
-    }else{
-      this.codigoSubscription = this._scs.getCodigoError(null).subscribe(data => {
-        this.codigoSelect = data.partes
-      });
+  getError(value:any,evento:any){
+    let regex = new RegExp('^Arrow?','i');
+    if(!regex.test(evento.key)){
+      if(value){
+        this.codigoSubscription = this._scs.getCodigoError(value).subscribe(data => {
+          this.codigoSelect = data
+        });
+      }else{
+        this.codigoSubscription = this._scs.getCodigoError(null).subscribe(data => {
+          this.codigoSelect = data
+        });
+      }
     }
 
   }
+
   seleccionaError(value){
-    if(value){
+    if(this.codigo){
       this.cd.markForCheck();
       this.codigo = value;
       this.cd.detectChanges();
@@ -65,6 +68,15 @@ export class SearchcodeComponent implements OnInit {
   }
 
   mostrarModal(){
+    let codigoSelect = this.codigoSelect
+                      .filter((value)=>{
+                        return value.codigo == this.codigo
+                      })[0];
+    this._ms.setStep(codigoSelect.items.length);
+    this._ms.setCodigo(codigoSelect.codigo);
+    this._ms.setDescripcion(codigoSelect.descripcion);
+    this._ms.setTexto(codigoSelect.texto);
+    this._ms.setContenido(codigoSelect.items);
     this._ms.mostrarModal('','');
   }
   //A pedido de her

@@ -20,26 +20,39 @@
 
         <div  class="modal-sp-header">
           <div class="col-md-12">
-            <app-step-bystep [steps] = "_mu.getStep()" [progress] = "valor"></app-step-bystep>
+            <app-step-bystep *ngIf="_mu.getStep()!=1" [steps] = "_mu.getStep()" [progress] = "valor"></app-step-bystep>
           </div>
         </div>
         <div class="modal-sp-body" align="center">
-          <div class="modal-sp-pasos">
             <div class="row">
               <div class="col">
-                <p>{{_mu.getContenido(valor).texto}}</p>
+                <div class="modal-sp-textos">
+                  <div class="modal-sp-descrp">
+                    <h4>{{ _mu.getDescripcion()}}</h4>
+                    <hr>
+                    <p>{{_mu.getContenido(valor).texto}}</p>
+                  </div>
+                </div>
               </div>
               <div *ngIf="_mu.getContenido(valor).imagen"class="col modal-sp-column">
-                <img src="http://i41.tinypic.com/2e0mgk3.jpg" class="rounded img-fluid">
+                <!-- If video-->
+                <video width="100%" height="auto" controls autoplay>
+                  <source src="assets/videos/videoplayback.mp4" type="video/mp4">
+                  Presentación Softland.
+                </video>
+                <!-- If imagen-->
+                    <!-- <div id="image-popups" class="row">
+                      <img src="assets/images/avatar3.jpg" class="img-responsive rounded" />
+                    </div> -->
               </div>
-            </div>
+                <!-- <img src="https://softland.com.ar/wp-content/uploads/2017/06/img-textil-04.jpg" class="rounded img-fluid"> -->
           </div>
 
       </div>
       <div class="modal-sp-footer">
           <div><button (click)="cerrarModal()" type="button" class="btn btn-secondary">Cerrar <i class="fa fa-close" aria-hidden="true"></i></button></div>
           <button *ngIf="valor!=0"(click)="anteriorStep()" type="button" class="btn btn-info"><i class="fa fa-chevron-left" aria-hidden="true"></i> Anterior</button>
-          <button *ngIf="valor!=_mu.getStep()"(click)="siguienteStep()" type="button" class="btn btn-info">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+          <button *ngIf="valor<_mu.getStep()-1"(click)="siguienteStep()" type="button" class="btn btn-info">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
       </div>
       </div>
     </div>

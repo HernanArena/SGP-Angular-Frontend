@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Codigo } from 'src/app/models/codigo.model';
 import { Observable } from 'rxjs';
 import {URL_SERVICESTEST} from '../../config/config';
 import { HttpClient } from '@angular/common/http';
@@ -19,10 +18,10 @@ export class SearchcodeService {
   getCodigoError(error:string):Observable<any>{
     if(error){
       return this.http.get(`${this.urlAPI}/partepublico/e/${error}/`)
-      .pipe(map((resp:any) => resp.payload))
+      .pipe(map((resp:any) => resp.payload.partes))
     }else{
       return this.http.get(`${this.urlAPI}/partepublico/e`)
-        .pipe(map((resp:any) => resp.payload));
+        .pipe(map((resp:any) => resp.payload.partes));
     }
   }
 }

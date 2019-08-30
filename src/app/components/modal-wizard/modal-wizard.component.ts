@@ -26,6 +26,7 @@ export class ModalWizardComponent implements OnInit {
     this.init();
   }
   cerrarModal(){
+    this.valor = 0;
     this.pasarPresentacion = false;
     this.valor = 0
     this._mu.ocultarModal();

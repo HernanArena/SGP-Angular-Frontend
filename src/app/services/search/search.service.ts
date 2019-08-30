@@ -3,12 +3,10 @@ import { Parte } from 'src/app/models/parte.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
-import { Filtro } from 'src/app/models/filtro.model';
-import { CargarFilterAction, AgregarFilterVersionAction, AgregarFilterObjetoAction, LimpiarPartesAction } from 'src/app/store/actions';
+import { AgregarFilterVersionAction, AgregarFilterObjetoAction, LimpiarPartesAction } from 'src/app/store/actions';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICESTEST } from '../../config/config';
 import { map } from 'rxjs/operators';
-import { PartePayload } from 'src/app/models/partepayload.model';
 
 @Injectable({
   providedIn: 'root'
@@ -73,9 +71,6 @@ export class SearchService {
       .pipe(map((resp:any) => resp.payload))
   };
 
-  cargarFiltrosStore(filtros:Filtro){
-    this.store.dispatch(new CargarFilterAction(filtros));
-  }
 
   limpiarPartes(){
     this.store.dispatch(new LimpiarPartesAction());

@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SearchService } from 'src/app/services/search/search.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Router } from '@angular/router';
 import { Filtro } from 'src/app/models/filtro.model';
+import { ComboService } from 'src/app/services/combo/combo.service';
 
 @Component({
   selector: 'app-combo-modulo-objeto',
@@ -37,58 +37,78 @@ export class ComboModuloObjetoComponent implements OnInit {
   moduloValido:boolean = false;
   objetoValido:boolean = false;
 
-  constructor(public _sp:SearchService,
+  constructor(public _cb:ComboService,
               public store:Store<AppState>,
               private router:Router,
               private cd: ChangeDetectorRef) {
-      this.storeSubscription = this.store.subscribe(data =>{
-        this.filtroCargados = data.filtro.filtro
-        if(data.cargaresults.oktonavigate){
-             this.router.navigate(['/resultados']);
-          }
-      });
-
+                this.storeSubscription = this.store.subscribe(data =>{
+                  this.filtroCargados = data.filtro.filtro
+                  if(data.cargaresults.oktonavigate){
+                       this.router.navigate(['/resultados']);
+                    }
+                });
    }
-
   ngOnInit() {
   }
-  getModulos(termino:any){
-    if(termino && termino.length >= 2){
-      this.moduloSubscription = this._sp.getModulos(termino).subscribe(data => {
-        this.modulos = data
-      });
-    }else{
-      this._sp.getModulos(null)
-      .subscribe(data => {this.modulos = data;});
-    }
-    if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
-      let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
-      this._sp.cargarFiltrosStore(filtros);
+  getModulos(termino:any,evento:any){
+    let regex = new RegExp('^Arrow?','i');
+    if(!regex.test(evento.key)){
+      if(termino){
+        this.moduloSubscription = this._cb.getModulos(termino).subscribe(data => {
+          this.modulos = data
+        });
+      }else{
+        this._cb.getModulos(null)
+        .subscribe(data => {
+          this.modulos = data;
+        });
+      }
+      if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
+        let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
+        this._cb.cargarFiltrosStore(filtros);
+      }
     }
     this.emiteEstado();
   }
   seleccionaModulo(value:string){
+
     if(value){
       this.cd.markForCheck();
       this.modulo = value;
       this.moduloSeleccionado.emit(this.modulo);
       this.cd.detectChanges();
       let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
-      this._sp.cargarFiltrosStore(filtros);
+      this._cb.cargarFiltrosStore(filtros);
     }else{
-      this._sp.getModulos(null)
-      .subscribe(data => {this.modulos = data;});
+      this._cb.getModulos(null)
+      .subscribe(data => {
+        this.modulos = data;});
     }
     this.emiteEstado()
   }
-  getObjetos(modulo:string,termino:string){
-    if(modulo){
-      termino==null?null:termino;
-      this.ObjetoSubscription = this._sp.getObjetosConFiltro(modulo, termino).subscribe(data => {
-        this.objetos = data;
-      });
-    }else{
-        this.objetos = [];
+  getObjetos(modulo:string,termino:string,evento:any){
+    let regex = new RegExp('^Arrow?','i');
+    if(!regex.test(evento.key)){
+        if(termino && modulo){
+          termino = termino==null?null:termino;
+          console.log(termino);
+          this.ObjetoSubscription = this._cb.getObjetos(modulo, termino).subscribe(data => {
+            this.objetos = data;
+          });
+        }else if(modulo){
+          this.ObjetoSubscription = this._cb.getObjetos(this.modulo,null)
+              .subscribe(data => {
+                this.objetos = data
+              });
+        }else if(termino){
+          this.ObjetoSubscription = this._cb.getObjetos(null, termino).subscribe(data => {
+            this.objetos = data;
+          });
+        }else{
+          this.ObjetoSubscription = this._cb.getObjetos(null,null)
+              .subscribe(data => { this.objetos = data });
+        }
+        this._cb.AgregarObjetoStore(this.modulo, this.objeto);
     }
     this.emiteEstado()
   }
@@ -101,13 +121,17 @@ export class ComboModuloObjetoComponent implements OnInit {
       this.cd.detectChanges();
       if (this.store.select('filtro') == null ) {
           let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
-          this._sp.cargarFiltrosStore(filtros);
+          this._cb.cargarFiltrosStore(filtros);
       }
-      this._sp.AgregarObjetoStore(this.modulo, this.objeto);
+    }else if(this.modulo){
+      console.log(this.modulo);
+      this.ObjetoSubscription = this._cb.getObjetos(this.modulo,null)
+          .subscribe(data => { this.objetos = data });
     }else{
-      this.ObjetoSubscription = this._sp.getObjetosConFiltro(this.modulo,null)
-          .subscribe(data => {this.objetos = data});
+      this.ObjetoSubscription = this._cb.getObjetos(null,null)
+          .subscribe(data => { this.objetos = data });
     }
+    this._cb.AgregarObjetoStore(this.modulo, this.objeto);
   }
 
   private emiteEstado() {

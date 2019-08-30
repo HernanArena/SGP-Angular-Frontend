@@ -24,6 +24,7 @@ export class SearchComponent implements OnInit{
   version:number;
   versionValida:boolean = false;
 
+
   constructor(public _sp:SearchService,
               public store:Store<AppState>,
               private router:Router,
@@ -40,13 +41,17 @@ export class SearchComponent implements OnInit{
 
   ngOnInit() {
   };
-  getVersiones(termino:string){
-    if(termino){
-      this._sp.getVersiones(termino).subscribe(data => {
-        this.versiones = data;
-      });
-    }else{
-        this.versiones = [];
+  getVersiones(termino:string,evento:any){
+    let regex = new RegExp('^Arrow?','i');
+    if(!regex.test(evento.key)){
+      if(termino){
+        this._sp.getVersiones(termino).subscribe(data => {
+          this.versiones = data;
+        });
+      }else{
+        this._sp.getVersiones(null)
+        .subscribe(data => {this.versiones = data;});
+      }
     }
   }
   seleccionaVersion(value:any){

@@ -1,5 +1,4 @@
 import {Action} from '@ngrx/store';
-import { Parte } from 'src/app/models/parte.model';
 import { PartePayload } from 'src/app/models/partepayload.model';
 
 export const CARGAR_PARTES = '[DownloadTickets buscadorPartes] buscar partes';
