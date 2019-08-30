@@ -19,7 +19,7 @@ export class ComboModuloObjetoComponent implements OnInit {
 
   @Output('modulo') moduloSeleccionado:EventEmitter<string> = new EventEmitter();
   @Output('objeto') objetoSeleccionado:EventEmitter<string> = new EventEmitter();
-  @Output('comboEstado') comboEstado:EventEmitter<boolean> = new EventEmitter();
+  @Output('actualizaEstado') actualizaEstado:EventEmitter<boolean> = new EventEmitter();
 
   termino:string;
   modulos:any[] = [];
@@ -68,6 +68,7 @@ export class ComboModuloObjetoComponent implements OnInit {
         this._cb.cargarFiltrosStore(filtros);
       }
     }
+    this.emiteEstado();
   }
   seleccionaModulo(value:string){
     this.termino = value
@@ -83,6 +84,7 @@ export class ComboModuloObjetoComponent implements OnInit {
       .subscribe(data => {
         this.modulos = data;});
     }
+    this.emiteEstado()
   }
   getObjetos(modulo:string,termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
@@ -107,6 +109,7 @@ export class ComboModuloObjetoComponent implements OnInit {
         }
         this._cb.AgregarObjetoStore(this.modulo, this.objeto);
     }
+    this.emiteEstado()
   }
 
   seleccionaObjeto(value:string){
@@ -115,11 +118,6 @@ export class ComboModuloObjetoComponent implements OnInit {
       this.cd.markForCheck();
       this.objeto = value;
       this.objetoSeleccionado.emit(this.objeto);
-      console.log(this.moduloValido + ' ' + this.objetoValido)
-      if (this.moduloValido && this.objetoValido) {
-        console.log('entro valido')
-        this.comboEstado.emit(true)
-      }
       this.cd.detectChanges();
       if (this.store.select('filtro') == null ) {
           let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
@@ -135,6 +133,15 @@ export class ComboModuloObjetoComponent implements OnInit {
     }
 
     this._cb.AgregarObjetoStore(this.modulo, this.objeto);
+  }
+
+  private emiteEstado() {
+    if (this.moduloValido == true && this.objetoValido == true) {
+      this.actualizaEstado.emit(true)
+    }
+    else {
+      this.actualizaEstado.emit(false)
+    }
   }
 
 }

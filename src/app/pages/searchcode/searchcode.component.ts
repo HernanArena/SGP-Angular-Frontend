@@ -49,6 +49,18 @@ export class SearchcodeComponent implements OnInit {
       this.cd.markForCheck();
       this.codigo = value;
       this.cd.detectChanges();
+      let codigoSelect = this.codigoSelect
+                        .filter((value)=>{
+                          return value.codigo == this.codigo
+                        })[0];
+
+      this._ms.setStep(codigoSelect.items.length);
+      this._ms.setCodigo(codigoSelect.codigo);
+      this._ms.setDescripcion(codigoSelect.descripcion);
+      this._ms.setTexto(codigoSelect.texto);
+      this._ms.setContenido(codigoSelect.items);
+
+
     }else{
       this._scs.getCodigoError(null)
       .subscribe(data => {this.codigoSelect = data;});
@@ -56,7 +68,6 @@ export class SearchcodeComponent implements OnInit {
   }
 
   mostrarModal(){
-    console.log(this.termino)
     let codigoSelect = this.codigoSelect
                       .filter((value)=>{
                         return value.codigo == this.codigo
@@ -67,7 +78,6 @@ export class SearchcodeComponent implements OnInit {
     this._ms.setTexto(codigoSelect.texto);
     this._ms.setContenido(codigoSelect.items);
     this._ms.mostrarModal('','');
-
   }
   //A pedido de her
   ngOnDestroy(): void {
