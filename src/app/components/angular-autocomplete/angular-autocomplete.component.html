@@ -2,26 +2,33 @@
       novalidate = "novalidate"
       autocomplete="off">
     <mat-form-field class = "example-full-width">
-      <input class="form-control" [ngClass]="{'form-control-success': (forma.get('inputFloating').valid || valid()),
-                                              'form-control-danger':  (arrayItem.length > 0 && validar)&& !valid() && !forma.controls['inputFloating'].errors?.valid }"
-            type="text"
+      <input class="form-control" [ngClass]="{'form-control-success': (forma.get('inputFloating').valid && valid()) && focus,
+                                              'form-control-danger':  (!forma.get('inputFloating').valid || !valid()) && focus }"
+             type="text"
+             (keyup) = "borraValorSeleccionado($event)"
+             (focus) = "focus = $event"
              (ngModelChange)="onChanges($event)"
              matInput placeholder={{placeholder}}
              formControlName="inputFloating"
              [matAutocomplete]="autoGroup"
-             [readonly]="disabled?true:null" style = "caret-color:green">
+             [readonly]="disabled?true:null">
 
-        <mat-error *ngIf="forma.controls['inputFloating'].errors?.required"
+        <mat-error *ngIf="!forma.get('inputFloating').valid && focus"
                     class="form-control-feedback">
             {{nombre}} es necesario
         </mat-error>
-        <mat-error *ngIf="forma.controls['inputFloating'].errors?.email"
+        <mat-error *ngIf="forma.controls['inputFloating'].errors?.email && focus"
                     class="form-control-feedback">
             No es una dirección de email correcta
         </mat-error>
+        <mat-error *ngIf="!valid() && forma.get('inputFloating').pristine"
+                    class="form-control-feedback">
+            El valor ingresado es incorrecto
+        </mat-error>
         <mat-autocomplete #autoGroup="matAutocomplete">
             <mat-option *ngFor="let item of arrayItem"
-                        [value]="item.codigo.toString().concat(' - ').concat(item.descripcion.toString())">
+                        [value]="item.codigo.toString().concat(' - ').concat(item.descripcion.toString())"
+                        (onSelectionChange)="seleccionaValor(item.codigo.toString().concat(' - ').concat(item.descripcion.toString()))">
               {{item.codigo}} - {{item.descripcion}}
             </mat-option>
       </mat-autocomplete>

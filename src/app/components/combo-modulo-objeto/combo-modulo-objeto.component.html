@@ -1,15 +1,14 @@
-  <app-angular-autocomplete [array] = "modulos" requerido = "true"
+  <app-angular-autocomplete [array] = "modulos"
                             nombre ="Módulo" placeholder = "{{moduloPlaceHolder}}"
                             (keyup)="getModulos(termino,$event)"
                             (click)="seleccionaModulo(modulo)"
                             (valorSeleccionado) = "modulo = $event"
                             (actualizaEstado) = "moduloValido = $event"
-                            (actualizaValor)="termino = $event"></app-angular-autocomplete>
-  <app-angular-autocomplete nombre = "Objeto" requerido = "true"
-                            (ngModelChange)="onChanges($event)"
+                            (actualizaValor)="seleccionaModulo($event)"></app-angular-autocomplete>
+  <app-angular-autocomplete nombre = "Objeto"
                             [array] = "objetos" placeholder = "{{objetoPlaceHolder}}"
                             (keyup)="getObjetos(modulo,termino,$event)"
+                            (actualizaEstado) = "objetoValido = $event"
                             (click)="seleccionaObjeto(objeto)"
                             (valorSeleccionado) = "objeto = $event"
-                            (actualizaEstado) = "objetoValido = $event"
-                            (actualizaValor)="termino = $event"></app-angular-autocomplete>
+                            (actualizaValor)="seleccionaObjeto($event)"></app-angular-autocomplete>

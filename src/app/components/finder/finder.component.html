@@ -20,8 +20,8 @@
                                  'form-control-success': forma.get('textArea').valid} "
                      type="textarea"
                      placeholder="Ingrese un término de busqueda..."
-                     formControlName = "textArea"
-                     (ngModelChange)="onChanges($event)"> </textarea>
+
+                     formControlName = "textArea"> </textarea>
          <div  *ngIf="forma.controls['textArea'].errors?.required && !forma.get('textArea').pristine "
              class="form-control-feedback left">
              {{nombre}} es necesario

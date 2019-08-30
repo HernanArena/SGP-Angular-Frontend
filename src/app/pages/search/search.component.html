@@ -9,9 +9,9 @@
       <app-angular-autocomplete [array] = "versiones" requerido = "true"
                                 nombre ="Version" placeholder = "EJ: 4.3.0- Indique una versión.."
                                 (keyup)="getVersiones(termino,$event)"
-                                (click)="seleccionaVersion(termino)"
                                 (actualizaEstado)="versionValida = $event"
-                                (actualizaValor)="termino = $event"
+                                (actualizaValor)="seleccionaVersion($event)"
+                                (click)="seleccionaVersion(termino)"
                                 (valorSeleccionado) = "version = $event"></app-angular-autocomplete>
 
     </div>
@@ -25,7 +25,7 @@
     <div class="col-md-1">
     </div>
     <div class="col-md-10">
-        <app-combo-modulo-objeto (objeto)="objeto = $event" (modulo)="modulo = $event"
+        <app-combo-modulo-objeto (objeto)="objeto = $event" (modulo)="modulo = $event" (comboEstado) = "moduloObjetoValido = $event"
                                  moduloPlaceHolder = "Seleccione un módulo... - EJ: Tesorería"
                                  objetoPlaceHolder="Indique el objeto... - EJ: Cuentas corrientes por fecha"
                                  [version] = "version"></app-combo-modulo-objeto>
@@ -38,7 +38,7 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <app-finder nombre = "Termino" requerido= "true" minLength ="5"></app-finder>
+    <app-finder nombre = "Termino" requerido= "true" minLength ="5" [botonvalido] = "versionValida && comboObjetoValido?true:null"></app-finder>
   </div>
   <div class="col-md-1"></div>
 </div>

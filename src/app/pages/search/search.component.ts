@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit{
   storeSubscription:Subscription;
   version:number;
   versionValida:boolean = false;
+  comboObjetoValido:boolean = false;
 
 
   constructor(public _sp:SearchService,
@@ -54,11 +55,13 @@ export class SearchComponent implements OnInit{
     }
   }
   seleccionaVersion(value:any){
+    this.termino = value;
     if(value){
       this.cd.markForCheck();
       this.version = value;
       this.cd.detectChanges();
       let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
+
       this._sp.cargarFiltrosStore(filtros);
     }else{
       this._sp.getVersiones(null)

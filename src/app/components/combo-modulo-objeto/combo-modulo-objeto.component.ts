@@ -19,7 +19,7 @@ export class ComboModuloObjetoComponent implements OnInit {
 
   @Output('modulo') moduloSeleccionado:EventEmitter<string> = new EventEmitter();
   @Output('objeto') objetoSeleccionado:EventEmitter<string> = new EventEmitter();
-  @Output('comboEstado') comboEstado:EventEmitter<string> = new EventEmitter();
+  @Output('comboEstado') comboEstado:EventEmitter<boolean> = new EventEmitter();
 
   termino:string;
   modulos:any[] = [];
@@ -70,7 +70,7 @@ export class ComboModuloObjetoComponent implements OnInit {
     }
   }
   seleccionaModulo(value:string){
-
+    this.termino = value
     if(value){
       this.cd.markForCheck();
       this.modulo = value;
@@ -89,7 +89,6 @@ export class ComboModuloObjetoComponent implements OnInit {
     if(!regex.test(evento.key)){
         if(termino && modulo){
           termino = termino==null?null:termino;
-          console.log(termino);
           this.ObjetoSubscription = this._cb.getObjetos(modulo, termino).subscribe(data => {
             this.objetos = data;
           });
@@ -109,11 +108,18 @@ export class ComboModuloObjetoComponent implements OnInit {
         this._cb.AgregarObjetoStore(this.modulo, this.objeto);
     }
   }
+
   seleccionaObjeto(value:string){
+    this.termino = value
     if(value){
       this.cd.markForCheck();
       this.objeto = value;
       this.objetoSeleccionado.emit(this.objeto);
+      console.log(this.moduloValido + ' ' + this.objetoValido)
+      if (this.moduloValido && this.objetoValido) {
+        console.log('entro valido')
+        this.comboEstado.emit(true)
+      }
       this.cd.detectChanges();
       if (this.store.select('filtro') == null ) {
           let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
@@ -127,6 +133,7 @@ export class ComboModuloObjetoComponent implements OnInit {
       this.ObjetoSubscription = this._cb.getObjetos(null,null)
           .subscribe(data => { this.objetos = data });
     }
+
     this._cb.AgregarObjetoStore(this.modulo, this.objeto);
   }
 

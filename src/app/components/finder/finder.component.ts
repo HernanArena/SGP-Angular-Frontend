@@ -33,11 +33,7 @@ export class FinderComponent implements OnInit,OnDestroy {
               public store:Store<AppState>,
               public _vs: ValidationService) {
     this.init();
-      if(this._termino =="" ||this._termino ==null ||this._termino == undefined){
-        this.botonValido = false;
-      }else{
-        this.botonValido = true;
-      }
+
     this.storeSubscription = this.store.select('filtro').subscribe( data => {
       if(data.filtro != null && this.recuperaStore){
           this._termino = data.filtro.termino;
@@ -51,7 +47,7 @@ export class FinderComponent implements OnInit,OnDestroy {
     this.createValidation();
   }
   onChanges(evento:any){
-    console.log(evento);
+    console.log(this.botonValido);
     if(evento =="" ||evento ==null ||evento == undefined){
       this.botonValido = false;
     }else{
