@@ -5,9 +5,9 @@
       <div class="form-group has-feedback floating-labels"
           [ngClass]="{'has-danger': (!forma.get('inputFloating').valid || (arrayItem.length==0 && validar)) && (!valid()|| !validar) ,
                                                        'has-error': (!forma.get('inputFloating').valid || (arrayItem.length==0 && validar)) && !valid() && !forma.get('inputFloating').pristine,
-                                                       'has-success': forma.get('inputFloating').valid && (valid() || validar) }">
+                                                       'has-success': forma.get('inputFloating').valid && (valid() || validar) && focus}">
       <div class="select-code p-0">
-        <input #inputFloating (focus)="onFocus()" (blur)="outFocus()" (ngModelChange)="onChanges($event)"
+        <input #inputFloating (focus)="focus = $event" (blur)="outFocus()" (ngModelChange)="onChanges($event)"
                class="form-control form-control-line"
                [ngClass]="{'form-control-danger': (!forma.get('inputFloating').valid || (arrayItem.length==0 && validar)) && !valid() && !forma.get('inputFloating').pristine ,
                                                 'form-control-success': forma.get('inputFloating').valid && (valid() || !validar) ,

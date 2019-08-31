@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { TicketFormService } from 'src/app/services/ticket-form/ticket-form.service';
-import { contacto } from 'src/app/models/contacto.model';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -18,15 +17,14 @@ import { ComboService } from 'src/app/services/combo/combo.service';
 export class TicketFormComponent implements OnInit {
 
   //Parametrización
-  @Input('titulo') public titulo:string = "Sugerencia";
-  @Input('subtitulo') public subtitulo:string = "Ingrese la sugerencia";
-  @Input('mensajeFinal') public mensajeFinal:string = "Gracias por enviarnos una sugerencia";
-  // private contactos:contacto[] = [];
+  @Input('titulo') public titulo:string = "";
+  @Input('subtitulo') public subtitulo:string = "";
+  @Input('mensajeFinal') public mensajeFinal:string = "";
 
   //Valores devueltos de las peticiones
-  @Input('contactos') public contactos: Combo[] = [];
-  @Input('versiones') public versiones:any[] = [];
-  @Input('modulos') public modulos:any[] = [];
+  private contactos: Combo[] = [];
+  private versiones:any[] = [];
+  private modulos:any[] = [];
 
 
   private valor:number = 0;
@@ -74,11 +72,7 @@ export class TicketFormComponent implements OnInit {
 
   ngOnInit() {
   }
-  guardar(forma:NgForm){
-    console.log("formulario posteado");
-    console.log("NgForm: ",forma);
-    console.log("Valor: ",forma.value);
-  }
+
   private siguienteStep(){
     this.disabled = false;
     if(this.valor<3 && this.valor>=0){
@@ -96,26 +90,47 @@ export class TicketFormComponent implements OnInit {
   private getState(){
     return this.contactos;
   }
-  private getContactos(termino:string){
-      termino==null || termino =="" || termino==undefined?null:termino;
-      return this._tf.getContacto(this.razonSocial,termino)
+  private getContactos(termino:string,evento:any){
+    let regex = new RegExp('^Arrow?','i');
+    console.log(termino);
+    termino==null || termino =="" || termino==undefined?null:termino;
+    if(!regex.test(evento.key) && termino){
+        console.log(termino);
+      return this._cb.getContacto(this.razonSocial,termino)
       .subscribe((data)=>{
         this.contactos = data
       });
+    }
+  }
+  seleccionaContacto(value:any){
+    if(value){
+      this.cd.markForCheck();
+      this.contacto = value;
+      this.cd.detectChanges();
+    }else{
+      this.getAllContactos();
+    }
   }
   private getAllContactos(){
-    return this._tf.getContacto(this.razonSocial,null)
+    return this._cb.getContacto(this.razonSocial,null)
     .subscribe((data)=>{
+      console.log(data)
       this.contactos = data
     });
   }
   getVersiones(termino:string){
-    if(termino){
-      this._cb.getVersiones(termino).subscribe(data => {
-        this.versiones = data;
-      });
-    }else{
-      this.versiones = [];
+    let regex = new RegExp('^Arrow?','i');
+    console.log(termino);
+    termino==null || termino =="" || termino==undefined?null:termino;
+    if(!regex.test(evento.key)){
+      if(termino){
+        this._cb.getVersiones(termino).subscribe(data => {
+          this.versiones = data;
+        });
+      }else{
+        this._cb.getVersiones(null)
+        .subscribe(data => {this.versiones = data;});
+      }
     }
   }
   seleccionaVersion(value:any){

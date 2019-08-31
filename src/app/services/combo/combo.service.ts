@@ -58,6 +58,15 @@ export class ComboService {
         .pipe(map((resp:any) => resp.payload));
     }
   }
+  getContacto(nrocta:string,termino:string):Observable<any>{
+    if(termino){
+      return this.http.get(`${this.urlAPI}/contacto/${nrocta}/${termino}`)
+        .pipe(map((resp:any) => {return resp.payload;}))
+    }else{
+      return this.http.get(`${this.urlAPI}/contacto/${nrocta}`)
+        .pipe(map((resp:any) => {return resp.payload;}))
+    }
+  }
   public cargarFiltrosStore(filtros:Filtro){
     this.store.dispatch(new CargarFilterAction(filtros));
   }

@@ -14,17 +14,15 @@
             <h5 >Ingrese los datos de su empresa</h5>
             <app-angular-autocomplete nombre ="Razón social" [disabled]="true"
                                       requerido = "true"
-                                      placeholder="Razón social" [valor] = "razonSocial" validar = "false"></app-angular-autocomplete>
-            <!-- <app-floating-input [valor] = "razonSocial" nombre ="Razón social" [disabled]="true" (actualizaValor)="razonSocial = $event" requerido = "true" placeholder="Razón social"></app-floating-input> -->
-            <!-- <app-floating-input nombre ="Contacto" (actualizaValor)="termino = $event" (valorSeleccionado) = "contacto = $event"
-                                (actualizaEstado)="contactoValid = $event"
-                                validar = "true" minLength = "0" (click) = "getAllContactos()"
-                                requerido = "true" placeholder="Contacto"
-                                [array] = "contactos" (keyup) = "getContactos(termino)"></app-floating-input> -->
-            <app-angular-autocomplete [array] = "contactos" requerido = "true"
-                                      nombre ="Contacto" placeholder = "Contacto"
+                                      placeholder="Razón social"
+                                      [valor] = "razonSocial"></app-angular-autocomplete>
+            <app-angular-autocomplete [array] = "contactos"
+                                      requerido = "true"
+                                      nombre ="Contacto"
+                                      placeholder = "Contacto"
+                                      (click) = "seleccionaContacto(contacto)"
                                       (actualizaEstado)="contactoValid = $event"
-                                      (actualizaValor)="termino = $event"></app-angular-autocomplete>
+                                      (actualizaValor)="seleccionaContacto($event)"></app-angular-autocomplete>
 
             <app-angular-autocomplete nombre ="Sector" placeholder="Sector" (keyup) = "getState()" validar = "false"></app-angular-autocomplete>
 
@@ -38,21 +36,20 @@
           <div class="form-group">
             <h4 style="font-weight:500;">Datos del Sistema</h4>
             <h5 >Ingrese los datos sobre su versión</h5>
-            <app-angular-autocomplete [array] = "versiones" requerido = "true"
-                                      nombre ="Versión" placeholder = "Versión"
+            <app-angular-autocomplete [array] = "versiones"
+                                      requerido = "true"
+                                      nombre ="Versión"
+                                      placeholder = "Versión"
                                       (actualizaEstado)="versionValid = $event"
                                       (actualizaValor)="termino = $event"
+                                      (keyup)="getContactos(termino,$event)"
                                       (click) = "seleccionaVersion(version)"
                                       (valorSeleccionado) = "version = $event"></app-angular-autocomplete>
-            <!-- <app-floating-input  (actualizaValor)="termino = $event"
-                                (actualizaEstado) = "versionValid = $event"
-                                nombre ="Versión"  requerido = "true" placeholder="Versión"
-                                (keyup)="getVersiones(termino)" [array] = "versiones" validar="true"
-                                (actualizaValor)="termino = $event" (click) = "seleccionaVersion(version)"
-                                minLength = "1" (valorSeleccionado) = "version = $event"></app-floating-input> -->
-            <app-combo-modulo-objeto (objeto)="objeto = $event" (modulo)="modulo = $event"
-                                     moduloPlaceHolder ="Modulo"
-                                     objetoPlaceHolder="Objeto"
+
+            <app-combo-modulo-objeto (objeto)="objeto = $event"
+                                     (modulo)="modulo = $event"
+                                      moduloPlaceHolder ="Modulo"
+                                      objetoPlaceHolder="Objeto"
                                      [version] = "version"></app-combo-modulo-objeto>
 
                   <button style="margin:10px;" href="#carouselExampleControls" data-slide="prev" *ngIf="valor!=0 && valor<=2"(click)="anteriorStep()" class="btn btn-info" ><i class="fa fa-chevron-left"></i> Anterior</button>
