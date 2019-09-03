@@ -13,29 +13,31 @@ import { ComboService } from 'src/app/services/combo/combo.service';
 })
 export class ComboModuloObjetoComponent implements OnInit {
 
-  @Input() version:number;
-  @Input() objetoPlaceHolder:string = "";
-  @Input() moduloPlaceHolder:string = "";
+  @Input() public version:number;
+  @Input() public objetoPlaceHolder:string = "";
+  @Input() public moduloPlaceHolder:string = "";
 
-  @Output('modulo') moduloSeleccionado:EventEmitter<string> = new EventEmitter();
-  @Output('objeto') objetoSeleccionado:EventEmitter<string> = new EventEmitter();
-  @Output('comboEstado') comboEstado:EventEmitter<string> = new EventEmitter();
+  @Output('modulo') public moduloSeleccionado:EventEmitter<string> = new EventEmitter();
+  @Output('objeto') public objetoSeleccionado:EventEmitter<string> = new EventEmitter();
+  @Output('comboEstado') public comboEstado:EventEmitter<boolean> = new EventEmitter();
 
-  termino:string;
-  modulos:any[] = [];
-  objetos:any[] = [];
-  filtroCargados:any;
+  private terminoModulo:string;
+  private terminoObjeto:string;
 
-  moduloSubscription:Subscription;
-  ObjetoSubscription:Subscription;
-  storeSubscription:Subscription;
+  private modulos:any[] = [];
+  private objetos:any[] = [];
+  private filtroCargados:any;
 
-  modulo:string;
-  objeto:string;
-  moduloFilter:string;
+  private moduloSubscription:Subscription;
+  private ObjetoSubscription:Subscription;
+  private storeSubscription:Subscription;
 
-  moduloValido:boolean = false;
-  objetoValido:boolean = false;
+  private modulo:string;
+  private objeto:string;
+  private moduloFilter:string;
+
+  private moduloValido:boolean = false;
+  private objetoValido:boolean = false;
 
   constructor(public _cb:ComboService,
               public store:Store<AppState>,
@@ -52,14 +54,28 @@ export class ComboModuloObjetoComponent implements OnInit {
   }
   getModulos(termino:any,evento:any){
     let regex = new RegExp('^Arrow?','i');
+    let modulo:any[];
+    if(this.objetos.length>0 && this.terminoObjeto){
+      modulo = this.objetos.filter((data)=>{
+        return (data.codigo + " - "+data.descripcion) == this.terminoObjeto
+      });
+      if(modulo.length>0) modulo = modulo[0].modulo
+      else this.terminoObjeto =  null
+    }
     if(!regex.test(evento.key)){
       if(termino){
         this.moduloSubscription = this._cb.getModulos(termino).subscribe(data => {
+          if(this.objetos.length>0 && this.terminoObjeto) {
+            data.filter((data)=>{return data.codigo === modulo});
+          }
           this.modulos = data
         });
       }else{
         this._cb.getModulos(null)
         .subscribe(data => {
+          if(this.objetos.length>0 && this.terminoObjeto) {
+            data = data.filter((data)=>{return data.codigo === modulo});
+          }
           this.modulos = data;
         });
       }
@@ -67,29 +83,45 @@ export class ComboModuloObjetoComponent implements OnInit {
         let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
         this._cb.cargarFiltrosStore(filtros);
       }
+      this.comboEstado.emit(this.moduloValido);
     }
+
+
   }
   seleccionaModulo(value:string){
 
+    let modulo:any[];
+    if(this.objetos.length>0 && this.terminoObjeto){
+      modulo = this.objetos.filter((data)=>{
+        return (data.codigo + " - "+data.descripcion) == this.terminoObjeto
+      });
+      if(modulo.length>0) modulo = modulo[0].modulo
+      else this.terminoObjeto =  null
+    }
     if(value){
       this.cd.markForCheck();
       this.modulo = value;
       this.moduloSeleccionado.emit(this.modulo);
       this.cd.detectChanges();
+      this.terminoModulo = this.modulo
       let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
       this._cb.cargarFiltrosStore(filtros);
     }else{
       this._cb.getModulos(null)
       .subscribe(data => {
+        if(this.objetos.length>0 && this.terminoObjeto) {
+          data = data.filter((data)=>{return data.codigo === modulo});
+        }
         this.modulos = data;});
     }
+    this.comboEstado.emit(this.moduloValido);
   }
   getObjetos(modulo:string,termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
     if(!regex.test(evento.key)){
         if(termino && modulo){
           termino = termino==null?null:termino;
-          console.log(termino);
+
           this.ObjetoSubscription = this._cb.getObjetos(modulo, termino).subscribe(data => {
             this.objetos = data;
           });
@@ -108,12 +140,19 @@ export class ComboModuloObjetoComponent implements OnInit {
         }
         this._cb.AgregarObjetoStore(this.modulo, this.objeto);
     }
+    this.comboEstado.emit(this.moduloValido);
+  }
+  mostrarEstado(){
+    console.log(this.objetoValido);
+    console.log(this.moduloValido);
   }
   seleccionaObjeto(value:string){
+
     if(value){
       this.cd.markForCheck();
       this.objeto = value;
       this.objetoSeleccionado.emit(this.objeto);
+      this.terminoObjeto = this.objeto
       this.cd.detectChanges();
       if (this.store.select('filtro') == null ) {
           let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
@@ -128,6 +167,7 @@ export class ComboModuloObjetoComponent implements OnInit {
           .subscribe(data => { this.objetos = data });
     }
     this._cb.AgregarObjetoStore(this.modulo, this.objeto);
+    this.comboEstado.emit(this.moduloValido);
   }
 
 }

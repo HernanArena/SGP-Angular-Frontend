@@ -34,10 +34,12 @@ export class SearchcodeComponent implements OnInit {
       if(value){
         this.codigoSubscription = this._scs.getCodigoError(value).subscribe(data => {
           this.codigoSelect = data
+          console.log(data)
         });
       }else{
         this.codigoSubscription = this._scs.getCodigoError(null).subscribe(data => {
           this.codigoSelect = data
+          console.log(data)
         });
       }
     }
@@ -56,11 +58,12 @@ export class SearchcodeComponent implements OnInit {
   }
 
   mostrarModal(){
-    console.log(this.termino)
+
     let codigoSelect = this.codigoSelect
                       .filter((value)=>{
-                        return value.codigo == this.codigo
+                        return value.codigo == this.codigo.split(" - ")[0]
                       })[0];
+
     this._ms.setStep(codigoSelect.items.length);
     this._ms.setCodigo(codigoSelect.codigo);
     this._ms.setDescripcion(codigoSelect.descripcion);

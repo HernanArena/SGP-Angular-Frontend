@@ -25,3 +25,8 @@
 .form-control-warning {
   background-image: url(../../../assets/images/icon/warning.svg);
 }
+.descrp {
+  margin-top: 10%;
+  border: 1px solid white;
+  background-color: white;
+}

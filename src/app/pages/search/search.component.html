@@ -7,11 +7,11 @@
     <div class="col-md-1"></div>
     <div class="col-md-5">
       <app-angular-autocomplete [array] = "versiones" requerido = "true"
-                                nombre ="Version" placeholder = "EJ: 4.3.0- Indique una versión.."
+                                nombre ="Version" placeholder = "Versión - EJ: 4.3.0"
                                 (keyup)="getVersiones(termino,$event)"
                                 (click)="seleccionaVersion(termino)"
                                 (actualizaEstado)="versionValida = $event"
-                                (actualizaValor)="termino = $event"
+                                (actualizaValor)="seleccionaVersion($event)"
                                 (valorSeleccionado) = "version = $event"></app-angular-autocomplete>
 
     </div>
@@ -26,9 +26,9 @@
     </div>
     <div class="col-md-10">
         <app-combo-modulo-objeto (objeto)="objeto = $event" (modulo)="modulo = $event"
-                                 moduloPlaceHolder = "Seleccione un módulo... - EJ: Tesorería"
-                                 objetoPlaceHolder="Indique el objeto... - EJ: Cuentas corrientes por fecha"
-                                 [version] = "version"></app-combo-modulo-objeto>
+                                 moduloPlaceHolder = "Módulo - EJ: Tesorería"
+                                 objetoPlaceHolder="Objeto - EJ: Cuentas corrientes"
+                                 [version] = "version" (comboEstado)="estado = $event"></app-combo-modulo-objeto>
     </div>
     <div class="col-md-1"></div>
   </div>
@@ -38,7 +38,7 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <app-finder nombre = "Termino" requerido= "true" minLength ="5"></app-finder>
+    <app-finder nombre = "Termino" requerido= "true" minLength ="5" [botonvalido] ="estado" ></app-finder>
   </div>
   <div class="col-md-1"></div>
 </div>

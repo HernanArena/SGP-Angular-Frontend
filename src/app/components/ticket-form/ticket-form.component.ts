@@ -118,7 +118,7 @@ export class TicketFormComponent implements OnInit {
       this.contactos = data
     });
   }
-  getVersiones(termino:string){
+  getVersiones(termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
     console.log(termino);
     termino==null || termino =="" || termino==undefined?null:termino;

@@ -1,36 +1,33 @@
+<form [formGroup] = "forma"
+novalidate = "novalidate"
+autocomplete="off">
+  <div class="form-group has-feedback"
+       [ngClass]="{'has-danger': !forma.get('textArea').valid
+                                 && forma.get('textArea').touched,
+                   'has-error': !forma.get('textArea').valid
+                                && forma.get('textArea').touched,
+                   'has-success': forma.get('textArea').valid
+                                  && forma.get('textArea').touched }">
+    <textarea  class="form-control form-control-line"
+               [ngClass]="{'form-control-danger': !forma.get('textArea').valid
+                                                  && forma.get('textArea').touched ,
+                           'form-control-success': forma.get('textArea').valid
+                                                   && forma.get('textArea').touched}"
+               type="textarea"
+               placeholder="Ingrese un término de busqueda..."
+               formControlName = "textArea">
+    </textarea>
 
-<!-- <div class="input-group">
-  <textarea  type="textarea" class="form-control" placeholder="Ingrese un término de busqueda..."
-  name = "termino"
-  [(ngModel)] = "_termino"
-  (ngModelChange)="onChanges($event)"
-  #termino = "ngModel"> </textarea>
-</div>
+    <div  *ngIf="forma.controls['textArea'].errors?.required && forma.get('textArea').touched"
+    class="form-control-feedback left">
+      {{nombre}} es necesario
+    </div>
+
+    <div *ngIf="forma.get('textArea').errors?.minlength && forma.get('textArea').touched"
+    class="form-control-feedback left">
+      Se necesitan al menos {{minLength}} caracteres.
+    </div>
+  </div>
 <br>
-  <button [attr.disabled]="botonValido==true?null:true" class="btn btn-info" (click) ="navegararesultsyguardarstorage()" type="button">Buscar</button> -->
-  <form [formGroup] = "forma"
-        novalidate = "novalidate"
-        autocomplete="off">
-    <div class="form-group has-feedback"
-          [ngClass]="{'has-danger': !forma.get('textArea').valid  ,
-                      'has-error': !forma.get('textArea').valid && !forma.get('textArea').pristine,
-                      'has-success': forma.get('textArea').valid }">
-          <textarea  class="form-control form-control-line" (focus)="onFocus()" (blur)="outFocus()"
-                     [ngClass]="{'form-control-danger': !forma.get('textArea').valid && !forma.get('textArea').pristine ,
-                                 'form-control-success': forma.get('textArea').valid} "
-                     type="textarea"
-                     placeholder="Ingrese un término de busqueda..."
-                     formControlName = "textArea"
-                     (ngModelChange)="onChanges($event)"> </textarea>
-         <div  *ngIf="forma.controls['textArea'].errors?.required && !forma.get('textArea').pristine "
-             class="form-control-feedback left">
-             {{nombre}} es necesario
-         </div>
-         <div *ngIf="forma.get('textArea').errors?.minlength"
-             class="form-control-feedback left">
-             Se necesitan al menos {{minLength}} caracteres.
-         </div>
-       </div>
-       <br>
-         <button [attr.disabled]="botonValido==true?null:true" class="btn btn-info" (click) ="navegararesultsyguardarstorage()" type="button">Buscar</button>
-     </form>
+<button [attr.disabled]="(botonValido==true && forma.get('textArea').valid)?null:true" class="btn btn-info" (click) ="navegararesultsyguardarstorage()" type="button">Buscar</button>
+</form>

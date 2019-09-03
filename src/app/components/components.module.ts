@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FinderComponent } from './finder/finder.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FloatingInputComponent } from './floating-input/floating-input.component';
 import { TitlePageComponent } from './title-page/title-page.component';
 import { ModalWizardComponent } from './modal-wizard/modal-wizard.component';
 import { StepBystepComponent } from './step-bystep/step-bystep.component';
@@ -19,7 +18,6 @@ import { PaginationComponent } from './pagination/pagination.component';
 @NgModule({
   declarations: [
     FinderComponent,
-    FloatingInputComponent,
     TitlePageComponent,
     ModalWizardComponent,
     StepBystepComponent,
@@ -39,7 +37,6 @@ import { PaginationComponent } from './pagination/pagination.component';
   ],
   exports:[
     FinderComponent,
-    FloatingInputComponent,
     TitlePageComponent,
     ModalWizardComponent,
     StepBystepComponent,
@@ -50,7 +47,6 @@ import { PaginationComponent } from './pagination/pagination.component';
     MatInputModule,
     AngularAutocompleteComponent,
     PaginationComponent
-
   ]
 })
 export class ComponentsModule { }
