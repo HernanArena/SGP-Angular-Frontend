@@ -3,7 +3,7 @@ import { Parte } from 'src/app/models/parte.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
-import { AgregarFilterVersionAction, AgregarFilterObjetoAction } from 'src/app/store/actions';
+import { CargarFilterAction, AgregarFilterVersionAction, AgregarFilterObjetoAction, LimpiarPartesAction } from 'src/app/store/actions';
 import { HttpClient } from '@angular/common/http';
 import {URL_SERVICESTEST} from '../../config/config';
 import { map, filter } from 'rxjs/operators';
@@ -32,13 +32,27 @@ export class SearchService {
       objeto = data.filtro.objeto;
     })
 
-    termino = (termino == '' ? 'null':termino)
-    modulo = (modulo == '' || !modulo ? 'null':modulo)
-    objeto = (objeto == '' || !objeto ? 'null':objeto)
+    termino= (termino==''?'null':termino)
+    modulo= (modulo=='' || !modulo ?'null':modulo)
+    objeto= (objeto=='' || !objeto ?'null':objeto)
 
     return this.http.get(`${this.urlAPI}/partepublico/P/${modulo}/${objeto}/${version}/${termino}/${offset}/${limit}`)
       .pipe(map((resp:any) => resp.payload))
   };
+
+
+  cargarFiltrosStore(filtros:any){
+    this.store.dispatch(new CargarFilterAction(filtros));
+  }
+
+  limpiarPartes(){
+    this.store.dispatch(new LimpiarPartesAction());
+  }
+
+  AgregarVersionStore(version:number){
+    this.store.dispatch(new AgregarFilterVersionAction(version));
+  };
+
   public getDataRoute(){
     return this.router.events.pipe(
       filter(evento => evento instanceof ActivationEnd),

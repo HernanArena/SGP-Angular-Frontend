@@ -28,6 +28,7 @@ export class ModalWizardComponent implements OnInit {
   cerrarModal(){
     this.valor = 0;
     this.pasarPresentacion = false;
+    this.valor = 0
     this._mu.ocultarModal();
   }
   siguienteStep(){
@@ -36,7 +37,6 @@ export class ModalWizardComponent implements OnInit {
     }
   }
   anteriorStep(){
-    console.log();
     if(this.valor <= 6 && this.valor>0){
       this.valor = this.valor - 1;
     }
