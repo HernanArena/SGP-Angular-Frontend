@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { SearchService } from 'src/app/services/search/search.service';
 import { Subscription } from 'rxjs';
 import { Filtro } from 'src/app/models/filtro.model'
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Router } from '@angular/router';
+import { ComboService } from 'src/app/services/combo/combo.service';
+import { SearchService } from 'src/app/services/search/search.service';
+import { CargarBeforeRouteAction, CargarAfterRouteAction } from 'src/app/store/actions';
 
 
 @Component({
@@ -15,57 +17,88 @@ import { Router } from '@angular/router';
 export class SearchComponent implements OnInit{
 
 
-  termino:string;
-  modulo:string;
-  objeto:string;
-  versiones:any[] = [];
-  filtroCargados:any;
-  storeSubscription:Subscription;
-  version:number;
-  versionValida:boolean = false;
-  comboObjetoValido:boolean = false;
+  private termino:string = "";
+  private objeto:string = "";
+  private modulo:string = "";
+  private versiones:any[] = [];
+  private filtroCargados:any;
+  private storeSubscription:Subscription;
+  private version:number;
+  private versionValida:boolean = false;
+  private estado:boolean = true;
+  private anterior:string = "";
 
 
-  constructor(public _sp:SearchService,
+  constructor(public _cb:ComboService,
+              public _sp:SearchService,
               public store:Store<AppState>,
               private router:Router,
               private cd: ChangeDetectorRef) {
 
+
     this.storeSubscription = this.store.subscribe(data =>{
-      this.filtroCargados = data.filtro.filtro
+      this.filtroCargados = data.filtro.filtro;
+      this.anterior = data.navigation.rutaActual;
       if(data.cargaresults.oktonavigate){
            this.router.navigate(['/resultados']);
         }
     });
-    this._sp.limpiarPartes();
+
+
   }
 
   ngOnInit() {
+    this._sp.getDataRoute().subscribe( (data)=>{
+      console.log(this.anterior)
+      let route = {
+        after: this.anterior,
+        before: data.titulo
+      }
+      this.store.dispatch(new CargarBeforeRouteAction(route))
+      this.store.dispatch(new CargarAfterRouteAction(route))
+    });
+
   };
-  getVersiones(termino:string,evento:any){
+  private getVersiones(termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
+
     if(!regex.test(evento.key)){
       if(termino){
-        this._sp.getVersiones(termino).subscribe(data => {
+        this._cb.getVersiones(termino).subscribe(data => {
           this.versiones = data;
         });
       }else{
-        this._sp.getVersiones(null)
+        this._cb.getVersiones(null)
         .subscribe(data => {this.versiones = data;});
       }
     }
   }
+<<<<<<< HEAD
   seleccionaVersion(value:any){
     this.termino = value;
+=======
+  private seleccionaVersion(value:any){
+>>>>>>> master
     if(value){
       this.cd.markForCheck();
       this.version = value;
       this.cd.detectChanges();
+<<<<<<< HEAD
       let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
 
       this._sp.cargarFiltrosStore(filtros);
+=======
+      console.log(this.filtroCargados)
+
+      if(!this.filtroCargados){
+        let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
+        this._cb.cargarFiltrosStore(filtros);
+      }
+
+
+>>>>>>> master
     }else{
-      this._sp.getVersiones(null)
+      this._cb.getVersiones(null)
       .subscribe(data => {this.versiones = data;});
     }
   }
@@ -79,13 +112,16 @@ export class SearchComponent implements OnInit{
 
     if (this.store.select('filtro') == null ) {
         let filtros = new Filtro(version,this.modulo,this.objeto,"");
-        this._sp.cargarFiltrosStore(filtros);
+        this._cb.cargarFiltrosStore(filtros);
     }
-    this._sp.AgregarVersionStore(version);
+    this._cb.AgregarVersionStore(version);
   }
 //A pedido de her
   ngOnDestroy(): void {
+
   //  this.moduloSubscription.unsubscribe();
     //this.storeSubscription.unsubscribe();
   }
+
+
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FloatingInputComponent } from './floating-input.component';
+import { RigthSidebarComponent } from './rigth-sidebar.component';
 
-describe('FloatingInputComponent', () => {
-  let component: FloatingInputComponent;
-  let fixture: ComponentFixture<FloatingInputComponent>;
+describe('RigthSidebarComponent', () => {
+  let component: RigthSidebarComponent;
+  let fixture: ComponentFixture<RigthSidebarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FloatingInputComponent ]
+      declarations: [ RigthSidebarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FloatingInputComponent);
+    fixture = TestBed.createComponent(RigthSidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

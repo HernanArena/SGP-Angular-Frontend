@@ -52,33 +52,25 @@ export class AngularAutocompleteComponent implements OnInit {
     });
   }
   private valid():boolean{
-    if (this.validar) {
-      if (this.valorSeleccionado != "" && this.forma.get('inputFloating').value != "" && this.focus) {
-        return true
-      }
-      else {
-        return false
-      }
-    }
-    else {
-      return true
-    }
+    return (this.arrayItem.length>0 && this.arrayItem.filter( data => {
+      return data.codigo.toString().concat(' - ').concat(data.descripcion.toString()) == this.termino
+    }).length>0) || this.termino == ""
+  }
+  getPosts(evento:any){
+    this.valorSeleccionado = evento;
   }
   private onChanges(newValue:any) {
-      this.termino = newValue;
-
-      if(newValue.indexOf(" - ") > 0 ) this.termino = newValue.split(" - ")[0];
-
-      this.cambioValor.emit(this.termino)
-
-      if(this.valid() && this.forma.get('inputFloating').valid){
-        this.estado.emit(true);
-        this.valorFinal.emit(this.termino);
-      }else{
-        this.estado.emit(false);
-      }
-      //Emito valor al padre
-
+    this.termino = newValue;
+    if(this.valid() && this.forma.get('inputFloating').valid){
+      this.estado.emit(true);
+      this.valorFinal.emit(this.termino);
+    }else{
+      this.estado.emit(false);
+    }
+    this.estado.emit(this.valid());
+    console.log(this.valid())
+    //Emito valor al padre
+    this.cambioValor.emit(newValue)
 
   }
 

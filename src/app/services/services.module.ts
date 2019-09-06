@@ -4,7 +4,7 @@ import { HttpClientModule} from '@angular/common/http'
 import { CommonModule } from '@angular/common';
 import { SearchService } from './search/search.service';
 import { FinderService } from './finder/finder.service';
-import { SearchcodeService } from './searchcode/searchcode.service';
+
 import { ValidationService } from './validation/validation.service';
 import { ModalWizardService } from './modal-wizard/modal-wizard.service';
 import { TicketFormService } from './ticket-form/ticket-form.service';
@@ -20,7 +20,6 @@ import { TicketFormService } from './ticket-form/ticket-form.service';
     UsuarioService,
     SearchService,
     FinderService,
-    SearchcodeService,
     ValidationService,
     ModalWizardService,
     TicketFormService

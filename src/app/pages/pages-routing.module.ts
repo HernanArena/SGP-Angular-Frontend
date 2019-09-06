@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ResultsComponent } from './results/results.component';
 import { SearchcodeComponent } from './searchcode/searchcode.component';
 import { NewSuggestComponent } from './new-suggest/new-suggest.component';
-import { NewTicketComponent } from './new-ticket/new-ticket.component';
+// import { NewTicketComponent } from './new-ticket/new-ticket.component';
 
 const pagesRoutes: Routes = [
     { path: 'escritorio',
@@ -28,12 +28,7 @@ const pagesRoutes: Routes = [
     },
     { path: 'resultados',
      component: ResultsComponent,
-     data:{ titulo:"Resultados de búsqueda"}
-    },
-    { path: 'new-ticket',
-     component: NewTicketComponent,
-     data:{ titulo:"Alta de nuevo parte",
-            descrip:"Formulario de alta de parte"}
+     loadChildren: () => import('./results/results.module').then(m => m.ResultsModule),
     },
     { path: 'sugerencias',
      component: NewSuggestComponent,

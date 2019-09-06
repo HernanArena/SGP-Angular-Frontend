@@ -24,7 +24,6 @@ export class FinderComponent implements OnInit,OnDestroy {
   @Input('minLength') public minLength:number = 0;
   @Input('nombre')  public nombre:string = "";
 
-  private focus:boolean = false;
   partes:Parte[];
   _termino:string ="";
   storeSubscription:Subscription;
@@ -35,6 +34,7 @@ export class FinderComponent implements OnInit,OnDestroy {
     this.init();
 
     this.storeSubscription = this.store.select('filtro').subscribe( data => {
+      console.log(data);
       if(data.filtro != null && this.recuperaStore){
           this._termino = data.filtro.termino;
       }else{
@@ -46,18 +46,12 @@ export class FinderComponent implements OnInit,OnDestroy {
   ngOnInit() {
     this.createValidation();
   }
-  onChanges(evento:any){
-    console.log(this.botonValido);
-    if(evento =="" ||evento ==null ||evento == undefined){
-      this.botonValido = false;
-    }else{
-      this.botonValido = true;
-    }
-  }
 
   navegararesultsyguardarstorage(){
-    this._fs.guardarTerminoStore(this._termino);
-    this.store.dispatch(new CargarPartes(this._termino, 0, 5));
+    if(this._termino){
+      this._fs.guardarTerminoStore(this._termino);
+    }
+    this.store.dispatch(new CargarPartes(this._termino,0,5));
   }
   ngOnDestroy(): void {
       this.storeSubscription.unsubscribe();
@@ -78,15 +72,5 @@ export class FinderComponent implements OnInit,OnDestroy {
                               .map((data)=> data.validation);
 
     this.forma.controls['textArea'].setValidators(validation);
-
   }
-
-
-  onFocus(){
-    this.focus = true;
-  }
-  outFocus(){
-    this.focus=false;
-  }
-
 }

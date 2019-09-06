@@ -5,54 +5,23 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { CargarFilterAction, AgregarFilterVersionAction, AgregarFilterObjetoAction, LimpiarPartesAction } from 'src/app/store/actions';
 import { HttpClient } from '@angular/common/http';
-import { URL_SERVICESTEST } from '../../config/config';
-import { map } from 'rxjs/operators';
+import {URL_SERVICESTEST} from '../../config/config';
+import { map, filter } from 'rxjs/operators';
+import { Router, ActivationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  partes:Parte[] =[];
-  modulos:modulo[] =[];
-  objetos:objeto[] =[];
-  urlAPI = URL_SERVICESTEST;
-  constructor(public http:HttpClient,public store:Store<AppState>) { }
+  private partes:Parte[] =[];
+  private urlAPI = URL_SERVICESTEST;
+  constructor(public http:HttpClient,
+              public store:Store<AppState>,
+              public router:Router) { }
 
-
-  getVersiones(termino:string):Observable<any>{
-    if(termino){
-      return this.http.get(`${this.urlAPI}/version/${termino}`)
-        .pipe(map((resp:any) => resp.payload))
-    }else{
-      return this.http.get(`${this.urlAPI}/version`)
-        .pipe(map((resp:any) => resp.payload))
-    }
-  }
-
-  getModulos(termino:string):Observable<any>{
-    if(termino){
-       if(termino.indexOf(" - ") > 0 )termino = termino.split(" - ")[1];
-       return this.http.get(`${this.urlAPI}/modulo/${termino}`)
-                  .pipe(map((resp:any) => resp.payload));
-    }else{
-      return this.http.get(`${this.urlAPI}/modulo`)
-        .pipe(map((resp:any) => resp.payload));
-    }
-  }
-
-
-  getObjetosConFiltro(modulo:string,termino:string):Observable<any> {
-    if(termino){
-      return this.http.get(`${this.urlAPI}/objeto/${modulo}/${termino}/`)
-      .pipe(map((resp:any) => resp.payload))
-    }else{
-      return this.http.get(`${this.urlAPI}/objeto/${modulo}`)
-        .pipe(map((resp:any) => resp.payload));
-    }
-  }
-
-  getPartesConFiltro(termino:string, offset:number ,limit:number):Observable<any>{
-
+  public getPartesConFiltro(termino:string,
+                            offset:number,
+                            limit:number):Observable<any>{
     let modulo:string;
     let version:number;
     let objeto:string;
@@ -66,7 +35,7 @@ export class SearchService {
     termino= (termino==''?'null':termino)
     modulo= (modulo=='' || !modulo ?'null':modulo)
     objeto= (objeto=='' || !objeto ?'null':objeto)
-    console.log(`${this.urlAPI}/partepublico/P/${modulo}/${objeto}/${version}/${termino}/${offset}/${limit}`)
+
     return this.http.get(`${this.urlAPI}/partepublico/P/${modulo}/${objeto}/${version}/${termino}/${offset}/${limit}`)
       .pipe(map((resp:any) => resp.payload))
   };
@@ -82,11 +51,16 @@ export class SearchService {
 
   AgregarVersionStore(version:number){
     this.store.dispatch(new AgregarFilterVersionAction(version));
+  };
+
+  public getDataRoute(){
+    return this.router.events.pipe(
+      filter(evento => evento instanceof ActivationEnd),
+      filter((evento:ActivationEnd) => evento.snapshot.firstChild ==null),
+      map((evento:ActivationEnd) => evento.snapshot.data)
+    )
   }
 
-  AgregarObjetoStore(modulo:string,objeto:string){
-    this.store.dispatch(new AgregarFilterObjetoAction(modulo,objeto));
-  }
 
 }
 interface modulo{

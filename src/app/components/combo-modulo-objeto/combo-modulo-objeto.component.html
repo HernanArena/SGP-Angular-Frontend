@@ -1,14 +1,14 @@
   <app-angular-autocomplete [array] = "modulos"
                             nombre ="Módulo" placeholder = "{{moduloPlaceHolder}}"
-                            (keyup)="getModulos(termino,$event)"
+                            (keyup)="getModulos(terminoModulo,$event)"
                             (click)="seleccionaModulo(modulo)"
                             (valorSeleccionado) = "modulo = $event"
                             (actualizaEstado) = "moduloValido = $event"
                             (actualizaValor)="seleccionaModulo($event)"></app-angular-autocomplete>
   <app-angular-autocomplete nombre = "Objeto"
                             [array] = "objetos" placeholder = "{{objetoPlaceHolder}}"
-                            (keyup)="getObjetos(modulo,termino,$event)"
-                            (actualizaEstado) = "objetoValido = $event"
+                            (keyup)="getObjetos(modulo,terminoObjeto,$event)"
                             (click)="seleccionaObjeto(objeto)"
                             (valorSeleccionado) = "objeto = $event"
+                            (actualizaEstado) = "moduloValido = $event"
                             (actualizaValor)="seleccionaObjeto($event)"></app-angular-autocomplete>

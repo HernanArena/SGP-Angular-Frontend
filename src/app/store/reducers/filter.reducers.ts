@@ -43,7 +43,6 @@ export function filterReducers (state:filterState = initState,action: fromFilter
         }
       };
 
-
     default:
       return state;
   }

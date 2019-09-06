@@ -23,6 +23,9 @@ export class ComboService {
 
   public getVersiones(termino:string):Observable<any>{
     if(termino){
+      if(termino.includes("-")){
+        termino = termino.split("-").slice(0,termino.split("-").length-1).join("-").trim();
+      }
       return this.http.get(`${this.urlAPI}/version/${termino}`)
         .pipe(map((resp:any) => resp.payload));
     }else{
@@ -32,6 +35,9 @@ export class ComboService {
   }
   public getModulos(termino:string):Observable<any>{
     if(termino){
+       if(termino.includes("-")){
+         termino = termino.split("-").slice(0,termino.split("-").length-1).join("-").trim();
+       }
        return this.http.get(`${this.urlAPI}/modulo/${termino}`)
                   .pipe(map((resp:any) => resp.payload));
     }else{
@@ -40,14 +46,15 @@ export class ComboService {
     }
   }
   public getObjetos(modulo:string,termino:string):Observable<any> {
-    if(termino){
+    if(modulo && modulo.includes("-")){
+      modulo = modulo.split("-").slice(0,modulo.split("-").length-1).join("-").trim();
+    }
+    termino = termino?termino:null;
+    modulo = modulo?modulo:null;
+    console.log(modulo);
+    console.log(termino);
       return this.http.get(`${this.urlAPI}/objeto/${modulo}/${termino}/`)
       .pipe(map((resp:any) => resp.payload));
-    }else{
-      console.log(`${this.urlAPI}/objeto/${modulo}`)
-      return this.http.get(`${this.urlAPI}/objeto/${modulo}`)
-        .pipe(map((resp:any) => resp.payload));
-    }
   }
   public getCodigoError(error:string):Observable<any>{
     if(error){
@@ -56,6 +63,15 @@ export class ComboService {
     }else{
       return this.http.get(`${this.urlAPI}/partepublico/e`)
         .pipe(map((resp:any) => resp.payload));
+    }
+  }
+  getContacto(nrocta:string,termino:string):Observable<any>{
+    if(termino){
+      return this.http.get(`${this.urlAPI}/contacto/${nrocta}/${termino}`)
+        .pipe(map((resp:any) => {return resp.payload;}))
+    }else{
+      return this.http.get(`${this.urlAPI}/contacto/${nrocta}`)
+        .pipe(map((resp:any) => {return resp.payload;}))
     }
   }
   public cargarFiltrosStore(filtros:Filtro){
