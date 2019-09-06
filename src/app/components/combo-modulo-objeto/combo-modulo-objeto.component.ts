@@ -99,7 +99,7 @@ export class ComboModuloObjetoComponent implements OnInit {
       if(modulo.length>0) modulo = modulo[0].modulo
       else this.terminoObjeto =  null
     }
-    if(value){
+    if(value || value == ''){
       this.cd.markForCheck();
       this.modulo = value;
       this.moduloSeleccionado.emit(this.modulo);
@@ -147,7 +147,7 @@ export class ComboModuloObjetoComponent implements OnInit {
 
   seleccionaObjeto(value:string){
 
-    if(value){
+    if(value || value == ''){
       this.cd.markForCheck();
       this.objeto = value;
       this.objetoSeleccionado.emit(this.objeto);

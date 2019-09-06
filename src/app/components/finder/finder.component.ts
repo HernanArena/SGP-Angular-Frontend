@@ -34,7 +34,6 @@ export class FinderComponent implements OnInit,OnDestroy {
     this.init();
 
     this.storeSubscription = this.store.select('filtro').subscribe( data => {
-      console.log(data);
       if(data.filtro != null && this.recuperaStore){
           this._termino = data.filtro.termino;
       }else{

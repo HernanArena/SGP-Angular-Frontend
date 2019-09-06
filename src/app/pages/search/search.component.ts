@@ -49,7 +49,6 @@ export class SearchComponent implements OnInit{
 
   ngOnInit() {
     this._sp.getDataRoute().subscribe( (data)=>{
-      console.log(this.anterior)
       let route = {
         after: this.anterior,
         before: data.titulo
@@ -73,30 +72,24 @@ export class SearchComponent implements OnInit{
       }
     }
   }
-<<<<<<< HEAD
-  seleccionaVersion(value:any){
-    this.termino = value;
-=======
+
   private seleccionaVersion(value:any){
->>>>>>> master
-    if(value){
+
+    if(value || value == ''){
+
       this.cd.markForCheck();
       this.version = value;
       this.cd.detectChanges();
-<<<<<<< HEAD
+
       let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
 
       this._sp.cargarFiltrosStore(filtros);
-=======
-      console.log(this.filtroCargados)
 
       if(!this.filtroCargados){
         let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
         this._cb.cargarFiltrosStore(filtros);
       }
 
-
->>>>>>> master
     }else{
       this._cb.getVersiones(null)
       .subscribe(data => {this.versiones = data;});
