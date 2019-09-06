@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, ActivationEnd } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { Router, ActivationEnd, RoutesRecognized } from '@angular/router';
+import { filter, map, pairwise } from 'rxjs/operators';
 import { Meta, MetaDefinition } from '@angular/platform-browser';
 
 @Component({
@@ -10,22 +10,23 @@ import { Meta, MetaDefinition } from '@angular/platform-browser';
 })
 export class BreadcrumbsComponent {
   titulo:string;
-  descrip:string;
+  pathAnterior:string;
+  pathSiguiente:string;
+  inicio:string;
 
   constructor(public router:Router,
               private meta:Meta) {
+
     this.getDataRoute()
     .subscribe( data =>{
        if(data.titulo){
          this.titulo = data.titulo;
-         this.descrip = data.descrip;
         const metaTag:MetaDefinition = {
           name: 'Description',
           content: this.titulo
         };
         this.meta.updateTag(metaTag);
        }
-
     });
 
   }
@@ -38,13 +39,11 @@ export class BreadcrumbsComponent {
       map((evento:ActivationEnd) => evento.snapshot.data)
     )
   }
-  // getDataRoute(){
-  //   return this.router.events.pipe(
-  //       filter((e: any) => e instanceof RoutesRecognized),
-  //       pairwise()
-  //     )  .subscribe((e: any) => {
-    //     console.log(e[0].urlAfterRedirects); //previous url
-    // });
-  //   }
+  getDataRouteAfterAndBefore(){
+    return this.router.events.pipe(
+        filter((e: any) => e instanceof RoutesRecognized),
+        pairwise()
+      )
+  }
 
 }

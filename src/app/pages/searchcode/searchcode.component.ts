@@ -31,15 +31,14 @@ export class SearchcodeComponent implements OnInit {
   getError(value:any,evento:any){
     let regex = new RegExp('^Arrow?','i');
     if(!regex.test(evento.key)){
+        console.log(value)
       if(value){
         this.codigoSubscription = this._cb.getCodigoError(value).subscribe(data => {
-          this.codigoSelect = data
-          console.log(data)
+          this.codigoSelect = data.partes
         });
       }else{
         this.codigoSubscription = this._cb.getCodigoError(null).subscribe(data => {
-          this.codigoSelect = data
-          console.log(data)
+          this.codigoSelect = data.partes
         });
       }
     }
@@ -65,7 +64,7 @@ export class SearchcodeComponent implements OnInit {
 
     }else{
       this._cb.getCodigoError(null)
-      .subscribe(data => {this.codigoSelect = data;});
+      .subscribe(data => {this.codigoSelect = data.partes;});
     }
   }
 
