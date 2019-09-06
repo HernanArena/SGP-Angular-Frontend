@@ -41,6 +41,7 @@
                                       requerido = "true"
                                       nombre ="Versión"
                                       placeholder = "Versión"
+                                      [valor] = "setVersiones()"
                                       (actualizaEstado)="versionValid = $event"
                                       (actualizaValor)="termino = $event"
                                       (keyup)="getVersiones(termino,$event)"
@@ -49,6 +50,8 @@
 
             <app-combo-modulo-objeto (objeto)="objeto = $event"
                                      (modulo)="modulo = $event"
+                                     [valorModulo] = "moduloFiltro"
+                                     [valorObjeto] = "objetoFiltro"
                                       moduloPlaceHolder ="Modulo"
                                       objetoPlaceHolder="Objeto"
                                      [version] = "version"></app-combo-modulo-objeto>

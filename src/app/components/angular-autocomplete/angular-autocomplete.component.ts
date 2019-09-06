@@ -69,8 +69,7 @@ export class AngularAutocompleteComponent implements OnInit {
     this.estado.emit(this.valid());
     console.log(this.valid())
     //Emito valor al padre
-    this.cambioValor.emit(newValue)
-
+    this.cambioValor.emit(newValue);
   }
 
   private createValidation(){

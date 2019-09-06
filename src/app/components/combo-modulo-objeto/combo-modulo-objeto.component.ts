@@ -16,6 +16,8 @@ export class ComboModuloObjetoComponent implements OnInit {
   @Input() public version:number;
   @Input() public objetoPlaceHolder:string = "";
   @Input() public moduloPlaceHolder:string = "";
+  @Input('valorModulo') public valorModulo:string = "";
+  @Input('valorObjeto') public valorObjeto:string = "";
 
   @Output('modulo') public moduloSeleccionado:EventEmitter<string> = new EventEmitter();
   @Output('objeto') public objetoSeleccionado:EventEmitter<string> = new EventEmitter();
@@ -143,12 +145,7 @@ export class ComboModuloObjetoComponent implements OnInit {
     }
     this.comboEstado.emit(this.moduloValido);
   }
-  mostrarEstado(){
-    console.log(this.objetoValido);
-    console.log(this.moduloValido);
-  }
   seleccionaObjeto(value:string){
-
     if(value){
       this.cd.markForCheck();
       this.objeto = value;

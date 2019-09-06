@@ -2,6 +2,7 @@
                             nombre ="Módulo" placeholder = "{{moduloPlaceHolder}}"
                             (keyup)="getModulos(terminoModulo,$event)"
                             (click)="seleccionaModulo(modulo)"
+                            [valor] = "valorModulo"
                             (valorSeleccionado) = "modulo = $event"
                             (actualizaEstado) = "moduloValido = $event"
                             (actualizaValor)="seleccionaModulo($event)"></app-angular-autocomplete>
@@ -9,6 +10,7 @@
                             [array] = "objetos" placeholder = "{{objetoPlaceHolder}}"
                             (keyup)="getObjetos(modulo,terminoObjeto,$event)"
                             (click)="seleccionaObjeto(objeto)"
+                            [valor] = "valorObjeto"
                             (valorSeleccionado) = "objeto = $event"
                             (actualizaEstado) = "moduloValido = $event"
                             (actualizaValor)="seleccionaObjeto($event)"></app-angular-autocomplete>

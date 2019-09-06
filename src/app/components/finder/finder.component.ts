@@ -48,7 +48,7 @@ export class FinderComponent implements OnInit,OnDestroy {
 
   navegararesultsyguardarstorage(){
     if(this._termino){
-      this._fs.guardarTerminoStore(this._termino);
+      this._fs.guardarTerminoStore(this.forma.get("textArea").value);
     }
     this.store.dispatch(new CargarPartes(this._termino,0,5));
   }
