@@ -109,6 +109,10 @@ export class SearchComponent implements OnInit{
     }
     this._cb.AgregarVersionStore(version);
   }
+
+  loguea() {
+    console.log(this.estado)
+  }
 //A pedido de her
   ngOnDestroy(): void {
 

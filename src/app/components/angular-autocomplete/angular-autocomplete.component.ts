@@ -47,6 +47,10 @@ export class AngularAutocompleteComponent implements OnInit {
     }
     this.changeDetector.markForCheck();
     this.createValidation();
+    //Para que comience emitiendo un valor true si el campo no es requerido
+    if (!this.required){
+      this.estado.emit(true);
+    }
   }
 
   private init(){
@@ -57,7 +61,7 @@ export class AngularAutocompleteComponent implements OnInit {
   private valid():boolean{
     return (this.arrayItem.length>0 && this.arrayItem.filter( data => {
       return data.codigo.toString().concat(' - ').concat(data.descripcion.toString()) == this.termino
-    }).length>0) || this.termino == ""
+    }).length>0) || this.termino == ''
   }
   getPosts(evento:any){
     this.valorSeleccionado = evento;
@@ -68,7 +72,8 @@ export class AngularAutocompleteComponent implements OnInit {
       this.estado.emit(false);
       this.valorFinal.emit('');
       this.cambioValor.emit('')
-      console.log('emite null')
+    }else {
+      this.estado.emit(true);
     }
     //Emito valor al padre
     if(this.seleccionoValor == false){

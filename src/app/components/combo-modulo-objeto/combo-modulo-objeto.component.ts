@@ -85,12 +85,12 @@ export class ComboModuloObjetoComponent implements OnInit {
         this._cb.cargarFiltrosStore(filtros);
       }
       this.comboEstado.emit(this.moduloValido);
+
     }
 
 
   }
   seleccionaModulo(value:string){
-
     let modulo:any[];
     if(this.objetos.length>0 && this.terminoObjeto){
       modulo = this.objetos.filter((data)=>{
@@ -117,6 +117,7 @@ export class ComboModuloObjetoComponent implements OnInit {
     }
     this.comboEstado.emit(this.moduloValido);
   }
+
   getObjetos(modulo:string,termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
     if(!regex.test(evento.key)){
@@ -142,6 +143,7 @@ export class ComboModuloObjetoComponent implements OnInit {
         this._cb.AgregarObjetoStore(this.modulo, this.objeto);
     }
     this.comboEstado.emit(this.moduloValido);
+
   }
 
 
@@ -158,7 +160,7 @@ export class ComboModuloObjetoComponent implements OnInit {
           this._cb.cargarFiltrosStore(filtros);
       }
     }else if(this.modulo){
-      console.log(this.modulo);
+
       this.ObjetoSubscription = this._cb.getObjetos(this.modulo,null)
           .subscribe(data => { this.objetos = data });
     }else{
@@ -168,6 +170,7 @@ export class ComboModuloObjetoComponent implements OnInit {
 
     this._cb.AgregarObjetoStore(this.modulo, this.objeto);
     this.comboEstado.emit(this.moduloValido);
+
   }
 
 

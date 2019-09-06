@@ -28,6 +28,7 @@
         <app-combo-modulo-objeto (objeto)="objeto = $event" (modulo)="modulo = $event"
                                  moduloPlaceHolder = "Módulo - EJ: Tesorería"
                                  objetoPlaceHolder="Objeto - EJ: Cuentas corrientes"
+                                 (click) = "loguea()"
                                  [version] = "version" (comboEstado)="estado = $event"></app-combo-modulo-objeto>
     </div>
     <div class="col-md-1"></div>
@@ -38,7 +39,7 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <app-finder nombre = "Termino"  [botonvalido] ="estado && versionValida" ></app-finder>
+    <app-finder nombre = "Termino"  [botonvalido] ="estado==true && versionValida " ></app-finder>
   </div>
   <div class="col-md-1"></div>
 </div>
