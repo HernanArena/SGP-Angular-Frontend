@@ -1,7 +1,6 @@
 <!-- Footer -->
 <div class="footer-results bg-light">
           <h5 class="mt-4 mb-3">{{titulo}}</h5>
-          <a style="margin:10px;" class="btn btn-secondary" href="#" target="_blank"><i class="{{awesomeboton1}}"></i> {{boton1}} </a>
-          <a style="margin:10px;" class="btn btn-info" href="#" target="_blank"> {{boton2}}<i class="{{awesomeboton2}}"></i></a>
-      <!-- Grid row -->
+          <button *ngIf="boton1" style="margin:10px;" (click)="enlace1()" class="btn btn-secondary" target="_blank"><i class="{{awesomeboton1}}"></i> {{boton1}} </button>
+          <button *ngIf="boton2"style="margin:10px;" (click)="enlace2()"class="btn btn-info" target="_blank"> {{boton2}} <i class="{{awesomeboton2}}"></i></button>
 </div>

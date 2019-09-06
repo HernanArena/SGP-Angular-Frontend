@@ -12,6 +12,7 @@ import { MatAutocompleteModule, MatFormFieldModule, MatInputModule} from '@angul
 import { AngularAutocompleteComponent } from './angular-autocomplete/angular-autocomplete.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ResultsFooterComponent } from './results-footer/results-footer.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ResultsFooterComponent } from './results-footer/results-footer.componen
     PipesModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    RouterModule
   ],
   exports:[
     FinderComponent,

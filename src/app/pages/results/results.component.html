@@ -21,7 +21,15 @@
       </div>
     </li>
 </ul>
-<button class="btn btn-info" [routerLink] = "['/new-ticket']" type="button">Generar parte</button>
 
 <app-pagination *ngIf="cantidadPartes > 0" [tope] = 5 [cantidadResultados] = "cantidadPartes"></app-pagination>
-<app-results-footer></app-results-footer>
+<app-results-footer
+                titulo="Si no encuentra la solución adecuada puede cargar un nuevo parte aquí"
+                link1 = "/panel"
+                boton1= " Volver "
+                awesomeboton1="fa fa-arrow-left"
+                link2 = "/new-ticket"
+                boton2= " Nuevo Parte "
+                awesomeboton2="fa fa-pencil-square-o"
+                >
+</app-results-footer>
