@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {switchMap, map, catchError} from 'rxjs/operators';
-import * as usuarioActions from '../actions/user.actions';
 import * as searchTicketsActions from '../actions/searchTickets.actions';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { of } from 'rxjs/internal/observable/of';
-import {Usuario} from '../../models/usuario.model';
 import { FinderService } from 'src/app/services/finder/finder.service';
-import { Parte } from 'src/app/models/parte.model';
 import { PartePayload } from 'src/app/models/partepayload.model';
 
 @Injectable()

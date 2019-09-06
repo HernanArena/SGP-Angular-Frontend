@@ -21,6 +21,7 @@
           </mat-error>
           <mat-autocomplete #autoGroup="matAutocomplete">
               <mat-option *ngFor="let item of arrayItem"
+                          (onSelectionChange) = "seleccionaValor(item)"
                           [value]="item | selected:' - '" >
                           {{item | selected:" - "}}
               </mat-option>

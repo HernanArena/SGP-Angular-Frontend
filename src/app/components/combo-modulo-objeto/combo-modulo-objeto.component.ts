@@ -87,12 +87,12 @@ export class ComboModuloObjetoComponent implements OnInit {
         this._cb.cargarFiltrosStore(filtros);
       }
       this.comboEstado.emit(this.moduloValido);
+
     }
 
 
   }
   seleccionaModulo(value:string){
-
     let modulo:any[];
     if(this.objetos.length>0 && this.terminoObjeto){
       modulo = this.objetos.filter((data)=>{
@@ -101,7 +101,7 @@ export class ComboModuloObjetoComponent implements OnInit {
       if(modulo.length>0) modulo = modulo[0].modulo
       else this.terminoObjeto =  null
     }
-    if(value){
+    if(value || value == ''){
       this.cd.markForCheck();
       this.modulo = value;
       this.moduloSeleccionado.emit(this.modulo);
@@ -119,6 +119,7 @@ export class ComboModuloObjetoComponent implements OnInit {
     }
     this.comboEstado.emit(this.moduloValido);
   }
+
   getObjetos(modulo:string,termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
     if(!regex.test(evento.key)){
@@ -144,9 +145,13 @@ export class ComboModuloObjetoComponent implements OnInit {
         this._cb.AgregarObjetoStore(this.modulo, this.objeto);
     }
     this.comboEstado.emit(this.moduloValido);
+
   }
+
+
   seleccionaObjeto(value:string){
-    if(value){
+
+    if(value || value == ''){
       this.cd.markForCheck();
       this.objeto = value;
       this.objetoSeleccionado.emit(this.objeto);
@@ -157,15 +162,18 @@ export class ComboModuloObjetoComponent implements OnInit {
           this._cb.cargarFiltrosStore(filtros);
       }
     }else if(this.modulo){
-      console.log(this.modulo);
+
       this.ObjetoSubscription = this._cb.getObjetos(this.modulo,null)
           .subscribe(data => { this.objetos = data });
     }else{
       this.ObjetoSubscription = this._cb.getObjetos(null,null)
           .subscribe(data => { this.objetos = data });
     }
+
     this._cb.AgregarObjetoStore(this.modulo, this.objeto);
     this.comboEstado.emit(this.moduloValido);
+
   }
+
 
 }

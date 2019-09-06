@@ -8,9 +8,7 @@ import { StepBystepComponent } from './step-bystep/step-bystep.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { ComboModuloObjetoComponent } from './combo-modulo-objeto/combo-modulo-objeto.component';
-import {MatAutocompleteModule,
-        MatFormFieldModule,
-        MatInputModule} from '@angular/material';
+import { MatAutocompleteModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import { AngularAutocompleteComponent } from './angular-autocomplete/angular-autocomplete.component';
 import { PaginationComponent } from './pagination/pagination.component';
 
@@ -23,8 +21,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     StepBystepComponent,
     TicketFormComponent,
     ComboModuloObjetoComponent,
-    AngularAutocompleteComponent,
-    PaginationComponent
+    PaginationComponent,
+    AngularAutocompleteComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +40,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     StepBystepComponent,
     TicketFormComponent,
     ComboModuloObjetoComponent,
+    PipesModule,
+    PaginationComponent,
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,

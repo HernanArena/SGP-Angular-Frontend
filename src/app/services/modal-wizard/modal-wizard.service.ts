@@ -49,7 +49,6 @@ export class ModalWizardService {
    }
    setContenido(value:any[]){
      this.contenido = value;
-     console.log(this.contenido);
    }
    getContenido(value:number){
      return this.contenido[value];

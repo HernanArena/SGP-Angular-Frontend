@@ -11,6 +11,7 @@ import { ValidationService } from 'src/app/services/validation/validation.servic
 export class AngularAutocompleteComponent implements OnInit {
   private forma:FormGroup;
   options: FormGroup;
+  focus: boolean;
 
   //Data Input
   @Input('array') public arrayItem:Combo [] = [];
@@ -32,6 +33,9 @@ export class AngularAutocompleteComponent implements OnInit {
   private termino:string ="";
   private valorSeleccionado: string;
 
+  //Define si el usuario esta seleccionando valor correcto
+  private seleccionoValor: boolean
+
   constructor(public _vs:ValidationService,
               private changeDetector : ChangeDetectorRef) {
     this.init();
@@ -43,6 +47,10 @@ export class AngularAutocompleteComponent implements OnInit {
     }
     this.changeDetector.markForCheck();
     this.createValidation();
+    //Para que comience emitiendo un valor true si el campo no es requerido
+    if (!this.required){
+      this.estado.emit(true);
+    }
   }
 
   private init(){
@@ -53,23 +61,28 @@ export class AngularAutocompleteComponent implements OnInit {
   private valid():boolean{
     return (this.arrayItem.length>0 && this.arrayItem.filter( data => {
       return data.codigo.toString().concat(' - ').concat(data.descripcion.toString()) == this.termino
-    }).length>0) || this.termino == ""
+    }).length>0) || this.termino == ''
   }
   getPosts(evento:any){
     this.valorSeleccionado = evento;
   }
   private onChanges(newValue:any) {
     this.termino = newValue;
-    if(this.valid() && this.forma.get('inputFloating').valid){
-      this.estado.emit(true);
-      this.valorFinal.emit(this.termino);
-    }else{
+    if(!this.valid() || !this.forma.get('inputFloating').valid){
       this.estado.emit(false);
+      this.valorFinal.emit('');
+      this.cambioValor.emit('')
+    }else {
+      this.estado.emit(true);
     }
-    this.estado.emit(this.valid());
-    console.log(this.valid())
     //Emito valor al padre
-    this.cambioValor.emit(newValue);
+    if(this.seleccionoValor == false){
+      this.cambioValor.emit(newValue)
+    }
+    else{
+      this.seleccionoValor = false
+    }
+
   }
 
   private createValidation(){
@@ -83,6 +96,18 @@ export class AngularAutocompleteComponent implements OnInit {
                               .map((data)=> data.validation);
 
     this.forma.controls['inputFloating'].setValidators(validation);
+  }
+  private seleccionaValor(item:any){
+    this.seleccionoValor = true
+    this.estado.emit(true);
+    this.valorFinal.emit(item.codigo);
+    this.cambioValor.emit(item.codigo)
+  }
+
+  private borraValorSeleccionado(event:any){
+    if (event.key != "Enter") {
+        this.valorSeleccionado = ""
+    }
   }
 
 }
