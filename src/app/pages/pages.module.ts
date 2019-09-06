@@ -16,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 import { NewSuggestComponent } from './new-suggest/new-suggest.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ResultsModule } from './results/results.module';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ResultsModule } from './results/results.module';
     SearchComponent,
     HomeComponent,
     SearchcodeComponent,
-    NewSuggestComponent
+    NewSuggestComponent,
+    ProfileComponent
 
   ],
   imports: [

@@ -1,0 +1,12 @@
+.footer-results{
+  margin-top: 10px;
+  padding-top: 5px;
+  width: 100%;
+  position: relative;
+  border-radius: 15px;
+}
+.footer-results-feet{
+  width: 100%;
+  position: relative;
+  background-color: #E8E8E8;
+}

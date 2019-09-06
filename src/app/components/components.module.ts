@@ -13,7 +13,7 @@ import {MatAutocompleteModule,
         MatInputModule} from '@angular/material';
 import { AngularAutocompleteComponent } from './angular-autocomplete/angular-autocomplete.component';
 import { PaginationComponent } from './pagination/pagination.component';
-
+import { ResultsFooterComponent } from './results-footer/results-footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     TicketFormComponent,
     ComboModuloObjetoComponent,
     AngularAutocompleteComponent,
-    PaginationComponent
+    PaginationComponent,
+    ResultsFooterComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +47,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     MatFormFieldModule,
     MatInputModule,
     AngularAutocompleteComponent,
-    PaginationComponent
+    PaginationComponent,
+    ResultsFooterComponent
   ]
 })
 export class ComponentsModule { }
