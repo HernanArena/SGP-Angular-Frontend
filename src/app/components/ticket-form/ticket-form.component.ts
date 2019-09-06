@@ -40,6 +40,7 @@ export class TicketFormComponent implements OnInit {
   private versionFiltro:number;
   private moduloFiltro:string="";
   private objetoFiltro:string="";
+  private versionFiltroString:string = "";
 
   //valor recuperado del input
   private contacto:string;
@@ -78,16 +79,15 @@ export class TicketFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    let version:number;
-
-
-    console.log(this.versionFiltro)
-
+    console.log(this.versionFiltro);
+    console.log(this.moduloFiltro);
+    console.log(this.objetoFiltro);
+    this.setVersiones();
   }
   private setVersiones(){
     return this._cb.getVersiones(this.versionFiltro.toString()).subscribe(version => {
         if(version.length>0){
-          return version[0].codigo +" - "+ version[0].descripcion;
+          return this.versionFiltroString = version[0].codigo +" - "+ version[0].descripcion;
         }
     });
   }
@@ -133,7 +133,6 @@ export class TicketFormComponent implements OnInit {
   private getAllContactos(){
     return this._cb.getContacto(this.razonSocial,null)
     .subscribe((data)=>{
-      console.log(data)
       this.contactos = data
     });
   }
