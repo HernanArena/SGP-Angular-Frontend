@@ -7,12 +7,13 @@
     <div class="col-md-1"></div>
     <div class="col-md-5">
       <app-angular-autocomplete [array] = "versiones" requerido = "true"
-                                nombre ="Version" placeholder = "Versión - EJ: 4.3.0"
-                                (keyup)="getVersiones(termino,$event)"
-                                (click)="seleccionaVersion(termino)"
+                                nombre ="Versión" placeholder = "Versión - EJ: 4.3.0"
+                                (keyup)="getVersiones(version,$event)"
+                                (click)="seleccionaVersion(version)"
                                 (actualizaEstado)="versionValida = $event"
-                                (actualizaValor)="seleccionaVersion($event)"
-                                (valorSeleccionado) = "version = $event"></app-angular-autocomplete>
+                                (valorSeleccionado) = "version = $event"
+                                (actualizaEstado) = "versionValida = $event"
+                                (actualizaValor)="seleccionaVersion($event)"></app-angular-autocomplete>
 
     </div>
     <div class="col-md-5">
@@ -38,7 +39,7 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <app-finder nombre = "Termino" requerido= "true" minLength ="5" [botonvalido] ="estado" ></app-finder>
+    <app-finder nombre = "Termino"  [botonvalido] ="estado && versionValida" ></app-finder>
   </div>
   <div class="col-md-1"></div>
 </div>

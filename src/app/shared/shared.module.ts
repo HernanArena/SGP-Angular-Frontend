@@ -6,6 +6,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { PagenofoundComponent } from './pagenofound/pagenofound.component';
 import { RouterModule } from '@angular/router';
 import { LoadingComponent } from './loading/loading.component';
+import { RigthSidebarComponent } from './rigth-sidebar/rigth-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { LoadingComponent } from './loading/loading.component';
     SidebarComponent,
     BreadcrumbsComponent,
     PagenofoundComponent,
-    LoadingComponent
+    LoadingComponent,
+    RigthSidebarComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { LoadingComponent } from './loading/loading.component';
     SidebarComponent,
     BreadcrumbsComponent,
     PagenofoundComponent,
-    LoadingComponent
+    LoadingComponent,
+    RigthSidebarComponent
   ]
 })
 export class SharedModule { }

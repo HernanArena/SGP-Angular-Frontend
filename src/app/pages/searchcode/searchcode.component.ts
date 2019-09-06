@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { SearchcodeService } from 'src/app/services/searchcode/searchcode.service';
 import { ModalWizardService } from 'src/app/services/modal-wizard/modal-wizard.service';
 import { Subscription } from 'rxjs';
+import { ComboService } from 'src/app/services/combo/combo.service';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class SearchcodeComponent implements OnInit {
   codigo:string;
   termino:string = "";
 
-  constructor(public _scs: SearchcodeService,
+  constructor(public _cb:  ComboService,
               public _ms:  ModalWizardService,
               private cd:  ChangeDetectorRef) { }
 
@@ -32,12 +32,12 @@ export class SearchcodeComponent implements OnInit {
     let regex = new RegExp('^Arrow?','i');
     if(!regex.test(evento.key)){
       if(value){
-        this.codigoSubscription = this._scs.getCodigoError(value).subscribe(data => {
+        this.codigoSubscription = this._cb.getCodigoError(value).subscribe(data => {
           this.codigoSelect = data
           console.log(data)
         });
       }else{
-        this.codigoSubscription = this._scs.getCodigoError(null).subscribe(data => {
+        this.codigoSubscription = this._cb.getCodigoError(null).subscribe(data => {
           this.codigoSelect = data
           console.log(data)
         });
@@ -52,7 +52,7 @@ export class SearchcodeComponent implements OnInit {
       this.codigo = value;
       this.cd.detectChanges();
     }else{
-      this._scs.getCodigoError(null)
+      this._cb.getCodigoError(null)
       .subscribe(data => {this.codigoSelect = data;});
     }
   }

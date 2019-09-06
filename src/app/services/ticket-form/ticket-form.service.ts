@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { SearchService } from '../search/search.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICESTEST } from 'src/app/config/config';
 import { map } from 'rxjs/operators';
+import { ComboService } from '../combo/combo.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketFormService {
 
-  constructor(public http:HttpClient,public _sp:SearchService) { }
+  constructor(public http:HttpClient,public _cb:ComboService) { }
   urlAPI = URL_SERVICESTEST;
 
   getContacto(nrocta:string,termino:string):Observable<any>{
@@ -23,7 +23,7 @@ export class TicketFormService {
     }
   }
   getmodulo(value:string){
-    this._sp.getModulos(value);
+    this._cb.getModulos(value);
   }
 
 }

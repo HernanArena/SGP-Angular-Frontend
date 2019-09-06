@@ -23,6 +23,9 @@ export class ComboService {
 
   public getVersiones(termino:string):Observable<any>{
     if(termino){
+      if(termino.includes("-")){
+        termino = termino.split("-").slice(0,termino.split("-").length-1).join("-").trim();
+      }
       return this.http.get(`${this.urlAPI}/version/${termino}`)
         .pipe(map((resp:any) => resp.payload));
     }else{

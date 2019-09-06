@@ -43,6 +43,7 @@ export class ComboModuloObjetoComponent implements OnInit {
               public store:Store<AppState>,
               private router:Router,
               private cd: ChangeDetectorRef) {
+                this.comboEstado.emit(true);
                 this.storeSubscription = this.store.subscribe(data =>{
                   this.filtroCargados = data.filtro.filtro
                   if(data.cargaresults.oktonavigate){

@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { Router } from '@angular/router';
 import { ComboService } from 'src/app/services/combo/combo.service';
+import { SearchService } from 'src/app/services/search/search.service';
+import { CargarBeforeRouteAction, CargarAfterRouteAction } from 'src/app/store/actions';
 
 
 @Component({
@@ -15,33 +17,51 @@ import { ComboService } from 'src/app/services/combo/combo.service';
 export class SearchComponent implements OnInit{
 
 
-  termino:string;
-  modulo:string;
-  objeto:string;
-  versiones:any[] = [];
-  filtroCargados:any;
-  storeSubscription:Subscription;
-  version:number;
-  versionValida:boolean = false;
+  private termino:string = "";
+  private objeto:string = "";
+  private modulo:string = "";
+  private versiones:any[] = [];
+  private filtroCargados:any;
+  private storeSubscription:Subscription;
+  private version:number;
+  private versionValida:boolean = false;
+  private estado:boolean = true;
+  private anterior:string = "";
 
 
   constructor(public _cb:ComboService,
+              public _sp:SearchService,
               public store:Store<AppState>,
               private router:Router,
               private cd: ChangeDetectorRef) {
 
+
     this.storeSubscription = this.store.subscribe(data =>{
-      this.filtroCargados = data.filtro.filtro
+      this.filtroCargados = data.filtro.filtro;
+      this.anterior = data.navigation.rutaActual;
       if(data.cargaresults.oktonavigate){
            this.router.navigate(['/resultados']);
         }
     });
+
+
   }
 
   ngOnInit() {
+    this._sp.getDataRoute().subscribe( (data)=>{
+      console.log(this.anterior)
+      let route = {
+        after: this.anterior,
+        before: data.titulo
+      }
+      this.store.dispatch(new CargarBeforeRouteAction(route))
+      this.store.dispatch(new CargarAfterRouteAction(route))
+    });
+
   };
-  getVersiones(termino:string,evento:any){
+  private getVersiones(termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
+
     if(!regex.test(evento.key)){
       if(termino){
         this._cb.getVersiones(termino).subscribe(data => {
@@ -53,13 +73,19 @@ export class SearchComponent implements OnInit{
       }
     }
   }
-  seleccionaVersion(value:any){
+  private seleccionaVersion(value:any){
     if(value){
       this.cd.markForCheck();
       this.version = value;
       this.cd.detectChanges();
-      let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
-      this._cb.cargarFiltrosStore(filtros);
+      console.log(this.filtroCargados)
+
+      if(!this.filtroCargados){
+        let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
+        this._cb.cargarFiltrosStore(filtros);
+      }
+
+
     }else{
       this._cb.getVersiones(null)
       .subscribe(data => {this.versiones = data;});
@@ -81,7 +107,10 @@ export class SearchComponent implements OnInit{
   }
 //A pedido de her
   ngOnDestroy(): void {
+
   //  this.moduloSubscription.unsubscribe();
     //this.storeSubscription.unsubscribe();
   }
+
+
 }

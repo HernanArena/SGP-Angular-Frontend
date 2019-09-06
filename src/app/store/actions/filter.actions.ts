@@ -28,7 +28,8 @@ export class LimpiarFilterAction implements Action{
   readonly type = LIMPIAR_FILTER;
 }
 
-export type filterAcciones = CargarFilterAction | LimpiarFilterAction |
+export type filterAcciones = CargarFilterAction |
+                             LimpiarFilterAction |
                              AgregarFilterVersionAction |
                              AgregarFilterObjetoAction |
                              AgregarFilterTerminoAction;

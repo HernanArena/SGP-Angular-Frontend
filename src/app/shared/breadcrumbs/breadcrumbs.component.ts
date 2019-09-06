@@ -37,7 +37,14 @@ export class BreadcrumbsComponent {
       filter((evento:ActivationEnd) => evento.snapshot.firstChild ==null),
       map((evento:ActivationEnd) => evento.snapshot.data)
     )
-
   }
+  // getDataRoute(){
+  //   return this.router.events.pipe(
+  //       filter((e: any) => e instanceof RoutesRecognized),
+  //       pairwise()
+  //     )  .subscribe((e: any) => {
+    //     console.log(e[0].urlAfterRedirects); //previous url
+    // });
+  //   }
 
 }
