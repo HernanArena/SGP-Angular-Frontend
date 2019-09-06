@@ -7,7 +7,7 @@ Preloader
     top:0px;
     position: fixed;
     z-index: 99999;
-    background: #fff;
+    background: rgba(0,0,0,0.3);
     .cssload-speeding-wheel{
         position: absolute;
         top: calc(50% - 3.5px);
@@ -67,15 +67,15 @@ Preloader
   0% {
     height: 0;
     width: 0;
-    background-color: #1976d2;
+    background-color: rgba(255,255,255,0.2);
   }
   29% {
-    background-color: #1976d2;
+    background-color: rgba(255,255,255,0.2);
   }
   30% {
     height: 2em;
     width: 2em;
-    background-color: transparent;
+    background-color: rgba(255,255,255,0.2);
     border-width: 1em;
     opacity: 1;
   }
@@ -84,7 +84,7 @@ Preloader
     width: 2em;
     border-width: 0;
     opacity: 0;
-    background-color: transparent;
+    background-color: rgba(255,255,255,0.2);
   }
 }
 @-moz-keyframes loader-figure {

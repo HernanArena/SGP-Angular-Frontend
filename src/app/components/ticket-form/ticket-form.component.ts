@@ -32,12 +32,17 @@ export class TicketFormComponent implements OnInit {
 
   //valores ingresados keyup
   private termino:string;
-  private filtroCargados:any;
   private storeSubscription:Subscription;
   private descripcion:string="";
 
-  //valor recuperado del input
+  //valor seteado desde el store
   private razonSocial:string;
+  private versionFiltro:number;
+  private moduloFiltro:string="";
+  private objetoFiltro:string="";
+  private versionFiltroString:string = "";
+
+  //valor recuperado del input
   private contacto:string;
   private version:number;
   private modulo:string;
@@ -54,6 +59,7 @@ export class TicketFormComponent implements OnInit {
   private disabled:boolean = true;
   private estadoValid:boolean = false;
   private valorActual:string = "";
+
   constructor(public _tf:TicketFormService,
               public _cb:ComboService,
               private router:Router,
@@ -62,15 +68,28 @@ export class TicketFormComponent implements OnInit {
     this.store.select('usuario').subscribe((data)=>{
       this.razonSocial = data.user.empresa.name;
     });
-    this.storeSubscription = this.store.subscribe(data =>{
-      this.filtroCargados = data.filtro.filtro
-      if(data.cargaresults.oktonavigate){
-           this.router.navigate(['/resultados']);
-        }
+    this.storeSubscription = this.store.select('filtro').subscribe(data =>{
+      if(data.filtro){
+        this.versionFiltro = data.filtro.version;
+        this.moduloFiltro = data.filtro.modulo;
+        this.objetoFiltro = data.filtro.objeto;
+      }
     });
+
   }
 
   ngOnInit() {
+    console.log(this.versionFiltro);
+    console.log(this.moduloFiltro);
+    console.log(this.objetoFiltro);
+    this.setVersiones();
+  }
+  private setVersiones(){
+    return this._cb.getVersiones(this.versionFiltro.toString()).subscribe(version => {
+        if(version.length>0){
+          return this.versionFiltroString = version[0].codigo +" - "+ version[0].descripcion;
+        }
+    });
   }
 
   private siguienteStep(){
@@ -114,7 +133,6 @@ export class TicketFormComponent implements OnInit {
   private getAllContactos(){
     return this._cb.getContacto(this.razonSocial,null)
     .subscribe((data)=>{
-      console.log(data)
       this.contactos = data
     });
   }

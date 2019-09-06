@@ -43,6 +43,7 @@
                                       placeholder = "Versión"
                                       (actualizaEstado)="versionValid = $event"
                                       (actualizaValor)="termino = $event"
+                                      [valor] = "versionFiltroString"
                                       (keyup)="getVersiones(termino,$event)"
                                       (click) = "seleccionaVersion(version)"
                                       (valorSeleccionado) = "version = $event"></app-angular-autocomplete>

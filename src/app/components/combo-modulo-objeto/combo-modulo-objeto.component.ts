@@ -16,6 +16,8 @@ export class ComboModuloObjetoComponent implements OnInit {
   @Input() public version:number;
   @Input() public objetoPlaceHolder:string = "";
   @Input() public moduloPlaceHolder:string = "";
+  @Input('valorModulo') public valorModulo:string = "";
+  @Input('valorObjeto') public valorObjeto:string = "";
 
   @Output('modulo') public moduloSeleccionado:EventEmitter<string> = new EventEmitter();
   @Output('objeto') public objetoSeleccionado:EventEmitter<string> = new EventEmitter();
