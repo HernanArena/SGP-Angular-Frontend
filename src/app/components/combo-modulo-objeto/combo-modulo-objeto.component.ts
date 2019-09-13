@@ -83,7 +83,7 @@ export class ComboModuloObjetoComponent implements OnInit {
         });
       }
       if(this.filtroCargados === null || this.filtroCargados.modulo == undefined){
-        let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
+        let filtros = new Filtro(this.version,this.modulo,this.objeto,"","");
         this._cb.cargarFiltrosStore(filtros);
       }
       this.comboEstado.emit(this.moduloValido);
@@ -107,7 +107,7 @@ export class ComboModuloObjetoComponent implements OnInit {
       this.moduloSeleccionado.emit(this.modulo);
       this.cd.detectChanges();
       this.terminoModulo = this.modulo
-      let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
+      let filtros = new Filtro(this.version,this.modulo,this.objeto,"","");
       this._cb.cargarFiltrosStore(filtros);
     }else{
       this._cb.getModulos(null)
@@ -158,7 +158,7 @@ export class ComboModuloObjetoComponent implements OnInit {
       this.terminoObjeto = this.objeto
       this.cd.detectChanges();
       if (this.store.select('filtro') == null ) {
-          let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
+          let filtros = new Filtro(this.version,this.modulo,this.objeto,"","");
           this._cb.cargarFiltrosStore(filtros);
       }
     }else if(this.modulo){

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { UsuarioService} from './index';
+import { AuthService} from './index';
 import { HttpClientModule} from '@angular/common/http'
 import { CommonModule } from '@angular/common';
-import { SearchService } from './search/search.service';
+import { TicketService } from './ticket/ticket.service';
 import { FinderService } from './finder/finder.service';
 
 import { ValidationService } from './validation/validation.service';
@@ -17,8 +17,8 @@ import { TicketFormService } from './ticket-form/ticket-form.service';
     HttpClientModule
   ],
   providers:[
-    UsuarioService,
-    SearchService,
+    AuthService,
+    TicketService,
     FinderService,
     ValidationService,
     ModalWizardService,

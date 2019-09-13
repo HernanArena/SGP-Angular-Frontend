@@ -8,7 +8,7 @@ export interface AppState{
   navigation:fromReducers.RouteState;
   filtro:fromReducers.filterState;
   cargaresults: fromReducers.BuscarPartesState;
-
+  partenuevo: fromReducers.GenerarPartesState;
 }
 
 export const appReducers:ActionReducerMap<AppState>= {
@@ -16,10 +16,11 @@ export const appReducers:ActionReducerMap<AppState>= {
   usuario: fromReducers.usuarioReducer,
   navigation: fromReducers.navigationReducers,
   filtro:fromReducers.filterReducers,
-  cargaresults: fromReducers.buscarParteReducer
+  cargaresults: fromReducers.buscarParteReducer,
+  partenuevo: fromReducers.generarParteReducer
 }
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({keys: ['usuario','navigation','filtro','cargaresults'],rehydrate:true})(reducer);
+  return localStorageSync({keys: ['usuario','navigation','filtro','cargaresults','partenuevo'],rehydrate:true})(reducer);
 }
 export const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];

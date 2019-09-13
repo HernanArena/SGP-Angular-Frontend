@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { LimpiarUsuario } from 'src/app/store/actions';
 import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services';
+import { AuthService } from 'src/app/services';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private store:Store<AppState>,
               private router:Router,
-              public _us:UsuarioService) {
+              public _us:AuthService) {
 
 
   }

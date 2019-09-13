@@ -6,8 +6,7 @@ import { NewTicketComponent } from './new-ticket.component';
 const newTicketRoutes:Routes = [
   { path: 'new-ticket',
    component: NewTicketComponent,
-   data:{ titulo:"Alta de nuevo parte",
-          descrip:"Formulario de alta de parte"}
+   data:{ titulo:"Alta de nuevo parte"}
   }
 ];
 @NgModule({

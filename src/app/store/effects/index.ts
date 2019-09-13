@@ -1,6 +1,6 @@
 
 import {UsuarioEffects} from './usuario.effects';
-
-export const AllEffects:any[] =[UsuarioEffects];
+import {TicketEffects} from './ticket.effects';
+export const AllEffects:any[] =[UsuarioEffects,TicketEffects];
 
 export * from  './usuario.effects';

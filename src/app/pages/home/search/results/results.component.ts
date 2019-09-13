@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Parte } from 'src/app/models/parte.model';
 import { ModificarOkToNavigate } from 'src/app/store/actions';
-import { ModalWizardService } from 'src/app/services/modal-wizard/modal-wizard.service';
+import { ModalWizardService } from 'src/app/services';
 
 @Component({
   selector: 'app-results',
@@ -19,7 +19,8 @@ export class ResultsComponent implements OnInit {
   cantidadPartes:number = 0;
   parteAVisualizar:any;
 
-  constructor(public store:Store<AppState>, public _ms:ModalWizardService) {
+  constructor(public store:Store<AppState>,
+              public _ms:ModalWizardService) {
     this.initResults();
     this.modificarOktonavigate();
   }

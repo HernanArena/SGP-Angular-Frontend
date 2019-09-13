@@ -1,14 +1,11 @@
 
 import * as fromFilterActions from '../actions/filter.actions';
 import { Filtro } from 'src/app/models/filtro.model';
-// import {AppState} from '../app.reducer';
 
 export interface filterState {
   filtro: Filtro;
 };
-// export interface AppState extends AppState{
-//   filtro:filterState;
-// }
+
 const initState: filterState = {
   filtro:null
 };
@@ -29,6 +26,12 @@ export function filterReducers (state:filterState = initState,action: fromFilter
           version: action.version
         }
       };
+    case fromFilterActions.AGREGAR_MODULO_FILTER:
+      return {
+        filtro: {...state.filtro,
+          modulo: action.modulo
+        }
+      };
     case fromFilterActions.AGREGAR_OBJETO_FILTER:
       return {
         filtro: {...state.filtro,
@@ -40,6 +43,12 @@ export function filterReducers (state:filterState = initState,action: fromFilter
       return {
         filtro: {...state.filtro,
           termino: action.termino
+        }
+      };
+    case fromFilterActions.AGREGAR_CONTACTO_FILTER:
+      return {
+        filtro: {...state.filtro,
+          contacto: action.contacto
         }
       };
 

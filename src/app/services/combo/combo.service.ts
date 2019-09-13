@@ -1,60 +1,55 @@
 import { Injectable } from '@angular/core';
 import { URL_SERVICESTEST } from 'src/app/config/config';
 import { HttpClient } from '@angular/common/http';
-import { Combo } from 'src/app/models/combo.model';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { Filtro } from 'src/app/models/filtro.model';
-import { CargarFilterAction, AgregarFilterVersionAction, AgregarFilterObjetoAction } from 'src/app/store/actions';
+import { CargarFilterAction, AgregarFilterVersionAction, AgregarFilterObjetoAction, AgregarFilterModuloAction, AgregarFilterContactoAction } from 'src/app/store/actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComboService {
   private urlAPI = URL_SERVICESTEST;
-  private versiones:Combo[] = [];
-  private modulos:Combo[] = [];
-  private objetos:Combo[] = [];
-  private errores:Combo[] = [];
+
   constructor(public http:HttpClient,
               public store:Store<AppState>) { }
 
-  public getVersiones(termino:string):Observable<any>{
+  public getVersiones(termino:any):Observable<any>{
     if(termino){
-      if(termino.includes("-")){
-        termino = termino.split("-").slice(0,termino.split("-").length-1).join("-").trim();
+      if(termino.codigo.includes("-")){
+        termino.codigo = termino.codigo.split("-").slice(0,termino.codigo.split("-").length-1).join("-").trim();
       }
-      return this.http.get(`${this.urlAPI}/version/${termino}`)
+      return this.http.get(`${this.urlAPI}/version/${termino.codigo}`)
         .pipe(map((resp:any) => resp.payload));
     }else{
       return this.http.get(`${this.urlAPI}/version`)
         .pipe(map((resp:any) => resp.payload));
     }
   }
-  public getModulos(termino:string):Observable<any>{
+  public getModulos(termino:any):Observable<any>{
     if(termino){
-       if(termino.includes("-")){
-         termino = termino.split("-").slice(0,termino.split("-").length-1).join("-").trim();
+       if(termino.codigo.includes("-")){
+         termino.codigo = termino.codigo.split("-").slice(0,termino.codigo.split("-").length-1).join("-").trim();
        }
-       return this.http.get(`${this.urlAPI}/modulo/${termino}`)
+       return this.http.get(`${this.urlAPI}/modulo/${termino.codigo}`)
                   .pipe(map((resp:any) => resp.payload));
     }else{
       return this.http.get(`${this.urlAPI}/modulo`)
         .pipe(map((resp:any) => resp.payload));
     }
   }
-  public getObjetos(modulo:string,termino:string):Observable<any> {
-    if(modulo && modulo.includes("-")){
-      modulo = modulo.split("-").slice(0,modulo.split("-").length-1).join("-").trim();
+  public getObjetos(modulo:any,termino:any):Observable<any> {
+    if(modulo && modulo.codigo.includes("-")){
+      modulo.codigo = modulo.codigo.split("-").slice(0,modulo.codigo.split("-").length-1).join("-").trim();
     }
-    termino = termino?termino:null;
-    modulo = modulo?modulo:null;
-    console.log(modulo);
-    console.log(termino);
-      return this.http.get(`${this.urlAPI}/objeto/${modulo}/${termino}/`)
-      .pipe(map((resp:any) => resp.payload));
+    termino = (termino && termino.codigo != "")?termino.codigo:null;
+    modulo = (modulo && modulo.codigo != "")?modulo.codigo:null;
+
+    return this.http.get(`${this.urlAPI}/objeto/${modulo}/${termino}/`)
+    .pipe(map((resp:any) => resp.payload));
   }
   public getCodigoError(error:string):Observable<any>{
     if(error){
@@ -84,6 +79,12 @@ export class ComboService {
 
   public AgregarObjetoStore(modulo:string,objeto:string){
     this.store.dispatch(new AgregarFilterObjetoAction(modulo,objeto));
+  }
+  public AgregarModuloStore(modulo:string){
+    this.store.dispatch(new AgregarFilterModuloAction(modulo));
+  }
+  public AgregarContactoStore(contacto:string){
+    this.store.dispatch(new AgregarFilterContactoAction(contacto));
   }
 
 }

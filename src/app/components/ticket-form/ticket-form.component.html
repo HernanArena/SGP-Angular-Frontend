@@ -15,7 +15,7 @@
             <app-angular-autocomplete nombre ="Razón social" [disabled]="true"
                                       requerido = "true"
                                       placeholder="Razón social"
-                                      [valor] = "razonSocial"></app-angular-autocomplete>
+                                      [valor] = "valorRazonSocial"></app-angular-autocomplete>
             <app-angular-autocomplete [array] = "contactos"
                                       requerido = "true"
                                       nombre ="Contacto"
@@ -43,13 +43,15 @@
                                       placeholder = "Versión"
                                       (actualizaEstado)="versionValid = $event"
                                       (actualizaValor)="termino = $event"
-                                      [valor] = "versionFiltroString"
+                                      [valor] = "valorVersion"
                                       (keyup)="getVersiones(termino,$event)"
                                       (click) = "seleccionaVersion(version)"
                                       (valorSeleccionado) = "version = $event"></app-angular-autocomplete>
 
             <app-combo-modulo-objeto (objeto)="objeto = $event"
                                      (modulo)="modulo = $event"
+                                     [valorObjeto] = "valorObjeto"
+                                     [valorModulo] = "valorModulo"
                                       moduloPlaceHolder ="Modulo"
                                       objetoPlaceHolder="Objeto"
                                      [version] = "version"></app-combo-modulo-objeto>

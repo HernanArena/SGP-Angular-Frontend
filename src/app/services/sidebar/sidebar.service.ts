@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { UsuarioService } from '../usuario/usuario.service';
+import { AuthService } from '../auth/auth.service';
 
 
 @Injectable({
@@ -8,7 +8,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 })
 export class SidebarService {
   // menu:any[] = [];
-  constructor(public _us:UsuarioService) {
+  constructor(public _us:AuthService) {
   }
 
   // cargarMenu(){

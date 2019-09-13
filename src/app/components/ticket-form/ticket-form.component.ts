@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { TicketFormService } from 'src/app/services/ticket-form/ticket-form.service';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Filtro } from 'src/app/models/filtro.model';
-import { NgForm } from '@angular/forms';
 import { Combo } from 'src/app/models/combo.model';
 import { ComboService } from 'src/app/services/combo/combo.service';
 
@@ -32,22 +31,22 @@ export class TicketFormComponent implements OnInit {
 
   //valores ingresados keyup
   private termino:string;
-  private storeSubscription:Subscription;
-  private descripcion:string="";
-
+  private terminoAsunto:any = null;
+  private descripcion:string = "";
+  private contacto:string = "";
+  private version:any = "";
+  private modulo:any = "";
+  private objeto:any = "";
+  private razonSocial:string = "";
   //valor seteado desde el store
-  private razonSocial:string;
-  private versionFiltro:number;
-  private moduloFiltro:string="";
-  private objetoFiltro:string="";
-  private versionFiltroString:string = "";
+
 
   //valor recuperado del input
-  private contacto:string;
-  private version:number;
-  private modulo:string;
-  private objeto:string;
-
+  @Input('contacto') public valorContacto:string = "";
+  @Input('version') public valorVersion:any = "";
+  @Input('modulo') public valorModulo:string = "";
+  @Input('objeto') public valorObjeto:string = "";
+  @Input('razonSocial') public valorRazonSocial:string;
 
 
   //Estados
@@ -65,32 +64,22 @@ export class TicketFormComponent implements OnInit {
               private router:Router,
               private store:Store<AppState>,
               private cd: ChangeDetectorRef) {
-    this.store.select('usuario').subscribe((data)=>{
-      this.razonSocial = data.user.empresa.name;
-    });
-    this.storeSubscription = this.store.select('filtro').subscribe(data =>{
-      if(data.filtro){
-        this.versionFiltro = data.filtro.version;
-        this.moduloFiltro = data.filtro.modulo;
-        this.objetoFiltro = data.filtro.objeto;
-      }
-    });
+          // if(this.valorModulo) this.modulo = this.valorModulo;
+          // if(this.valorObjeto) this.objeto = this.valorObjeto;
+          // if(this.valorContacto) this.contacto = this.valorContacto;
+          // if(this.valorVersion) this.version = this.valorVersion;
+          // if(this.valorRazonSocial) this.razonSocial = this.valorRazonSocial;
 
   }
 
   ngOnInit() {
-    console.log(this.versionFiltro);
-    console.log(this.moduloFiltro);
-    console.log(this.objetoFiltro);
-    this.setVersiones();
+    if(this.valorModulo) this.modulo = this.valorModulo;
+    if(this.valorObjeto) this.objeto = this.valorObjeto;
+    if(this.valorContacto) this.contacto = this.valorContacto;
+    if(this.valorVersion) this.version = this.valorVersion;
+    if(this.valorRazonSocial) this.razonSocial = this.valorRazonSocial;
   }
-  private setVersiones(){
-    return this._cb.getVersiones(this.versionFiltro.toString()).subscribe(version => {
-        if(version.length>0){
-          return this.versionFiltroString = version[0].codigo +" - "+ version[0].descripcion;
-        }
-    });
-  }
+
 
   private siguienteStep(){
     this.disabled = false;
@@ -111,17 +100,17 @@ export class TicketFormComponent implements OnInit {
   }
   private getContactos(termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
-    console.log(termino);
     termino==null || termino =="" || termino==undefined?null:termino;
     if(!regex.test(evento.key) && termino){
-        console.log(termino);
       return this._cb.getContacto(this.razonSocial,termino)
       .subscribe((data)=>{
         this.contactos = data
       });
+      this._cb.AgregarContactoStore(this.contacto);
     }
   }
   seleccionaContacto(value:any){
+    console.log(value)
     if(value){
       this.cd.markForCheck();
       this.contacto = value;
@@ -156,11 +145,20 @@ export class TicketFormComponent implements OnInit {
       this.cd.markForCheck();
       this.version = value;
       this.cd.detectChanges();
-      let filtros = new Filtro(this.version,this.modulo,this.objeto,"");
+      let filtros = new Filtro(this.version,this.modulo,this.objeto,"","");
       this._cb.cargarFiltrosStore(filtros);
     }else{
       this._cb.getVersiones(null)
       .subscribe(data => {this.versiones = data;});
+    }
+  }
+  getAsunto(termino:any,evento:any){
+    let regex = new RegExp('^Arrow?','i');
+    if(!regex.test(evento.key)){
+      if(termino){
+        termino.codigo = termino && termino.codigo ==""  && evento.key!="Backspace"?evento.key:termino.codigo;
+        this.terminoAsunto = termino.codigo
+      }
     }
   }
 

@@ -18,7 +18,7 @@ import { ActivarLoadingAction,
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class AuthService {
   private subscription:Subscription = new Subscription();
   usuario:Usuario;
   urlAPI = URL_SERVICES;

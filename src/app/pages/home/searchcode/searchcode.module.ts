@@ -1,24 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SearchcodeComponent } from './searchcode.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NewTicketComponent } from './new-ticket.component';
-import { NewTicketRoutingModule } from './new-ticket-routing.module';
+import { PipesModule } from 'src/app/pipes/pipes.module';
+import { SearchcodeRoutingModule } from './searchcode-routing.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+
+
 
 @NgModule({
   declarations: [
-    NewTicketComponent
+    SearchcodeComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    NewTicketRoutingModule,
+    PipesModule,
+    SearchcodeRoutingModule,
     ComponentsModule
   ],
   exports:[
-
+    SearchcodeComponent
   ]
 })
-export class NewTicketModule { }
+export class SearchcodeModule { }

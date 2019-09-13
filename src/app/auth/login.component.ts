@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
-import { UsuarioService } from '../services';
+import { AuthService } from '../services';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit,OnDestroy {
   loaded:boolean = false;
 
   constructor(public store:Store<AppState>,
-              public _us:UsuarioService ) { }
+              public _us:AuthService ) { }
 
   ngOnInit() {
     this.subscription = this.store.select('ui').subscribe( ui => {

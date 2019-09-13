@@ -50,7 +50,7 @@ export class FinderComponent implements OnInit,OnDestroy {
     if(this._termino){
       this._fs.guardarTerminoStore(this.forma.get("textArea").value);
     }
-    this.store.dispatch(new CargarPartes(this._termino,0,5));
+    this._fs.cargarPartesStore(this._termino,0,5);
   }
   ngOnDestroy(): void {
       this.storeSubscription.unsubscribe();

@@ -2,8 +2,8 @@
       novalidate = "novalidate"
       autocomplete="off">
       <mat-form-field class = "example-full-width">
-        <input class="form-control" [ngClass]="{'form-control-success': forma.get('inputFloating').valid && valid(),
-                                                'form-control-danger':  (!forma.get('inputFloating').valid  || !valid())}"
+        <input class="form-control" [ngClass]="{'form-control-success': forma.get('inputFloating').valid && (valid() || sinCombo),
+                                                'form-control-danger':  (!forma.get('inputFloating').valid  || (!valid() && !sinCombo))}"
               type="text"
                (ngModelChange)="onChanges($event)"
                matInput placeholder={{placeholder}}
