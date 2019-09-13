@@ -1,9 +1,9 @@
 import {Action} from '@ngrx/store';
 import { ParteNuevo } from 'src/app/models/partenuevo.model';
 
-export const GUARDAR_PARTES = '[DownloadTickets DescargaPartes] guardar partes';
-export const GUARDAR_PARTES_FAIL = '[DownloadTickets DescargaPartes] guardar partes FAIL';
-export const GUARDAR_PARTES_SUCCESS = '[DownloadTickets DescargaPartes] guardar partes SUCCESS';
+export const GUARDAR_PARTES = '[uploadTickets DescargaPartes] guardar partes';
+export const GUARDAR_PARTES_FAIL = '[uploadTickets DescargaPartes] guardar partes FAIL';
+export const GUARDAR_PARTES_SUCCESS = '[uploadTickets DescargaPartes] guardar partes SUCCESS';
 
 //Guardar
 export class GuardarPartes implements Action{
