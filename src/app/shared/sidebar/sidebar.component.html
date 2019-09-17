@@ -11,8 +11,19 @@
                   <a class="waves-effect waves-dark hide-menu" href="#" aria-expanded="false">
                     <img src="../assets/images/avatar1.png" alt ="empresa"/></a></li>
               <li class="user-profile hide-menu">
-                  <a class="waves-effect waves-dark" >{{usuario.empresa.name|| ''}}</a></li>
+                  <a class="waves-effect waves-dark" >{{usuario.empresa.name|| ''}}</a>
+                  <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-8">
+                      <h3><span class="badge badge-pill badge-secondary waves-effect"  [routerLink]="['/perfil']" routerLinkActive ="active">Perfil</span></h3>
+                    </div>
+                    <div class="col-md-2"></div>
+                  </div>
+
+
+              </li>
               <li class="nav-devider"></li>
+
               <li class="nav-small-cap">PERSONAL</li>
               <li *ngFor="let menu of _sidebar.menu">
                 <li *ngFor="let menu of _sidebar.menu"> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu">{{menu.titulo}} </span></a>

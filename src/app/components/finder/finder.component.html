@@ -8,7 +8,8 @@ autocomplete="off">
                                 && forma.get('textArea').touched,
                    'has-success': forma.get('textArea').valid
                                   && forma.get('textArea').touched }">
-    <textarea  class="form-control form-control-line"
+    <textarea class="form-control form-control-line"
+              (ngModelChange)="onChanges($event)"
                [ngClass]="{'form-control-danger': !forma.get('textArea').valid
                                                   && forma.get('textArea').touched ,
                            'form-control-success': forma.get('textArea').valid

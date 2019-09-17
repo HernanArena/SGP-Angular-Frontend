@@ -27,9 +27,10 @@ export class TicketService {
   public getPartesConFiltro(termino:any,
                             offset:number,
                             limit:number):Observable<any>{
+                              console.log(termino)
+
     this.recuperaFiltro();
     termino = (termino && termino.codigo == '') || !termino ? 'null':termino.codigo
-    console.log(termino)
     console.log(this.version)
     this.modulo = (this.modulo && this.modulo.codigo == '') || !this.modulo ? 'null':this.modulo.codigo
     this.objeto = (this.objeto && this.objeto.codigo == '') || !this.objeto ? 'null':this.objeto.codigo

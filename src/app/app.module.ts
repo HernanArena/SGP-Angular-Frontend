@@ -34,7 +34,7 @@ import {
 @NgModule({
   declarations: [
     AppComponent,
-    PagesComponent
+    PagesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,27 +1,106 @@
 .navbar{
-  background:#FFF;
+  position:relative;
   padding:0;
   height:60px;
   margin:0;
-  z-index:10000;
+  z-index:100000;
   border-radius:0;
   border:none;
   margin:auto;
-  position:relative;
   -webkit-box-shadow:0 5px 5px -5px rgba(0,0,0,0.1);
   -moz-box-shadow:0 5px 5px -5px rgba(0,0,0,0.1);
   box-shadow:0 5px 5px -5px rgba(0,0,0,0.1)
 }
-.topmenu-outer{
-  height:60px;
-  background:#fff;
-  margin-left:160px
+.card-header {
+    padding: 0;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }
-.navbar-image{
-  margin-left:20px;
-  width:12%;
-  height:60px;
-  background:url('../../../assets/images/logo-sar.png') no-repeat center center;
-  background-size:contain
+.card-footer{
+  background-color: rgba(0,0,0,.00);
+
+}
+#Nuevo{
+  position:absolute;
+  z-index: 10;
+  top:21%;
+  right:10%;
+}
+
+.container-fluid{
+  margin-top: -3%;
 }
  .glyphicon-log-out:before{content:"\e163"}
+ @media (min-width: 768px) {
+     .carousel{
+       background-color: rgba(0,0,0,.03);
+       padding-top: 20px;
+       padding-left: 10px;
+     }
+
+     /* show 3 items */
+     .carousel-inner .active,
+     .carousel-inner .active + .carousel-item,
+     .carousel-inner .active + .carousel-item + .carousel-item,
+     .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item  {
+         display: block;
+     }
+
+     .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+     .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+     .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item,
+     .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
+         transition: none;
+     }
+
+     .carousel-inner .carousel-item-next,
+     .carousel-inner .carousel-item-prev {
+       position: relative;
+       transform: translate3d(0, 0, 0);
+     }
+
+     .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+         position: absolute;
+         top: 0;
+         right: -25%;
+         z-index: -1;
+         display: block;
+         visibility: visible;
+     }
+
+     /* left or forward direction */
+     .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+     .carousel-item-next.carousel-item-left + .carousel-item,
+     .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+     .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item,
+     .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+         position: relative;
+         transform: translate3d(-100%, 0, 0);
+         visibility: visible;
+     }
+
+     /* farthest right hidden item must be abso position for animations */
+     .carousel-inner .carousel-item-prev.carousel-item-right {
+         position: absolute;
+         top: 0;
+         left: 0;
+         z-index: -1;
+         display: block;
+         visibility: visible;
+     }
+
+     /* right or prev direction */
+     .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+     .carousel-item-prev.carousel-item-right + .carousel-item,
+     .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+     .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item,
+     .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+         position: relative;
+         transform: translate3d(100%, 0, 0);
+         visibility: visible;
+         display: block;
+         visibility: visible;
+     }
+
+ }

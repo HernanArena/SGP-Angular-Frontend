@@ -1339,7 +1339,8 @@ Notify
     transform: rotate(360deg); } }
 
 .right-side-toggle {
-  position: relative; }
+  /* position: relative;  */
+}
 
 .right-side-toggle i {
   -webkit-transition-property: -webkit-transform;
@@ -1364,9 +1365,10 @@ Notify
   animation-duration: 2s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  position: absolute;
+  /* position: absolute;
   top: 18px;
-  left: 18px; }
+  left: 18px;  */
+}
 
 .right-sidebar {
   position: fixed;

@@ -1,19 +1,55 @@
-<p>Usuario</p>
-<hr>
-<ul id="themecolors" class="m-t-20">
-    <li><b>With Light sidebar</b></li>
-    <li><a (click)="cambiarColor('default')" data-theme="default" class="default-theme">1</a></li>
-    <li><a (click)="cambiarColor('green')" data-theme="green" class="green-theme">2</a></li>
-    <li><a (click)="cambiarColor('red')" data-theme="red" class="red-theme">3</a></li>
-    <li><a (click)="cambiarColor('blue')" data-theme="blue" class="blue-theme">4</a></li>
-    <li><a (click)="cambiarColor('purple')" data-theme="purple" class="purple-theme">5</a></li>
-    <li><a (click)="cambiarColor('menga')" data-theme="megna" class="megna-theme">6</a></li>
-    <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-    <li><a (click)="cambiarColor('default-dark')" data-theme="default-dark" class="default-dark-theme working">7</a></li>
-    <li><a (click)="cambiarColor('green-dark')" data-theme="green-dark" class="green-dark-theme">8</a></li>
-    <li><a (click)="cambiarColor('red-dark')" data-theme="red-dark" class="red-dark-theme">9</a></li>
-    <li><a (click)="cambiarColor('blue-dark')" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
-    <li><a (click)="cambiarColor('purple-dark')" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
-    <li><a (click)="cambiarColor('menga-dark')" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
-</ul>
+<div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="m-t-30 perfil">
+          <img src="../assets/images/avatar1.png" class="img-circle" width="150" />
+            <h4 class="card-title m-t-10">{{valorRazonSocial}}</h4>
+            <h6 class="card-subtitle">        Usuario        </h6>
+            <div class="row text-center justify-content-md-center">
+                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
+                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
+
+            </div>
+        </div>
+        <form class="formulario" action="index.html" method="post">
+          <app-angular-autocomplete nombre ="Razón social" [disabled]="true"
+                                    requerido = "true"
+                                    placeholder="Razón social"
+                                    [valor] = "valorRazonSocial"></app-angular-autocomplete>
+          <!-- <app-angular-autocomplete nombre ="Usuario" [disabled]="true"
+                                    requerido = "true"
+                                    placeholder="Usuario"
+                                    [valor] = "usuario"></app-angular-autocomplete> -->
+          <app-angular-autocomplete nombre ="Contrasena" [disabled]="true"
+                                    requerido = "true"
+                                    placeholder="Contraseña"
+                                    [valor] = "contrasena | password: activar"></app-angular-autocomplete>
+
+          <hr>
+          <b class="m-t-30">Elija un color</b>
+          <div class="row">
+            <ul id="themecolors">
+                <li class="d-block m-t-20"><b>Con el menu blanco</b></li>
+                <li><a #link1 (click)="cambiarColor('default',link1)" data-theme="default" class="selector default-theme">1</a></li>
+                <li><a #link2 (click)="cambiarColor('green',link2)" data-theme="green" class="selector green-theme">2</a></li>
+                <li><a #link3 (click)="cambiarColor('red',link3)" data-theme="red" class="selector red-theme">3</a></li>
+                <li><a #link4 (click)="cambiarColor('blue',link4)" data-theme="blue" class="selector blue-theme">4</a></li>
+                <li><a #link5 (click)="cambiarColor('purple',link5)" data-theme="purple" class="selector purple-theme">5</a></li>
+            </ul>
+            <ul id="themecolors">
+              <li class="d-block m-t-20"><b>Con el menu negro</b></li>
+              <li><a #link6  (click)="cambiarColor('default-dark', link6 )" data-theme="default-dark" class="selector default-dark-theme">7</a></li>
+              <li><a #link7 (click)="cambiarColor('green-dark', link7 )" data-theme="green-dark" class="selector green-dark-theme">8</a></li>
+              <li><a #link8 (click)="cambiarColor('red-dark', link8 )" data-theme="red-dark" class="selector red-dark-theme">9</a></li>
+              <li><a #link9 (click)="cambiarColor('blue-dark', link9 )" data-theme="blue-dark" class="selector blue-dark-theme">10</a></li>
+              <li><a #link10 (click)="cambiarColor('purple-dark', link10)" data-theme="purple-dark" class="selector purple-dark-theme">11</a></li>
+            </ul>
+          </div>
+        </form>
+
+
+      </div>
+
+    </div>
+</div>
 <hr>

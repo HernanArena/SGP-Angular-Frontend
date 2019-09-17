@@ -25,7 +25,7 @@ export class FinderComponent implements OnInit,OnDestroy {
   @Input('nombre')  public nombre:string = "";
 
   partes:Parte[];
-  _termino:string ="";
+  termino:any;
   storeSubscription:Subscription;
 
   constructor(public _fs:FinderService,
@@ -35,9 +35,7 @@ export class FinderComponent implements OnInit,OnDestroy {
 
     this.storeSubscription = this.store.select('filtro').subscribe( data => {
       if(data.filtro != null && this.recuperaStore){
-          this._termino = data.filtro.termino;
-      }else{
-        this._termino = "";
+          this.termino = data.filtro.termino;
       }
     })
   }
@@ -45,12 +43,17 @@ export class FinderComponent implements OnInit,OnDestroy {
   ngOnInit() {
     this.createValidation();
   }
+  onChanges(newValue:any){
+    this.termino = newValue;
+  }
 
   navegararesultsyguardarstorage(){
-    if(this._termino){
-      this._fs.guardarTerminoStore(this.forma.get("textArea").value);
+    this.termino = {codigo: this.forma.get("textArea").value,
+                    descrip:this.forma.get("textArea").value}
+    if(this.forma.get("textArea").value){
+      this._fs.guardarTerminoStore(this.termino);
     }
-    this._fs.cargarPartesStore(this._termino,0,5);
+    this._fs.cargarPartesStore(this.termino,0,5);
   }
   ngOnDestroy(): void {
       this.storeSubscription.unsubscribe();
