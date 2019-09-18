@@ -71,7 +71,7 @@ export class TicketService {
     this.store.dispatch(new LimpiarPartesAction());
   }
 
-  AgregarVersionStore(version:number){
+  AgregarVersionStore(version:string){
     this.store.dispatch(new AgregarFilterVersionAction(version));
   };
 

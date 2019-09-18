@@ -73,7 +73,7 @@ export class ComboService {
     this.store.dispatch(new CargarFilterAction(filtros));
   }
 
-  public AgregarVersionStore(version:number){
+  public AgregarVersionStore(version:string){
     this.store.dispatch(new AgregarFilterVersionAction(version));
   }
 

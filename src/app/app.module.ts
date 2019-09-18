@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import {
+  BrowserAnimationsModule
+} from '@angular/platform-browser/animations';
+
 //@Ngrx
 import { StoreModule } from '@ngrx/store';
 import { appReducers, metaReducers } from './store/app.reducer';
@@ -17,6 +21,8 @@ import { SharedModule } from './shared/shared.module';
 import { ServicesModule } from './services/services.module';
 import { ComponentsModule } from './components/components.module';
 import { AuthModule } from './auth/auth.module';
+import { DirectiveModule } from './directives/directive.module';
+import { PipesModule } from './pipes/pipes.module';
 
 //Components
 import { AppComponent } from './app.component';
@@ -24,17 +30,11 @@ import { PagesComponent } from './pages/pages.component';
 
 //Routes
 import { APP_ROUTING } from './app-routing.module';
-import { PipesModule } from './pipes/pipes.module';
-
-import {
-  BrowserAnimationsModule
-} from '@angular/platform-browser/animations';
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    PagesComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +47,7 @@ import {
     ComponentsModule,
     PipesModule,
     AuthModule,
+    DirectiveModule,
     StoreModule.forRoot(appReducers,{metaReducers}),
     EffectsModule.forRoot(AllEffects),
     StoreDevtoolsModule.instrument({

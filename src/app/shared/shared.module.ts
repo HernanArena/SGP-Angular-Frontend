@@ -7,6 +7,8 @@ import { PagenofoundComponent } from './pagenofound/pagenofound.component';
 import { RouterModule } from '@angular/router';
 import { LoadingComponent } from './loading/loading.component';
 import { RigthSidebarComponent } from './rigth-sidebar/rigth-sidebar.component';
+import { ComponentsModule } from '../components/components.module';
+import { DirectiveModule } from '../directives/directive.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { RigthSidebarComponent } from './rigth-sidebar/rigth-sidebar.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ComponentsModule,
+    DirectiveModule
   ],
   exports:[
     NavbarComponent,

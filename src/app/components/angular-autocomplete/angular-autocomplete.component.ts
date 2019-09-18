@@ -9,9 +9,9 @@ import { ValidationService } from 'src/app/services/validation/validation.servic
   styleUrls: ['./angular-autocomplete.component.css']
 })
 export class AngularAutocompleteComponent implements OnInit {
-  private forma:FormGroup;
-  options: FormGroup;
-  focus: boolean;
+  public forma:FormGroup;
+  public options: FormGroup;
+  public focus: boolean;
 
   //Data Input
   @Input('array') public arrayItem:Combo [] = [];
@@ -31,11 +31,11 @@ export class AngularAutocompleteComponent implements OnInit {
   @Output('actualizaValor') public cambioValor:EventEmitter<any> = new EventEmitter()
   @Output('valorSeleccionado') public valorFinal:EventEmitter<any> = new EventEmitter()
   //valores recuperados
-  private termino:string ="";
-  private valorSeleccionado: string;
+  public termino:string ="";
+  public valorSeleccionado: string;
 
   //Define si el usuario esta seleccionando valor correcto
-  private seleccionoValor: boolean
+  public seleccionoValor: boolean
 
   constructor(public _vs:ValidationService,
               private changeDetector : ChangeDetectorRef) {
@@ -62,15 +62,15 @@ export class AngularAutocompleteComponent implements OnInit {
     });
 
   }
-  private valid():boolean{
+  public valid():boolean{
     return (this.arrayItem.length>0 && this.arrayItem.filter( data => {
       return data.codigo.toString().concat(' - ').concat(data.descripcion.toString()) == this.termino
     }).length>0) || this.termino == ''
   }
-  getPosts(evento:any){
+  public getPosts(evento:any){
     this.valorSeleccionado = evento;
   }
-  private onChanges(newValue:any) {
+  public onChanges(newValue:any) {
     this.termino = newValue;
 
     if(!this.valid()|| !this.forma.get('inputFloating').valid){
@@ -91,7 +91,7 @@ export class AngularAutocompleteComponent implements OnInit {
 
   }
 
-  private createValidation(){
+  public createValidation(){
     let arrayValidations:any[] = [];
     if(this.required) arrayValidations.push({nombre:this.nombre,validation:'required'});
     if(this.email) arrayValidations.push({nombre:this.nombre,validation:'email'});
@@ -102,7 +102,7 @@ export class AngularAutocompleteComponent implements OnInit {
 
     this.forma.controls['inputFloating'].setValidators(validation);
   }
-  private seleccionaValor(item:any){
+  public seleccionaValor(item:any){
     this.seleccionoValor = true
     this.estado.emit(true);
     this.valorFinal.emit({codigo: item.codigo,
@@ -111,7 +111,7 @@ export class AngularAutocompleteComponent implements OnInit {
                           descrip:item.descripcion})
   }
 
-  private borraValorSeleccionado(event:any){
+  public borraValorSeleccionado(event:any){
     if (event.key != "Enter") {
         this.valorSeleccionado = ""
     }

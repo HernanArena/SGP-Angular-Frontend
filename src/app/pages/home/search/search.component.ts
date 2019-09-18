@@ -15,16 +15,16 @@ import { AppState } from 'src/app/store/app.reducer';
 export class SearchComponent implements OnInit{
 
 
-  private termino:string = "";
-  private objeto:string = "";
-  private modulo:string = "";
-  private versiones:any[] = [];
+  public termino:string = "";
+  public objeto:string = "";
+  public modulo:string = "";
+  public versiones:any[] = [];
   private filtroCargados:any;
   private storeSubscription:Subscription;
-  private version:number;
-  private versionValida:boolean = false;
-  private estado:boolean = true;
-  private anterior:string = "";
+  public version:string;
+  public versionValida:boolean = false;
+  public estado:boolean = true;
+  public anterior:string = "";
 
 
   constructor(public _cb:ComboService,
@@ -54,7 +54,7 @@ export class SearchComponent implements OnInit{
     });
 
   };
-  private getVersiones(termino:string,evento:any){
+  public getVersiones(termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i')
     if(!regex.test(evento.key)){
       if(termino){
@@ -68,7 +68,7 @@ export class SearchComponent implements OnInit{
     }
   }
 
-  private seleccionaVersion(value:any){
+  public seleccionaVersion(value:any){
     if(value || value == ''){
       this.cd.markForCheck();
       this.version = value;
@@ -84,7 +84,7 @@ export class SearchComponent implements OnInit{
       .subscribe(data => {this.versiones = data;});
     }
   }
-  private grabaFiltroVersion(version:number){
+  public grabaFiltroVersion(version:string){
     if (this.store.select('filtro') == null ) {
         let filtros = new Filtro(version,this.modulo,this.objeto,"","");
         this._cb.cargarFiltrosStore(filtros);

@@ -7,9 +7,10 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  private valorRazonSocial:string = "sac";
-  private contrasena:string = "gsa1!";
-  private usuario:string = "sac";
+  public valorRazonSocial:string = "sac";
+  public contrasena:string = "gsa1!";
+  public usuario:string = "sac";
+  public activar = true;
 
   constructor(public _ajustes: ThemeService) { }
 

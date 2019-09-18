@@ -3,7 +3,6 @@ import { TicketFormService } from 'src/app/services/ticket-form/ticket-form.serv
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { Filtro } from 'src/app/models/filtro.model';
 import { Combo } from 'src/app/models/combo.model';
 import { ComboService } from 'src/app/services/combo/combo.service';
@@ -21,23 +20,23 @@ export class TicketFormComponent implements OnInit {
   @Input('mensajeFinal') public mensajeFinal:string = "";
 
   //Valores devueltos de las peticiones
-  private contactos: Combo[] = [];
-  private versiones:any[] = [];
-  private modulos:any[] = [];
+  public contactos: Combo[] = [];
+  public versiones:any[] = [];
+  public modulos:any[] = [];
 
 
-  private valor:number = 0;
-  private step:number = 3;
+  public valor:number = 0;
+  public step:number = 3;
 
   //valores ingresados keyup
-  private termino:string;
-  private terminoAsunto:any = null;
-  private descripcion:string = "";
-  private contacto:string = "";
-  private version:any = "";
-  private modulo:any = "";
-  private objeto:any = "";
-  private razonSocial:string = "";
+  public termino:string;
+  public terminoAsunto:any = null;
+  public descripcion:string = "";
+  public contacto:string = "";
+  public version:any = "";
+  public modulo:any = "";
+  public objeto:any = "";
+  public razonSocial:string = "";
   //valor seteado desde el store
 
 
@@ -50,14 +49,14 @@ export class TicketFormComponent implements OnInit {
 
 
   //Estados
-  private contactoValid:boolean = false;
-  private versionValid:boolean = false;
-  private moduloValid:boolean = false;
-  private objetoValid:boolean = false;
-  private asuntoValid:boolean = false;
-  private disabled:boolean = true;
-  private estadoValid:boolean = false;
-  private valorActual:string = "";
+  public contactoValid:boolean = false;
+  public versionValid:boolean = false;
+  public moduloValid:boolean = false;
+  public objetoValid:boolean = false;
+  public asuntoValid:boolean = false;
+  public disabled:boolean = true;
+  public estadoValid:boolean = false;
+  public valorActual:string = "";
 
   constructor(public _tf:TicketFormService,
               public _cb:ComboService,
@@ -95,10 +94,10 @@ export class TicketFormComponent implements OnInit {
   private enviar(){
     this.valor = this.valor + 1;
   }
-  private getState(){
+  public getState(){
     return this.contactos;
   }
-  private getContactos(termino:string,evento:any){
+  public getContactos(termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
     termino==null || termino =="" || termino==undefined?null:termino;
     if(!regex.test(evento.key) && termino){
@@ -109,7 +108,7 @@ export class TicketFormComponent implements OnInit {
       this._cb.AgregarContactoStore(this.contacto);
     }
   }
-  seleccionaContacto(value:any){
+  public seleccionaContacto(value:any){
     console.log(value)
     if(value){
       this.cd.markForCheck();
@@ -125,7 +124,7 @@ export class TicketFormComponent implements OnInit {
       this.contactos = data
     });
   }
-  getVersiones(termino:string,evento:any){
+  public getVersiones(termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
     console.log(termino);
     termino==null || termino =="" || termino==undefined?null:termino;
@@ -140,7 +139,7 @@ export class TicketFormComponent implements OnInit {
       }
     }
   }
-  seleccionaVersion(value:any){
+  public seleccionaVersion(value:any){
     if(value){
       this.cd.markForCheck();
       this.version = value;
@@ -152,7 +151,7 @@ export class TicketFormComponent implements OnInit {
       .subscribe(data => {this.versiones = data;});
     }
   }
-  getAsunto(termino:any,evento:any){
+  public getAsunto(termino:any,evento:any){
     let regex = new RegExp('^Arrow?','i');
     if(!regex.test(evento.key)){
       if(termino){

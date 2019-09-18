@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  mostar:boolean = false;
+  public mostrar:boolean = false;
 
   constructor(private store:Store<AppState>,
               private router:Router,
@@ -22,8 +22,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
   mostrarOcultar(){
-    this.mostar = !this.mostar;
-    console.log(this.mostar);
+    this.mostrar = !this.mostrar;
+    console.log(this.mostrar);
   }
   Logout(){
     this.store.dispatch(new LimpiarUsuario());

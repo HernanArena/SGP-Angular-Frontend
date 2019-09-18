@@ -16,7 +16,7 @@ export class CargarFilterAction implements Action {
 }
 export class AgregarFilterVersionAction implements Action {
   readonly type = AGREGAR_VERSION_FILTER;
-  constructor(public version:number){}
+  constructor(public version:string){}
 }
 export class AgregarFilterModuloAction implements Action {
   readonly type = AGREGAR_MODULO_FILTER;

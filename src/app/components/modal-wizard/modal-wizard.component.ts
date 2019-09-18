@@ -12,9 +12,9 @@ export class ModalWizardComponent implements OnInit {
   private descripcion:string;
   private texto:string;
   private codigo:string;
-  private valor:number = 0;
-  private step:number;
-  private pasarPresentacion:boolean;
+  public valor:number = 0;
+  public step:number;
+  public pasarPresentacion:boolean;
   private contenido:any[];
 
 

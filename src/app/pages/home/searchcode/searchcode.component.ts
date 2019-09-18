@@ -11,10 +11,10 @@ import { ComboService } from 'src/app/services/combo/combo.service';
 })
 export class SearchcodeComponent implements OnInit {
 
-  private codigoSelect: any[]=[];
+  public codigoSelect: any[]=[];
   private codigoSubscription:Subscription
-  private codigo:any;
-  private termino:string = "";
+  public codigo:any;
+  public termino:string = "";
 
   constructor(public _cb: ComboService,
               public _ms: ModalWizardService,
@@ -27,7 +27,7 @@ export class SearchcodeComponent implements OnInit {
     this.cd.detectChanges();
   }
 
-  private getError(value:any,evento:any){
+  public getError(value:any,evento:any){
     let regex = new RegExp('^Arrow?','i');
     if(!regex.test(evento.key)){
         console.log(value)
@@ -44,7 +44,7 @@ export class SearchcodeComponent implements OnInit {
 
   }
 
-  private seleccionaError(value){
+  public seleccionaError(value){
 
     if(this.codigo){
       this.cd.markForCheck();
@@ -67,7 +67,7 @@ export class SearchcodeComponent implements OnInit {
     }
   }
 
-  private mostrarModal(){
+  public mostrarModal(){
     console.log(this.codigoSelect)
     let codigoSelect = this.codigoSelect
                       .filter((value)=>{

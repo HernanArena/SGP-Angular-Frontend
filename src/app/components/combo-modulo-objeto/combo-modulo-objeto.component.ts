@@ -13,7 +13,7 @@ import { ComboService } from 'src/app/services/combo/combo.service';
 })
 export class ComboModuloObjetoComponent implements OnInit {
 
-  @Input() public version:number;
+  @Input() public version:string;
   @Input() public objetoPlaceHolder:string = "";
   @Input() public moduloPlaceHolder:string = "";
   @Input('valorModulo') public valorModulo:string = "";
@@ -23,23 +23,23 @@ export class ComboModuloObjetoComponent implements OnInit {
   @Output('objeto') public objetoSeleccionado:EventEmitter<string> = new EventEmitter();
   @Output('comboEstado') public comboEstado:EventEmitter<boolean> = new EventEmitter();
 
-  private terminoModulo:string;
-  private terminoObjeto:string;
+  public terminoModulo:string;
+  public terminoObjeto:string;
 
-  private modulos:any[] = [];
-  private objetos:any[] = [];
+  public modulos:any[] = [];
+  public objetos:any[] = [];
   private filtroCargados:any;
 
   private moduloSubscription:Subscription;
   private ObjetoSubscription:Subscription;
   private storeSubscription:Subscription;
 
-  private modulo:string;
-  private objeto:string;
-  private moduloFilter:string;
+  public modulo:string;
+  public objeto:string;
+  public moduloFilter:string;
 
-  private moduloValido:boolean = false;
-  private objetoValido:boolean = false;
+  public moduloValido:boolean = false;
+  public objetoValido:boolean = false;
 
   constructor(public _cb:ComboService,
               public store:Store<AppState>,

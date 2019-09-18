@@ -10,7 +10,7 @@ import { AppState } from 'src/app/store/app.reducer';
 export class NewSuggestComponent implements OnInit {
 
 
-  private razonSocial:any;
+  public razonSocial:any;
 
 
   constructor(public store:Store<AppState>) {

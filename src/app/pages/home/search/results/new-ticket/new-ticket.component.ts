@@ -10,11 +10,11 @@ import { Subscription } from 'rxjs';
 })
 export class NewTicketComponent implements OnInit {
 
-  private modulo:any;
-  private version:any;
-  private objeto:any;
-  private contacto:any;
-  private razonSocial:any;
+  public modulo:any;
+  public version:any;
+  public objeto:any;
+  public contacto:any;
+  public razonSocial:any;
 
   storeSubscription:Subscription;
 

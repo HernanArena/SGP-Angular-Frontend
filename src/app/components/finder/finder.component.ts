@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy, Input, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FinderService } from 'src/app/services/finder/finder.service';
 import { Parte } from 'src/app/models/parte.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
-import { CargarPartes } from 'src/app/store/actions';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ValidationService } from 'src/app/services/validation/validation.service';
@@ -16,7 +15,7 @@ import { ValidationService } from 'src/app/services/validation/validation.servic
 })
 
 export class FinderComponent implements OnInit,OnDestroy {
-  private forma:FormGroup;
+  public forma:FormGroup;
 
   @Input('botonvalido')  public botonValido:boolean = true;
   @Input('recuperaStore') public  recuperaStore:boolean = false;
@@ -24,8 +23,8 @@ export class FinderComponent implements OnInit,OnDestroy {
   @Input('minLength') public minLength:number = 0;
   @Input('nombre')  public nombre:string = "";
 
-  partes:Parte[];
-  termino:any;
+  public partes:Parte[];
+  public termino:any;
   storeSubscription:Subscription;
 
   constructor(public _fs:FinderService,

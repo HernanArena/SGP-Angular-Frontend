@@ -13,6 +13,8 @@ import { AngularAutocompleteComponent } from './angular-autocomplete/angular-aut
 import { PaginationComponent } from './pagination/pagination.component';
 import { ResultsFooterComponent } from './results-footer/results-footer.component';
 import { RouterModule } from '@angular/router';
+import { DragzoneMultipleComponent } from './dragzone-multiple/dragzone-multiple.component';
+import { DirectiveModule } from '../directives/directive.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { RouterModule } from '@angular/router';
     ComboModuloObjetoComponent,
     AngularAutocompleteComponent,
     PaginationComponent,
-    ResultsFooterComponent
+    ResultsFooterComponent,
+    DragzoneMultipleComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { RouterModule } from '@angular/router';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    RouterModule
+    RouterModule,
+    DirectiveModule
   ],
   exports:[
     FinderComponent,
@@ -50,7 +54,8 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     AngularAutocompleteComponent,
     PaginationComponent,
-    ResultsFooterComponent
+    ResultsFooterComponent,
+    DragzoneMultipleComponent
   ]
 })
 export class ComponentsModule { }

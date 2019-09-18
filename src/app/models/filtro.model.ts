@@ -1,7 +1,7 @@
 
 
 export class Filtro {
-  constructor(public version:number,
+  constructor(public version:string,
               public modulo:string,
               public objeto:string,
               public termino:string,

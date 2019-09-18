@@ -1,0 +1,37 @@
+<div class="row main-container">
+  <div class="col-md-12 text-center">
+    <h5>Zona de intercambio</h5>
+
+    <div appNgDropFiles
+         [archivos] ="archivos"
+         (fileHover) = "elementHover = $event"
+         [ngClass]="{'file-over': elementHover}"
+         class="well drop-zone">
+      <h6>Deje caer los archivos aquí</h6>
+      <img src="assets/dropzone/drop-images.png">
+    </div>
+  </div>
+</div>
+<div class="main-container text-center">
+  <h5>Cargar Archivos</h5>
+  <h6></h6><button (click)="cargarImagenes()" [disabled] ="archivos.length===0" type="button" class="btn btn-success m-2"><div class="button-text"><i class="fa fa-save"></i>  Guardar</div></button>
+  <button (click)="limpiarArchivos()" type="button" class="btn btn-danger"><div class="button-text"><i class="fa fa-trash"></i>  Borrar </div></button>
+  <table class="table bordes">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Tamaño</th>
+        <th scope="col">Progreso</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let archivo of archivos">
+        <td  scope="row" [ngClass]="{'text-green': archivo.progreso>=100}">{{archivo.archivo.size /1024 /1024 | number:'.2-2' }} MB</td>
+        <td>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{'width': archivo.progreso +'%'}"></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
