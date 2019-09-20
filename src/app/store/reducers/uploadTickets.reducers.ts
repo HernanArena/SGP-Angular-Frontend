@@ -1,8 +1,12 @@
 import * as fromGenerarPartes from '../actions/uploadTickets.actions';
-import { ParteNuevo } from 'src/app/models/partenuevo.model';
+import { Parte } from 'src/app/models/parte.model';
+import { Contacto } from 'src/app/models/contacto.model';
 
 export interface GenerarPartesState{
-  parte:ParteNuevo,
+  parte:Parte,
+  contacto:Contacto,
+  descripcion:string,
+  adjunto:string,
   loading:boolean,
   loaded:boolean,
   error:any
@@ -10,6 +14,9 @@ export interface GenerarPartesState{
 
 const estadoInicial:GenerarPartesState =  {
   parte: null,
+  contacto: null,
+  descripcion: null,
+  adjunto: null,
   loading: false,
   loaded: true,
   error: null
@@ -20,7 +27,6 @@ export function generarParteReducer(state = estadoInicial, action: fromGenerarPa
     case fromGenerarPartes.GUARDAR_PARTES:
       return {
         ...state,
-        parte: action.parte,
         loaded:false,
         loading: true,
         error:null
@@ -30,7 +36,7 @@ export function generarParteReducer(state = estadoInicial, action: fromGenerarPa
         ...state,
         loaded:true,
         loading:false,
-        parte: action.payload,
+        parte: action.parte,
         error: null
       };
     case fromGenerarPartes.GUARDAR_PARTES_FAIL:
@@ -44,8 +50,35 @@ export function generarParteReducer(state = estadoInicial, action: fromGenerarPa
           url: action.payload.url
         }
       };
+    case fromGenerarPartes.AGREGAR_DESCRIPCION:
+      return {
+        ...state,
+        loaded: true,
+        loading: false,
+        adjunto: action.descripcion,
+        error: null
+      };
+    case fromGenerarPartes.AGREGAR_CONTACTO:
+      return {
+        ...state,
+        loaded:true,
+        loading:false,
+        contacto: {
+          id: action.contacto.id,
+          nombre: action.contacto.nombre,
+          mail: action.contacto.mail
+        },
+        error: null
+      };
+    case fromGenerarPartes.AGREGAR_ADJUNTO:
+      return {
+        ...state,
+        loaded: true,
+        loading: false,
+        adjunto: action.adjunto,
+        error: null
+      };  
     default:
       return state;
-
     };
 }

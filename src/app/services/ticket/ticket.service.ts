@@ -27,15 +27,13 @@ export class TicketService {
   public getPartesConFiltro(termino:any,
                             offset:number,
                             limit:number):Observable<any>{
-                              console.log(termino)
 
     this.recuperaFiltro();
     termino = (termino && termino.codigo == '') || !termino ? 'null':termino.codigo
-    console.log(this.version)
+
     this.modulo = (this.modulo && this.modulo.codigo == '') || !this.modulo ? 'null':this.modulo.codigo
     this.objeto = (this.objeto && this.objeto.codigo == '') || !this.objeto ? 'null':this.objeto.codigo
     this.version = (this.version && this.version.codigo == '') || !this.version ? 'null':this.version.codigo
-    console.log(this.version)
 
     console.log(`${this.urlAPI}/partepublico/P/${this.modulo}/${this.objeto}/${this.version}/${termino}/${offset}/${limit}`)
     return this.http.get(`${this.urlAPI}/partepublico/P/${this.modulo}/${this.objeto}/${this.version}/${termino}/${offset}/${limit}`)

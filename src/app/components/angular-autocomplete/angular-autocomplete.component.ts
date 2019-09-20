@@ -72,7 +72,6 @@ export class AngularAutocompleteComponent implements OnInit {
   }
   public onChanges(newValue:any) {
     this.termino = newValue;
-
     if(!this.valid()|| !this.forma.get('inputFloating').valid){
       this.estado.emit(false);
       this.valorFinal.emit({codigo: '',descrip:''});

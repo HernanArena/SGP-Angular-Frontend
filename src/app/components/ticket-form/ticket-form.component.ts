@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Filtro } from 'src/app/models/filtro.model';
 import { Combo } from 'src/app/models/combo.model';
 import { ComboService } from 'src/app/services/combo/combo.service';
+import { Contacto } from 'src/app/models/contacto.model';
 
 @Component({
   selector: 'app-ticket-form',
@@ -20,10 +21,9 @@ export class TicketFormComponent implements OnInit {
   @Input('mensajeFinal') public mensajeFinal:string = "";
 
   //Valores devueltos de las peticiones
-  public contactos: Combo[] = [];
-  public versiones:any[] = [];
-  public modulos:any[] = [];
-
+  public contactos: Contacto[] = [];
+  public versiones: any[] = [];
+  public modulos: any[] = [];
 
   public valor:number = 0;
   public step:number = 3;
@@ -37,8 +37,6 @@ export class TicketFormComponent implements OnInit {
   public modulo:any = "";
   public objeto:any = "";
   public razonSocial:string = "";
-  //valor seteado desde el store
-
 
   //valor recuperado del input
   @Input('contacto') public valorContacto:string = "";
@@ -62,14 +60,7 @@ export class TicketFormComponent implements OnInit {
               public _cb:ComboService,
               private router:Router,
               private store:Store<AppState>,
-              private cd: ChangeDetectorRef) {
-          // if(this.valorModulo) this.modulo = this.valorModulo;
-          // if(this.valorObjeto) this.objeto = this.valorObjeto;
-          // if(this.valorContacto) this.contacto = this.valorContacto;
-          // if(this.valorVersion) this.version = this.valorVersion;
-          // if(this.valorRazonSocial) this.razonSocial = this.valorRazonSocial;
-
-  }
+              private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     if(this.valorModulo) this.modulo = this.valorModulo;
@@ -78,7 +69,6 @@ export class TicketFormComponent implements OnInit {
     if(this.valorVersion) this.version = this.valorVersion;
     if(this.valorRazonSocial) this.razonSocial = this.valorRazonSocial;
   }
-
 
   private siguienteStep(){
     this.disabled = false;
@@ -109,7 +99,6 @@ export class TicketFormComponent implements OnInit {
     }
   }
   public seleccionaContacto(value:any){
-    console.log(value)
     if(value){
       this.cd.markForCheck();
       this.contacto = value;
@@ -126,7 +115,6 @@ export class TicketFormComponent implements OnInit {
   }
   public getVersiones(termino:string,evento:any){
     let regex = new RegExp('^Arrow?','i');
-    console.log(termino);
     termino==null || termino =="" || termino==undefined?null:termino;
     if(!regex.test(evento.key)){
       if(termino){
