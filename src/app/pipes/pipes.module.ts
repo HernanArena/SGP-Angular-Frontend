@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { TruncatePipe } from './truncate.pipe';
 import { SelectedPipe } from './selected.pipe';
 import { PasswordPipe } from './password.pipe';
+import { ExtensionsPipe } from './extensions.pipe';
 
 @NgModule({
   declarations: [
     TruncatePipe,
     SelectedPipe,
-    PasswordPipe
+    PasswordPipe,
+    ExtensionsPipe
   ],
   imports: [
     CommonModule
@@ -16,7 +18,8 @@ import { PasswordPipe } from './password.pipe';
   exports:[
     TruncatePipe,
     SelectedPipe,
-    PasswordPipe
+    PasswordPipe,
+    ExtensionsPipe
   ]
 })
 export class PipesModule { }

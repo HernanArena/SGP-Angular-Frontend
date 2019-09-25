@@ -4,7 +4,6 @@ import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Filtro } from 'src/app/models/filtro.model';
-import { Combo } from 'src/app/models/combo.model';
 import { ComboService } from 'src/app/services/combo/combo.service';
 import { Contacto } from 'src/app/models/contacto.model';
 
@@ -24,6 +23,8 @@ export class TicketFormComponent implements OnInit {
   public contactos: Contacto[] = [];
   public versiones: any[] = [];
   public modulos: any[] = [];
+  public ocurrencias: any[] = [];
+  public impactos: any[] = [];
 
   public valor:number = 0;
   public step:number = 3;
@@ -37,6 +38,8 @@ export class TicketFormComponent implements OnInit {
   public modulo:any = "";
   public objeto:any = "";
   public razonSocial:string = "";
+  public impacto:any = "";
+  public ocurrencia:any = "";
 
   //valor recuperado del input
   @Input('contacto') public valorContacto:string = "";
@@ -51,10 +54,14 @@ export class TicketFormComponent implements OnInit {
   public versionValid:boolean = false;
   public moduloValid:boolean = false;
   public objetoValid:boolean = false;
-  public asuntoValid:boolean = false;
+
+
   public disabled:boolean = true;
   public estadoValid:boolean = false;
   public valorActual:string = "";
+  public comboValid:boolean = false;
+  public ocurrenciaValid:boolean = false;
+  public impactoValid:boolean = false;
 
   constructor(public _tf:TicketFormService,
               public _cb:ComboService,
@@ -139,15 +146,69 @@ export class TicketFormComponent implements OnInit {
       .subscribe(data => {this.versiones = data;});
     }
   }
-  public getAsunto(termino:any,evento:any){
-    let regex = new RegExp('^Arrow?','i');
-    if(!regex.test(evento.key)){
-      if(termino){
-        termino.codigo = termino && termino.codigo ==""  && evento.key!="Backspace"?evento.key:termino.codigo;
-        this.terminoAsunto = termino.codigo
-      }
-    }
-  }
+  // public getAsunto(termino:any,evento:any){
+  //   let regex = new RegExp('^Arrow?','i');
+  //   if(!regex.test(evento.key)){
+  //     if(termino){
+  //       termino.codigo = termino && termino.codigo ==""  && evento.key!="Backspace"?evento.key:termino.codigo;
+  //       this.terminoAsunto = termino.codigo
+  //     }
+  //   }
+  // }
+  public getGradosOcurrencia(termino:string,evento:any){
+     let regex = new RegExp('^Arrow?','i');
+     termino==null || termino =="" || termino==undefined?null:termino;
+     if(!regex.test(evento.key)){
+       if(termino){
+         this._cb.getGradosOcurrencia(termino).subscribe(data => {
+           this.ocurrencias = data;
+         });
+       }else{
+         this._cb.getGradosOcurrencia(null)
+         .subscribe(data => {this.ocurrencias = data;});
+       }
+     }
+   }
 
+   public seleccionaOcurrencia(value:any){
+     if(value){
+       this.cd.markForCheck();
+       this.ocurrencia = value;
+       this.cd.detectChanges();
+       //let filtros = new Filtro(this.version,this.modulo,this.objeto,"","");
+       //this._cb.cargarFiltrosStore(filtros);
+     }else{
+       this._cb.getGradosOcurrencia(null)
+       .subscribe(data => {this.ocurrencias = data;});
+     }
+   }
+
+   public getGradosImpacto(termino:string,evento:any){
+     let regex = new RegExp('^Arrow?','i');
+     termino==null || termino =="" || termino==undefined?null:termino;
+     if(!regex.test(evento.key)){
+       if(termino){
+         this._cb.getGradosImpacto(termino).subscribe(data => {
+           this.impactos = data;
+         });
+       }else{
+         this._cb.getGradosImpacto(null)
+         .subscribe(data => {this.impactos = data;});
+       }
+     }
+   }
+
+   public seleccionaImpacto (value:any){
+     if(value){
+       this.cd.markForCheck();
+       this.impacto = value;
+       this.cd.detectChanges();
+       //let filtros = new Filtro(this.version,this.modulo,this.objeto,"","");
+       //this._cb.cargarFiltrosStore(filtros);
+     }else{
+       this._cb.getGradosImpacto(null)
+       .subscribe(data => {this.impactos = data;});
+     }
+   }
 
 }

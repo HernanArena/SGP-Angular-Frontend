@@ -2,7 +2,10 @@
     <div class="col-md-12">
       <ol class="breadcrumb">
             <li class="breadcrumb-item pointer" >
-                <a [routerLink]="['/panel']"><i class="fa fa-1x fa-home"></i></a>
+                <a [routerLink]="['/panel']" (click)="home()"><i class="fa fa-1x fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item pointer" *ngFor="let item of ruta" >
+                <a routerLink="{{item.ruta}}">{{item.nombre}}</a>
             </li>
           <li class="breadcrumb-item">{{titulo}}</li>
       </ol>

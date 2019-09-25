@@ -30,7 +30,6 @@ export class SearchcodeComponent implements OnInit {
   public getError(value:any,evento:any){
     let regex = new RegExp('^Arrow?','i');
     if(!regex.test(evento.key)){
-        console.log(value)
       if(value){
         this.codigoSubscription = this._cb.getCodigoError(value).subscribe(data => {
           this.codigoSelect = data.partes
@@ -68,12 +67,10 @@ export class SearchcodeComponent implements OnInit {
   }
 
   public mostrarModal(){
-    console.log(this.codigoSelect)
     let codigoSelect = this.codigoSelect
                       .filter((value)=>{
                         return value.codigo == this.codigo.codigo
                       })[0];
-  console.log(codigoSelect)
     this._ms.setStep(codigoSelect.items.length);
     this._ms.setCodigo(codigoSelect.codigo);
     this._ms.setDescripcion(codigoSelect.descripcion);

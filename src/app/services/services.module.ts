@@ -9,6 +9,7 @@ import { ValidationService } from './validation/validation.service';
 import { ModalWizardService } from './modal-wizard/modal-wizard.service';
 import { TicketFormService } from './ticket-form/ticket-form.service';
 import { ThemeService } from './theme/theme.service';
+import { NewManualService } from './new-manual/new-manual.service';
 
 
 
@@ -24,7 +25,8 @@ import { ThemeService } from './theme/theme.service';
     ValidationService,
     ModalWizardService,
     TicketFormService,
-    ThemeService
+    ThemeService,
+    NewManualService
   ]
 })
 export class ServicesModule { }

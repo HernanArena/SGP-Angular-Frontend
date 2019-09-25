@@ -13,14 +13,41 @@ export class BreadcrumbsComponent {
   pathAnterior:string;
   pathSiguiente:string;
   inicio:string;
-
+  rutaSearch:any[] = [{
+                        ruta: "/panel",
+                        nombre: 'Panel de consulta'
+                      },{
+                        ruta: "/busqueda",
+                        nombre: 'Búsqueda avanzada'
+                      },{
+                        ruta: "/resultados",
+                        nombre: 'Resultados'
+                      },{
+                        ruta: "/new-ticket",
+                        nombre: 'Alta de nuevo parte'
+                      }];
+  ruta:any[]=[];
   constructor(public router:Router,
               private meta:Meta) {
+                this.ruta = [];
 
     this.getDataRoute()
     .subscribe( data =>{
+
        if(data.titulo){
          this.titulo = data.titulo;
+
+         if(this.rutaSearch.findIndex(i => i.nombre === data.titulo)>0){
+
+           if(this.rutaSearch[0].ruta == data.titulo){
+             this.ruta = [];
+             return
+           }
+           let position = this.rutaSearch.findIndex(i => i.nombre === data.titulo);
+
+           this.ruta = this.rutaSearch.slice(1,position);
+         }
+         // console.log(data.titulo);
         const metaTag:MetaDefinition = {
           name: 'Description',
           content: this.titulo
@@ -44,6 +71,9 @@ export class BreadcrumbsComponent {
         filter((e: any) => e instanceof RoutesRecognized),
         pairwise()
       )
+  }
+  home(){
+     this.ruta = [];
   }
 
 }

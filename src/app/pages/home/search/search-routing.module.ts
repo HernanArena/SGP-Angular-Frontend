@@ -7,6 +7,7 @@ const searchRoutes:Routes = [
   { path: 'resultados',
    component: ResultsComponent,
    loadChildren: () => import('./results/results.module').then(m => m.ResultsModule),
+   data:{ titulo:"Resultados"}
   }
 ]
 

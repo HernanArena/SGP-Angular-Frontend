@@ -4,6 +4,7 @@ import { AppState } from 'src/app/store/app.reducer';
 import { LimpiarUsuario } from 'src/app/store/actions';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services';
+import { NewManualService } from 'src/app/services/new-manual/new-manual.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,14 +13,20 @@ import { AuthService } from 'src/app/services';
 })
 export class NavbarComponent implements OnInit {
   public mostrar:boolean = false;
+  public novedadesGenerales = [];
 
   constructor(private store:Store<AppState>,
               private router:Router,
-              public _us:AuthService) {
-
+              public _us:AuthService,
+              public _nd: NewManualService) {
 
   }
   ngOnInit() {
+  }
+  public getNovedadesGeneral(){
+    this._nd.getNovedadesGeneral().subscribe( (data)=>{
+      this.novedadesGenerales = data;
+    });
   }
   mostrarOcultar(){
     this.mostrar = !this.mostrar;

@@ -1,5 +1,5 @@
 .main-container{
-  margin-top: 30px;
+  margin-top: 10px;
 }
 /* Drop Zone */
 .drop-zone {
@@ -16,6 +16,10 @@
 .table {
 	margin-top: 30px;
 }
+.box {
+       display: flex;
+       flex-wrap: wrap;
+   }
 
 .text-green {
 	color: green
@@ -29,4 +33,7 @@
 }
 .button-text{
   font-size:12px;
+}
+.text{
+  font-size: 15px
 }

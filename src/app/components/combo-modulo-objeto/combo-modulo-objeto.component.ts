@@ -18,6 +18,7 @@ export class ComboModuloObjetoComponent implements OnInit {
   @Input() public moduloPlaceHolder:string = "";
   @Input('valorModulo') public valorModulo:string = "";
   @Input('valorObjeto') public valorObjeto:string = "";
+  @Input('requerido') public requerido:boolean = false;
 
   @Output('modulo') public moduloSeleccionado:EventEmitter<string> = new EventEmitter();
   @Output('objeto') public objetoSeleccionado:EventEmitter<string> = new EventEmitter();
@@ -86,7 +87,7 @@ export class ComboModuloObjetoComponent implements OnInit {
         let filtros = new Filtro(this.version,this.modulo,this.objeto,"","");
         this._cb.cargarFiltrosStore(filtros);
       }
-      this.comboEstado.emit(this.moduloValido);
+      this.comboEstado.emit(this.objetoValido && this.moduloValido);
 
     }
 
@@ -117,7 +118,7 @@ export class ComboModuloObjetoComponent implements OnInit {
         }
         this.modulos = data;});
     }
-    this.comboEstado.emit(this.moduloValido);
+    this.comboEstado.emit(this.objetoValido && this.moduloValido);
   }
 
   getObjetos(modulo:string,termino:string,evento:any){
@@ -144,8 +145,7 @@ export class ComboModuloObjetoComponent implements OnInit {
         }
         this._cb.AgregarObjetoStore(this.modulo, this.objeto);
     }
-    this.comboEstado.emit(this.moduloValido);
-
+    this.comboEstado.emit(this.objetoValido && this.moduloValido);
   }
 
 
@@ -171,7 +171,7 @@ export class ComboModuloObjetoComponent implements OnInit {
     }
 
     this._cb.AgregarObjetoStore(this.modulo, this.objeto);
-    this.comboEstado.emit(this.moduloValido);
+    this.comboEstado.emit(this.objetoValido && this.moduloValido);
 
   }
 

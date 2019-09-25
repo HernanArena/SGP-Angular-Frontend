@@ -9,16 +9,22 @@
             <ul id="sidebarnav">
              <li class="user-profile">
                   <a class="waves-effect waves-dark hide-menu" href="#" aria-expanded="false">
-                    <img src="../assets/images/avatar1.png" alt ="empresa"/></a></li>
+                    <img src="../assets/images/avatar1.png" alt ="empresa"/></a>
+                    <a class="waves-effect waves-dark center" >{{usuario.empresa.name|| ''}}</a>
+</li>
+<li class="nav-devider"></li>
+
               <li class="user-profile hide-menu">
-                  <a class="waves-effect waves-dark" >{{usuario.empresa.name|| ''}}</a>
-                  <div class="row">
+                <!-- <li class="nav-small-cap">USUARIO</li> -->
+                  <li [routerLink]="['/perfil']"> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Ver perfil</span></a>
+
+                  <!-- <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-8">
-                      <h3><span class="badge badge-pill badge-secondary waves-effect"  [routerLink]="['/perfil']" routerLinkActive ="active">Perfil</span></h3>
+                      <h3><span class="badge badge-pill badge-secondary waves-effect"   routerLinkActive ="active">Perfil</span></h3>
                     </div>
                     <div class="col-md-2"></div>
-                  </div>
+                  </div> -->
 
 
               </li>
@@ -26,7 +32,7 @@
 
               <li class="nav-small-cap">PERSONAL</li>
               <li *ngFor="let menu of _sidebar.menu">
-                <li *ngFor="let menu of _sidebar.menu"> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu">{{menu.titulo}} </span></a>
+                <li [routerLink]="menu.url" *ngFor="let menu of _sidebar.menu"> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu">{{menu.titulo}} </span></a>
               </li>
             </ul>
         </nav>

@@ -8,3 +8,4 @@ export { FinderService } from './finder/finder.service';
 export { ModalWizardService } from './modal-wizard/modal-wizard.service';
 export { TicketService } from './ticket/ticket.service';
 export { TicketFormService } from './ticket-form/ticket-form.service';
+import { NewManualService } from './new-manual/new-manual.service';

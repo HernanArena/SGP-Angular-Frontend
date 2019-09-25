@@ -32,14 +32,21 @@
   margin-top: -3%;
 }
  .glyphicon-log-out:before{content:"\e163"}
- @media (min-width: 768px) {
+ .carousel{
+   background-color: rgba(0,0,0,.03);
+   padding-top: 20px;
+   padding-left: 10px;
+   padding-right: 10px;
+
+ }
+
+ /* @media (min-width: 768px) {
      .carousel{
        background-color: rgba(0,0,0,.03);
        padding-top: 20px;
        padding-left: 10px;
      }
 
-     /* show 3 items */
      .carousel-inner .active,
      .carousel-inner .active + .carousel-item,
      .carousel-inner .active + .carousel-item + .carousel-item,
@@ -69,7 +76,6 @@
          visibility: visible;
      }
 
-     /* left or forward direction */
      .active.carousel-item-left + .carousel-item-next.carousel-item-left,
      .carousel-item-next.carousel-item-left + .carousel-item,
      .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
@@ -80,7 +86,6 @@
          visibility: visible;
      }
 
-     /* farthest right hidden item must be abso position for animations */
      .carousel-inner .carousel-item-prev.carousel-item-right {
          position: absolute;
          top: 0;
@@ -90,7 +95,6 @@
          visibility: visible;
      }
 
-     /* right or prev direction */
      .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
      .carousel-item-prev.carousel-item-right + .carousel-item,
      .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
@@ -103,4 +107,4 @@
          visibility: visible;
      }
 
- }
+ } */

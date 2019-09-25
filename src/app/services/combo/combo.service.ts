@@ -69,6 +69,31 @@ export class ComboService {
         .pipe(map((resp:any) => {return resp.payload;}))
     }
   }
+  public getGradosOcurrencia(termino:any):Observable<any>{
+    if(termino){
+      if(termino.codigo.includes("-")){
+        termino.codigo = termino.codigo.split("-").slice(0,termino.codigo.split("-").length-1).join("-").trim();
+      }
+      return this.http.get(`${this.urlAPI}/ocurrencia/${termino.codigo}`)
+        .pipe(map((resp:any) => resp.payload));
+    }else{
+      return this.http.get(`${this.urlAPI}/ocurrencia`)
+        .pipe(map((resp:any) => resp.payload));
+    }
+  }
+
+  public getGradosImpacto(termino:any):Observable<any>{
+    if(termino){
+      if(termino.codigo.includes("-")){
+        termino.codigo = termino.codigo.split("-").slice(0,termino.codigo.split("-").length-1).join("-").trim();
+      }
+      return this.http.get(`${this.urlAPI}/impacto/${termino.codigo}`)
+        .pipe(map((resp:any) => resp.payload));
+    }else{
+      return this.http.get(`${this.urlAPI}/impacto`)
+        .pipe(map((resp:any) => resp.payload));
+    }
+  }
   public cargarFiltrosStore(filtros:Filtro){
     this.store.dispatch(new CargarFilterAction(filtros));
   }

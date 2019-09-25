@@ -45,6 +45,7 @@ export class AuthService {
                this.store.dispatch(new CargarUsuario(usuario));
                if(usuario.token){
                  // this.guardarStorage(usuario.token,usuario);
+
                  this.store.dispatch(new DesactivarLoadingAction());
                  this.router.navigate(['/']);
                }

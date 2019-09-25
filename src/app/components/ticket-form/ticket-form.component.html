@@ -21,13 +21,11 @@
                                       requerido = "true"
                                       nombre ="Contacto"
                                       placeholder = "Contacto"
+                                      [validar] = "true"
                                       (keyup)="getContactos(termino,$event)"
                                       (click) = "seleccionaContacto(contacto)"
                                       (actualizaEstado)="contactoValid = $event"
                                       (actualizaValor)="termino = $event"></app-angular-autocomplete>
-
-            <app-angular-autocomplete nombre ="Sector" placeholder="Sector"
-                                      (keyup) = "getState()" validar = "false"></app-angular-autocomplete>
 
             <button style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
                     *ngIf="valor!=0 && valor<=2"(click)="anteriorStep()" class="btn btn-info" >
@@ -49,6 +47,7 @@
                                       requerido = "true"
                                       nombre ="Versión"
                                       placeholder = "Versión"
+                                      [validar] = "true"
                                       (actualizaEstado)="versionValid = $event"
                                       (actualizaValor)="termino = $event"
                                       [valor] = "valorVersion"
@@ -62,14 +61,16 @@
                                      [valorModulo] = "valorModulo"
                                      moduloPlaceHolder ="Modulo"
                                      objetoPlaceHolder="Objeto"
-                                     [version] = "version"></app-combo-modulo-objeto>
+                                     [requerido] = "true"
+                                     [version] = "version"
+                                     (comboEstado) = "comboValid = $event"></app-combo-modulo-objeto>
 
                   <button style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
                           *ngIf="valor!=0 && valor<=2"(click)="anteriorStep()" class="btn btn-info" >
                           <i class="fa fa-chevron-left"></i> Anterior</button>
                   <button style="margin:10px;" href="#carouselExampleControls" data-slide="next"
                           *ngIf="valor<step-1" (click)="siguienteStep()" class="btn btn-info"
-                          [attr.disabled]="!versionValid?true:null"> Siguiente
+                          [attr.disabled]="!versionValid|| !comboValid ?true:null"> Siguiente
                           <i class="fa fa-chevron-right"></i></button>
                   <button style="margin:10px;" href="#carouselExampleControls" data-slide="next"
                           *ngIf="valor==step-1"(click)="enviar()" class="btn btn-success">Enviar
@@ -80,11 +81,29 @@
           <div class="form-group">
             <h4 style="font-weight:500;">{{titulo}}</h4>
             <h5 >{{subtitulo}}</h5>
-            <app-angular-autocomplete nombre ="Asunto"
-                                requerido="true"
-                                (actualizaValor)="termino = $event"
-                                placeholder="Asunto"></app-angular-autocomplete>
-            <form class="was-validated">
+            <app-angular-autocomplete [array] = "impactos"
+                                  requerido = "true"
+                                  nombre ="Impacto"
+                                  placeholder = "Impacto"
+                                  (actualizaEstado)="impactoValid = $event"
+                                  (actualizaValor)="termino = $event"
+                                  [valor] = "valorImpacto"
+                                  [validar] = "true"
+                                  (keyup)="getGradosImpacto(termino,$event)"
+                                  (click) = "seleccionaImpacto(version)"
+                                  (valorSeleccionado) = "impacto = $event"></app-angular-autocomplete>
+        <app-angular-autocomplete [array] = "ocurrencias"
+                                  requerido = "true"
+                                  nombre ="Ocurrencia"
+                                  placeholder = "Ocurrencia"
+                                  (actualizaEstado)="ocurrenciaValid = $event"
+                                  (actualizaValor)="termino = $event"
+                                  [valor] = "valorOcurrencia"
+                                  [validar] = "true"
+                                  (keyup)="getGradosOcurrencia(termino,$event)"
+                                  (click) = "seleccionaOcurrencia(version)"
+                                  (valorSeleccionado) = "ocurrencia = $event"></app-angular-autocomplete>
+              <form class="was-validated">
               <div class="mb-3">
                 <label for="validationTextarea"></label>
                 <textarea class="form-control is-invalid"
@@ -100,7 +119,8 @@
                     *ngIf="valor<step-1" (click)="siguienteStep()" class="btn btn-info" > Siguiente
                     <i class="fa fa-chevron-right"></i></button>
              <button style="margin:10px;" href="#carouselExampleControls" data-slide="next"
-                     *ngIf="valor==step-1"(click)="enviar()" class="btn btn-success">Enviar
+                     *ngIf="valor==step-1"(click)="enviar()" class="btn btn-success"
+                     [attr.disabled] = "!impactoValid || !ocurrenciaValid ?true:null">Enviar
                      <i class="fa fa-paper-plane"></i></button>
             </div>
           </div>

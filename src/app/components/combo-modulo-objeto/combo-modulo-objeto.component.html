@@ -3,6 +3,7 @@
                             (keyup)="getModulos(terminoModulo,$event)"
                             (click)="seleccionaModulo(modulo)"
                             [valor] = "valorModulo"
+                            [requerido] = "requerido==true"
                             (valorSeleccionado) = "modulo = $event"
                             (actualizaEstado) = "moduloValido = $event"
                             (actualizaValor)="seleccionaModulo($event)"></app-angular-autocomplete>
@@ -11,6 +12,7 @@
                             (keyup)="getObjetos(modulo,terminoObjeto,$event)"
                             (click)="seleccionaObjeto(objeto)"
                             [valor] = "valorObjeto"
+                            [requerido] = "requerido==true"
                             (valorSeleccionado) = "objeto = $event"
-                            (actualizaEstado) = "moduloValido = $event"
+                            (actualizaEstado) = "objetoValido = $event"
                             (actualizaValor)="seleccionaObjeto($event)"></app-angular-autocomplete>

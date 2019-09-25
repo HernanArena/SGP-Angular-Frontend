@@ -39,6 +39,7 @@ export class NgDropFilesDirective {
       let archivoTemp = archivosLista[propiedad];
       if(this._archivoListoParaSubir(archivoTemp)){
         let nuevoArchivo = new FileItem(archivoTemp);
+        console.log(nuevoArchivo);
         this.archivos.push(nuevoArchivo);
       }
     }

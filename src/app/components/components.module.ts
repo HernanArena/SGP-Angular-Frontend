@@ -8,13 +8,15 @@ import { StepBystepComponent } from './step-bystep/step-bystep.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { TicketFormComponent } from './ticket-form/ticket-form.component';
 import { ComboModuloObjetoComponent } from './combo-modulo-objeto/combo-modulo-objeto.component';
-import { MatAutocompleteModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import { MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatExpansionModule, MatListModule, MatTooltipModule} from '@angular/material';
 import { AngularAutocompleteComponent } from './angular-autocomplete/angular-autocomplete.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ResultsFooterComponent } from './results-footer/results-footer.component';
 import { RouterModule } from '@angular/router';
 import { DragzoneMultipleComponent } from './dragzone-multiple/dragzone-multiple.component';
 import { DirectiveModule } from '../directives/directive.module';
+import { CarrouselMultipleComponent } from './carrousel-multiple/carrousel-multiple.component';
+import { AccordionComponent } from './accordion/accordion.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { DirectiveModule } from '../directives/directive.module';
     AngularAutocompleteComponent,
     PaginationComponent,
     ResultsFooterComponent,
-    DragzoneMultipleComponent
+    DragzoneMultipleComponent,
+    CarrouselMultipleComponent,
+    AccordionComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +42,10 @@ import { DirectiveModule } from '../directives/directive.module';
     MatFormFieldModule,
     MatInputModule,
     RouterModule,
-    DirectiveModule
+    DirectiveModule,
+    MatExpansionModule,
+    MatListModule,
+    MatTooltipModule
   ],
   exports:[
     FinderComponent,
@@ -50,12 +57,17 @@ import { DirectiveModule } from '../directives/directive.module';
     PipesModule,
     PaginationComponent,
     MatAutocompleteModule,
+    MatListModule,
+    MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule,
     AngularAutocompleteComponent,
     PaginationComponent,
     ResultsFooterComponent,
-    DragzoneMultipleComponent
+    DragzoneMultipleComponent,
+    CarrouselMultipleComponent,
+    AccordionComponent
   ]
 })
 export class ComponentsModule { }
