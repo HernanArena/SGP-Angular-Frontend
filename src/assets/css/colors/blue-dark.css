@@ -31,8 +31,8 @@ File: scss
       color: #ffffff !important; }
   .topbar .top-navbar .navbar-nav > .nav-item > span {
     color: #ffffff; }
-  .topbar .navbar-header {
-    background: #272c33; }
+  /* .topbar .navbar-header {
+    background: #272c33; } */
 
 .logo-center .topbar .navbar-header {
   background: transparent;
