@@ -17,6 +17,8 @@ import { DragzoneMultipleComponent } from './dragzone-multiple/dragzone-multiple
 import { DirectiveModule } from '../directives/directive.module';
 import { CarrouselMultipleComponent } from './carrousel-multiple/carrousel-multiple.component';
 import { AccordionComponent } from './accordion/accordion.component';
+import { ItemFormComponent } from './item-form/item-form.component';
+import { ImagenComponent } from './imagen/imagen.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AccordionComponent } from './accordion/accordion.component';
     ResultsFooterComponent,
     DragzoneMultipleComponent,
     CarrouselMultipleComponent,
-    AccordionComponent
+    AccordionComponent,
+    ItemFormComponent,
+    ImagenComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +71,8 @@ import { AccordionComponent } from './accordion/accordion.component';
     ResultsFooterComponent,
     DragzoneMultipleComponent,
     CarrouselMultipleComponent,
-    AccordionComponent
+    AccordionComponent,
+    ItemFormComponent
   ]
 })
 export class ComponentsModule { }

@@ -31,6 +31,28 @@ export class SidebarService {
           url:'/licencias'
         },
         {
+          titulo:'Documentos',
+          icono:'mdi mdi-file-document',
+          sideMenu:[
+            {
+              titulo:'Crear',
+              icono:'fa fa-edit',
+              url:'/crear',
+            },
+            {
+              titulo:'Borrar',
+              icono:'fa fa-trash',
+              url:'/borrar',
+            },
+            {
+              titulo:'Modificar',
+              icono:'fa fa-refresh',
+              url:'/modificar',
+            }
+
+          ]
+        },
+        {
           titulo:'Salir',
           icono:'mdi mdi-logout',
           url:'/salir'

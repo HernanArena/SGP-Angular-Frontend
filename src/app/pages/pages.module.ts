@@ -14,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeModule } from './home/home.module';
+import { TicketCreatorModule } from './ticket-creator/ticket-creator.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HomeModule } from './home/home.module';
     ReactiveFormsModule,
     PAGES_ROUTING,
     ComponentsModule,
+    TicketCreatorModule,
     RouterModule,
     SharedModule,
     PipesModule,
@@ -33,7 +35,7 @@ import { HomeModule } from './home/home.module';
   ],
   exports:[
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
   ]
 })
 export class PagesModule { }

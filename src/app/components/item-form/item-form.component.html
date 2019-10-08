@@ -1,0 +1,175 @@
+<form [formGroup]="forma"
+      novalidate = "novalidate"
+      autocomplete="off">
+  <div class="form-material m-t-40"  id="carouselExampleControls" class="carousel slide"
+       data-interval="false" data-ride="carousel"  data-pause="hover">
+    <div class="carousel-inner" >
+      <div class="carousel-item active">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 class="card-title" style="text-align:left;">Descripción de pasos </h3>
+                </div>
+                <div class="col-md-6" style="text-align:right;margin-top:-10px">
+                  <button *ngIf="itemActual!==1?itemCargados.length == itemActual:false" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
+                          (click)="borrarItem()" class="btn btn-danger">
+                          <i class="fa fa-trash" style="margin-right:10px;"></i>Borrar</button>
+                  <button *ngIf="itemCargados.length == itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                          (click)="guardarNuevoItem()" class="btn btn-success">
+                          <i class="fa fa-plus" style="margin-right:10px;"></i>Nuevo</button>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                  <textarea #textEditor1
+                            type="textarea"
+                            formControlName="textEditor1"
+                            class="textarea_editor form-control"
+                            rows="15"
+                            placeholder="Escibrir aquí ..."></textarea>
+              </div>
+              <div class="row">
+                <div class="col-md-6" style="text-align:left;margin-top:-30px">
+                  <span>{{itemActual}} de {{itemCargados.length}} <small class="text-warning">(6 pasos máximo)</small></span>
+                </div>
+                <div  class="col-md-6" style="text-align:right;margin-top:-30px">
+                  <button  *ngIf="itemActual !== 1" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
+                          (click)="anteriorStep()" class="btn btn-info" >
+                          <i class="fa fa-chevron-left"></i> Anterior</button>
+                  <button *ngIf="itemCargados.length !== itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                           (click)="siguienteStep()" class="btn btn-info"> Siguiente
+                          <i class="fa fa-chevron-right"></i></button>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-3">
+              <app-imagen imagen = "imagen1=$event"></app-imagen>
+            </div>
+          </div>
+          <hr>
+
+          <div  style="text-align:center">
+            <button style="margin:10px;"
+                    (click)="guardarCambios(forma)" class="btn btn-success" >
+                    <i class="fa fa-save"></i> Guardar </button>
+          </div>
+
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 class="card-title" style="text-align:left;">Descripción de pasos </h3>
+                </div>
+                <div class="col-md-6" style="text-align:right;margin-top:-10px">
+                  <button *ngIf="itemActual!==1?itemCargados.length == itemActual:false" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
+                          (click)="borrarItem()" class="btn btn-danger">
+                          <i class="fa fa-trash" style="margin-right:10px;"></i>Borrar</button>
+                  <button *ngIf="itemCargados.length == itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                          (click)="guardarNuevoItem()" class="btn btn-success">
+                          <i class="fa fa-plus" style="margin-right:10px;"></i>Nuevo</button>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <textarea #textEditor2
+                          formControlName="textEditor1"
+                          class="textarea_editor form-control"
+                          rows="15"
+                          placeholder="Escibrir aquí ..."></textarea>
+              </div>
+              <div class="row">
+                <div class="col-md-6" style="text-align:left;margin-top:-30px">
+                  <span>{{itemActual}} de {{itemCargados.length}} <small class="text-warning">(6 pasos máximo)</small></span>
+                </div>
+                <div  class="col-md-6" style="text-align:right;margin-top:-30px">
+                  <button  *ngIf="itemActual !== 1" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
+                          (click)="anteriorStep()" class="btn btn-info" >
+                          <i class="fa fa-chevron-left"></i> Anterior</button>
+                  <button *ngIf="itemCargados.length !== itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                           (click)="siguienteStep()" class="btn btn-info"> Siguiente
+                          <i class="fa fa-chevron-right"></i></button>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-3">
+              <app-imagen  imagen = "imagen2 = $event"></app-imagen>
+            </div>
+          </div>
+          <hr>
+
+          <div  style="text-align:center">
+            <button style="margin:10px;"
+                    (click)="guardarCambios(forma)" class="btn btn-success" >
+                    <i class="fa fa-save"></i> Guardar </button>
+          </div>
+
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 class="card-title" style="text-align:left;">Descripción de pasos </h3>
+                </div>
+                <div class="col-md-6" style="text-align:right;margin-top:-10px">
+                  <button *ngIf="itemActual!==1?itemCargados.length == itemActual:false" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
+                          (click)="borrarItem()" class="btn btn-danger">
+                          <i class="fa fa-trash" style="margin-right:10px;"></i>Borrar</button>
+                  <button *ngIf="itemCargados.length !== itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                          (click)="guardarNuevoItem()" class="btn btn-success">
+                          <i class="fa fa-plus" style="margin-right:10px;"></i>Nuevo</button>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <textarea #textEditor3
+                          formControlName="textEditor1"
+                          class="textarea_editor form-control"
+                          rows="15"
+                          placeholder="Escibrir aquí ..."></textarea>
+              </div>
+              <div class="row">
+                <div class="col-md-6" style="text-align:left;margin-top:-30px">
+                  <span>{{itemActual}} de {{itemCargados.length}} <small class="text-warning">(6 pasos máximo)</small></span>
+                </div>
+                <div  class="col-md-6" style="text-align:right;margin-top:-30px">
+                  <button  *ngIf="itemActual !== 1" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
+                          (click)="anteriorStep()" class="btn btn-info" >
+                          <i class="fa fa-chevron-left"></i> Anterior</button>
+                  <button *ngIf="itemCargados.length !== itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                           (click)="siguienteStep()" class="btn btn-info"> Siguiente
+                          <i class="fa fa-chevron-right"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <app-imagen  imagen = "imagen3 = $event"></app-imagen>
+            </div>
+          </div>
+          <hr>
+
+          <div  style="text-align:center">
+            <button style="margin:10px;"
+                    (click)="guardarCambios(forma)" class="btn btn-success" >
+                    <i class="fa fa-save"></i> Guardar </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>

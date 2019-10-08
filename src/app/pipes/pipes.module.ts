@@ -4,13 +4,15 @@ import { TruncatePipe } from './truncate.pipe';
 import { SelectedPipe } from './selected.pipe';
 import { PasswordPipe } from './password.pipe';
 import { ExtensionsPipe } from './extensions.pipe';
+import { ImagenPipe } from './imagen.pipe';
 
 @NgModule({
   declarations: [
     TruncatePipe,
     SelectedPipe,
     PasswordPipe,
-    ExtensionsPipe
+    ExtensionsPipe,
+    ImagenPipe
   ],
   imports: [
     CommonModule

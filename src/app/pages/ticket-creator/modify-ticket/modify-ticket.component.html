@@ -1,0 +1,63 @@
+<app-title-page titulo = "Documentación de errores"
+                descrip ="Cree, borre o modifique errores controlados y partes publicos"
+                fontawsome = "fa fa-2x fa-cogs"
+                colorRibbon = "ribbon ribbon-corner ribbon-right ribbon-success">
+</app-title-page>
+
+<div class="row" style="margin-top:30px">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <app-angular-autocomplete [array] = "codigoSelect" requerido = "true"
+                              nombre ="Código" placeholder = "EJ: GR000016 -  Mensaje de error.."
+                              (valorSeleccionado) = "codigo = $event"
+                              (actualizaValor)="termino = $event"
+                              (keyup)="getError(termino,$event)"
+                              (click)="seleccionaError(codigo)"></app-angular-autocomplete>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<hr>
+<div style="text-align:left;">
+  <h3>Encabezado del error</h3>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <app-angular-autocomplete nombre ="Código de error"
+                              requerido = "true"
+                              placeholder="Código del error ..." disabled= true></app-angular-autocomplete>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <app-angular-autocomplete nombre ="Descripción del error"
+                                placeholder="Descripción del error ..."></app-angular-autocomplete>
+    </div>
+  </div>
+</div>
+
+
+  <div class="card" >
+      <div class="card-body p-b-0">
+        <div style="text-align:left;margin-top:-20px;" >
+          <h3>Descripción de pasos</h3>
+        </div>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs customtab" role="tablist">
+          <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Paso 1</span></a> </li>
+          <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Paso 2</span></a> </li>
+          <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages2" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Paso 3</span></a> </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+          <div class="tab-pane active" id="home2" role="tabpanel">
+              <div class="p-20">
+                  <h3>Best Clean Tab ever</h3>
+                  <h4>you can use it with the small code</h4>
+                  <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
+              </div>
+          </div>
+          <div class="tab-pane  p-20" id="profile2" role="tabpanel">2</div>
+          <div class="tab-pane p-20" id="messages2" role="tabpanel">3</div>
+      </div>
+  </div>

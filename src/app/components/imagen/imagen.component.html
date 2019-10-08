@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-body" align="center">
+      <h4 class="card-title">Imagen del item</h4>
+
+        <img *ngIf="!imagenTemp"[src]="noimagen" class="w150">
+        <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
+
+        <div style="margin-top: 10px;">
+          <input (change) = "seleccionImagen($event.target.files[0])" type="file">
+        </div>
+
+  </div>
+</div>

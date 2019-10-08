@@ -15,24 +15,17 @@
 <li class="nav-devider"></li>
 
               <li class="user-profile hide-menu">
-                <!-- <li class="nav-small-cap">USUARIO</li> -->
                   <li [routerLink]="['/perfil']"> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Ver perfil</span></a>
-
-                  <!-- <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-8">
-                      <h3><span class="badge badge-pill badge-secondary waves-effect"   routerLinkActive ="active">Perfil</span></h3>
-                    </div>
-                    <div class="col-md-2"></div>
-                  </div> -->
-
 
               </li>
               <li class="nav-devider"></li>
 
               <li class="nav-small-cap">PERSONAL</li>
               <li *ngFor="let menu of _sidebar.menu">
-                <li [routerLink]="menu.url" *ngFor="let menu of _sidebar.menu"> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu">{{menu.titulo}} </span></a>
+                <li [routerLink]="menu.url" *ngFor="let menu of _sidebar.menu"> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu" >{{menu.titulo}} <span *ngIf="menu.url == documentos"class="label label-rouded label-themecolor pull-right"><b>+</b></span></span></a>
+                  <ul aria-expanded="false" class="collapse">
+                      <li style="cursor: pointer;"  [routerLink]="sidemenu.url" *ngFor="let sidemenu of menu.sideMenu"><a ><i [class]="sidemenu.icono" style="margin-right:5px"></i>{{sidemenu.titulo}} </a></li>
+                  </ul>
               </li>
             </ul>
         </nav>

@@ -1,0 +1,19 @@
+<app-title-page titulo = "Documentación de errores"
+                descrip ="Cree, borre o modifique errores controlados y partes publicos"
+                fontawsome = "fa fa-2x fa-cogs"
+                colorRibbon = "ribbon ribbon-corner ribbon-right ribbon-success">
+</app-title-page>
+<div class="row" style="margin-top:30px">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <app-angular-autocomplete [array] = "codigoSelect" requerido = "true"
+                              nombre ="Código" placeholder = "EJ: GR000016 -  Mensaje de error.."
+                              (valorSeleccionado) = "codigo = $event"
+                              (actualizaValor)="termino = $event"
+                              (keyup)="getError(termino,$event)"
+                              (click)="seleccionaError(codigo)"></app-angular-autocomplete>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<button (click) = "mostrarModal()"  [attr.disabled] ="(termino==null||termino=='')?false:null"  class="btn btn-info">Buscar</button>
