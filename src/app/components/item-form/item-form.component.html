@@ -1,175 +1,252 @@
-<form [formGroup]="forma"
-      novalidate = "novalidate"
-      autocomplete="off">
-  <div class="form-material m-t-40"  id="carouselExampleControls" class="carousel slide"
-       data-interval="false" data-ride="carousel"  data-pause="hover">
-    <div class="carousel-inner" >
-      <div class="carousel-item active">
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-6">
-                  <h3 class="card-title" style="text-align:left;">Descripción de pasos </h3>
+<div class="card">
+    <div class="col-md-12 ">
+        <div class="card-body">
+          <div style="text-align:left;">
+            <h3 class="card-title">Encabezado del error </h3>
+          </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-7">
+                    <app-angular-autocomplete [array] = "tipos"
+                                              requerido = "true"
+                                              nombre ="Tipo"
+                                              placeholder = "Tipo de publicación"
+                                              [validar] = "true"
+                                              (keyup.enter)="recupera(termino,tipo)"
+                                              (keyup)="getTipos(tipo,$event)"
+                                              (click) = "seleccionaTipo(tipo)"
+                                              (actualizaEstado)="tipoValido = $event"
+                                              (actualizaValor)="tipo = $event"></app-angular-autocomplete>
+                  </div>
+                  <div *ngIf="tipo.codigo == 'Error'"class="col-md-5">
+                    <app-angular-autocomplete nombre ="Código de error"
+                                              requerido = "true"
+                                              (actualizaValor)="codigoError = $event"
+                                              placeholder="Código del error ..."></app-angular-autocomplete>
+                  </div>
+
                 </div>
-                <div class="col-md-6" style="text-align:right;margin-top:-10px">
-                  <button *ngIf="itemActual!==1?itemCargados.length == itemActual:false" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
-                          (click)="borrarItem()" class="btn btn-danger">
-                          <i class="fa fa-trash" style="margin-right:10px;"></i>Borrar</button>
-                  <button *ngIf="itemCargados.length == itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
-                          (click)="guardarNuevoItem()" class="btn btn-success">
-                          <i class="fa fa-plus" style="margin-right:10px;"></i>Nuevo</button>
+
+              </div>
+              <div *ngIf="tipo.codigo == 'Error'" class="col-md-6">
+                <div class="form-group">
+                  <app-angular-autocomplete nombre ="Descripción del error"
+                                            (actualizaValor)="descrpError = $event"
+                                            placeholder="Descripción del error ..."></app-angular-autocomplete>
                 </div>
               </div>
-
-
-              <div class="form-group">
-                  <textarea #textEditor1
-                            type="textarea"
-                            formControlName="textEditor1"
-                            class="textarea_editor form-control"
-                            rows="15"
-                            placeholder="Escibrir aquí ..."></textarea>
+            </div>
+            <div *ngIf="false"class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                    <input class="form-control" placeholder="tipo">
+                </div>
               </div>
-              <div class="row">
-                <div class="col-md-6" style="text-align:left;margin-top:-30px">
-                  <span>{{itemActual}} de {{itemCargados.length}} <small class="text-warning">(6 pasos máximo)</small></span>
+              <div class="col-md-6">
+                <div class="form-group">
+                    <input class="form-control" placeholder="texto">
                 </div>
-                <div  class="col-md-6" style="text-align:right;margin-top:-30px">
-                  <button  *ngIf="itemActual !== 1" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
-                          (click)="anteriorStep()" class="btn btn-info" >
-                          <i class="fa fa-chevron-left"></i> Anterior</button>
-                  <button *ngIf="itemCargados.length !== itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
-                           (click)="siguienteStep()" class="btn btn-info"> Siguiente
-                          <i class="fa fa-chevron-right"></i></button>
+              </div>
+            </div>
+            <hr>
+            <!-- botones arriba -->
+            <div class="row">
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3 class="card-title" style="text-align:left;">Descripción de pasos </h3>
+                  </div>
+                  <div class="col-md-6" style="text-align:right;margin-top:-10px">
+                    <button *ngIf="itemActual!==1?itemCargados.length == itemActual:false" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
+                            (click)="borrarItem()" class="btn btn-danger">
+                            <i class="fa fa-trash" style="margin-right:10px;"></i>Borrar</button>
+                    <button *ngIf="itemCargados.length!=6?itemCargados.length == itemActual:false" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                            (click)="guardarNuevoItem()" class="btn btn-success">
+                            <i class="fa fa-plus" style="margin-right:10px;"></i>Nuevo</button>
+                  </div>
                 </div>
+              </div>
+              <div class="col-md-3">
+              </div>
+            </div>
+
+            <!-- fin botones arriba -->
+            <form [formGroup]="forma"
+                  novalidate = "novalidate"
+                  autocomplete="off">
+              <div class="form-material m-t-40"  id="carouselExampleControls" class="carousel slide"
+                   data-interval="false" data-ride="carousel"  data-pause="hover">
+                <div class="carousel-inner" >
+
+                  <!-- item 1 -->
+                  <div class="carousel-item active" >
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-9">
+                          <div class="form-group">
+                              <textarea #textEditor1
+                                        type="textarea"
+                                        formControlName="textEditor1"
+                                        class="textarea_editor form-control"
+                                        rows="15"
+                                        placeholder="Escibrir aquí ..."></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <app-imagen (imagen) = "imagen1 = $event"></app-imagen>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- fin item 1 -->
+
+                  <!-- item 2 -->
+                  <div class="carousel-item">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-9">
+
+                          <div class="form-group">
+                            <textarea #textEditor2
+                                      formControlName="textEditor2"
+                                      class="textarea_editor form-control"
+                                      rows="15"
+                                      placeholder="Escibrir aquí ..."></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <app-imagen   (imagen) = "imagen2 = $event"></app-imagen>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--fin item 2 -->
+
+                  <!-- item 3 -->
+                  <div class="carousel-item">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-9">
+                          <div class="form-group">
+                            <textarea #textEditor3
+                                      formControlName="textEditor3"
+                                      class="textarea_editor form-control"
+                                      rows="15"
+                                      placeholder="Escibrir aquí ..."></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <app-imagen  (imagen) = "imagen3 = $event"></app-imagen>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <!-- fin item 3 -->
+
+                  <!-- item 4 -->
+                  <div class="carousel-item">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-9">
+                          <div class="form-group">
+                              <textarea #textEditor4
+                                        type="textarea"
+                                        formControlName="textEditor4"
+                                        class="textarea_editor form-control"
+                                        rows="15"
+                                        placeholder="Escibrir aquí ..."></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <app-imagen (imagen) = "imagen4 = $event"></app-imagen>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- fin item 4 -->
+
+                  <!-- item 5 -->
+                  <div class="carousel-item">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-9">
+
+                          <div class="form-group">
+                            <textarea #textEditor5
+                                      formControlName="textEditor5"
+                                      class="textarea_editor form-control"
+                                      rows="15"
+                                      placeholder="Escibrir aquí ..."></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <app-imagen (imagen) = "imagen5 = $event"></app-imagen>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--fin item 5 -->
+
+                  <!-- item 6 -->
+                  <div class="carousel-item">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-9">
+                          <div class="form-group">
+                            <textarea #textEditor6
+                                      formControlName="textEditor6"
+                                      class="textarea_editor form-control"
+                                      rows="15"
+                                      placeholder="Escibrir aquí ..."></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <app-imagen (imagen) = "imagen6 = $event"></app-imagen>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <!-- fin item 6 -->
+
+                </div>
+              </div>
+            </form>
+
+            <!-- botones abajo  -->
+            <div class="row">
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-6" style="text-align:left;margin-top:-30px">
+                    <span>{{itemActual}} de {{itemCargados.length}} <small class="text-warning">(6 pasos máximo)</small></span>
+                  </div>
+                  <div  class="col-md-6" style="text-align:right;margin-top:-30px">
+                    <button  *ngIf="itemActual !== 1" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
+                            (click)="anteriorStep()" class="btn btn-info" >
+                            <i class="fa fa-chevron-left"></i> Anterior</button>
+                    <button *ngIf="itemCargados.length !== itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
+                             (click)="siguienteStep()" class="btn btn-info"> Siguiente
+                            <i class="fa fa-chevron-right"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
 
               </div>
             </div>
-            <div class="col-md-3">
-              <app-imagen imagen = "imagen1=$event"></app-imagen>
-            </div>
-          </div>
-          <hr>
+            <!-- fin botones abajo -->
 
-          <div  style="text-align:center">
-            <button style="margin:10px;"
-                    (click)="guardarCambios(forma)" class="btn btn-success" >
-                    <i class="fa fa-save"></i> Guardar </button>
-          </div>
+            <hr>
+
+            <!-- boton guardar -->
+            <div  style="text-align:center">
+              <button style="margin:10px;"
+                      (click)="guardarCambios(forma)" class="btn btn-success" >
+                      <i class="fa fa-save"></i> Guardar </button>
+            </div>
 
         </div>
-      </div>
-      <div class="carousel-item">
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-6">
-                  <h3 class="card-title" style="text-align:left;">Descripción de pasos </h3>
-                </div>
-                <div class="col-md-6" style="text-align:right;margin-top:-10px">
-                  <button *ngIf="itemActual!==1?itemCargados.length == itemActual:false" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
-                          (click)="borrarItem()" class="btn btn-danger">
-                          <i class="fa fa-trash" style="margin-right:10px;"></i>Borrar</button>
-                  <button *ngIf="itemCargados.length == itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
-                          (click)="guardarNuevoItem()" class="btn btn-success">
-                          <i class="fa fa-plus" style="margin-right:10px;"></i>Nuevo</button>
-                </div>
-              </div>
-
-
-              <div class="form-group">
-                <textarea #textEditor2
-                          formControlName="textEditor1"
-                          class="textarea_editor form-control"
-                          rows="15"
-                          placeholder="Escibrir aquí ..."></textarea>
-              </div>
-              <div class="row">
-                <div class="col-md-6" style="text-align:left;margin-top:-30px">
-                  <span>{{itemActual}} de {{itemCargados.length}} <small class="text-warning">(6 pasos máximo)</small></span>
-                </div>
-                <div  class="col-md-6" style="text-align:right;margin-top:-30px">
-                  <button  *ngIf="itemActual !== 1" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
-                          (click)="anteriorStep()" class="btn btn-info" >
-                          <i class="fa fa-chevron-left"></i> Anterior</button>
-                  <button *ngIf="itemCargados.length !== itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
-                           (click)="siguienteStep()" class="btn btn-info"> Siguiente
-                          <i class="fa fa-chevron-right"></i></button>
-                </div>
-
-              </div>
-            </div>
-            <div class="col-md-3">
-              <app-imagen  imagen = "imagen2 = $event"></app-imagen>
-            </div>
-          </div>
-          <hr>
-
-          <div  style="text-align:center">
-            <button style="margin:10px;"
-                    (click)="guardarCambios(forma)" class="btn btn-success" >
-                    <i class="fa fa-save"></i> Guardar </button>
-          </div>
-
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-6">
-                  <h3 class="card-title" style="text-align:left;">Descripción de pasos </h3>
-                </div>
-                <div class="col-md-6" style="text-align:right;margin-top:-10px">
-                  <button *ngIf="itemActual!==1?itemCargados.length == itemActual:false" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
-                          (click)="borrarItem()" class="btn btn-danger">
-                          <i class="fa fa-trash" style="margin-right:10px;"></i>Borrar</button>
-                  <button *ngIf="itemCargados.length !== itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
-                          (click)="guardarNuevoItem()" class="btn btn-success">
-                          <i class="fa fa-plus" style="margin-right:10px;"></i>Nuevo</button>
-                </div>
-              </div>
-
-
-              <div class="form-group">
-                <textarea #textEditor3
-                          formControlName="textEditor1"
-                          class="textarea_editor form-control"
-                          rows="15"
-                          placeholder="Escibrir aquí ..."></textarea>
-              </div>
-              <div class="row">
-                <div class="col-md-6" style="text-align:left;margin-top:-30px">
-                  <span>{{itemActual}} de {{itemCargados.length}} <small class="text-warning">(6 pasos máximo)</small></span>
-                </div>
-                <div  class="col-md-6" style="text-align:right;margin-top:-30px">
-                  <button  *ngIf="itemActual !== 1" style="margin:10px;" href="#carouselExampleControls" data-slide="prev"
-                          (click)="anteriorStep()" class="btn btn-info" >
-                          <i class="fa fa-chevron-left"></i> Anterior</button>
-                  <button *ngIf="itemCargados.length !== itemActual" style="margin:10px;" href="#carouselExampleControls" data-slide="next"
-                           (click)="siguienteStep()" class="btn btn-info"> Siguiente
-                          <i class="fa fa-chevron-right"></i></button>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <app-imagen  imagen = "imagen3 = $event"></app-imagen>
-            </div>
-          </div>
-          <hr>
-
-          <div  style="text-align:center">
-            <button style="margin:10px;"
-                    (click)="guardarCambios(forma)" class="btn btn-success" >
-                    <i class="fa fa-save"></i> Guardar </button>
-          </div>
-
-        </div>
-      </div>
-
     </div>
-  </div>
-</form>
+</div>

@@ -9,7 +9,7 @@ export class ImagenComponent implements OnInit {
   imagenSubir:File;
   imagenTemp:string;
   noimagen:string = '../assets/images/images.png';
-  @Output() imagen:any = new EventEmitter();
+  @Output() public imagen:EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -20,7 +20,6 @@ export class ImagenComponent implements OnInit {
 
   }
   seleccionImagen(archivo:File){
-    console.log(archivo);
     if(!archivo){
       this.imagenSubir =  null;
       return;
@@ -31,6 +30,7 @@ export class ImagenComponent implements OnInit {
       return;
     }
     this.imagenSubir =  archivo;
+    if(archivo == undefined) this.imagen.emit("");
     this.imagen.emit(archivo);
 
     let reader = new FileReader();

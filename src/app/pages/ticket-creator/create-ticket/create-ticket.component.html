@@ -3,57 +3,5 @@
                 fontawsome = "fa fa-2x fa-cogs"
                 colorRibbon = "ribbon ribbon-corner ribbon-right ribbon-success">
 </app-title-page>
-<div class="card">
-    <div class="col-md-12 ">
-        <div class="card-body">
-          <div style="text-align:left;">
-            <h3 class="card-title">Encabezado del error </h3>
-          </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="row">
-                  <div class="col-md-7">
-                    <app-angular-autocomplete [array] = "tipos"
-                                              requerido = "true"
-                                              nombre ="Tipo"
-                                              placeholder = "Tipo de publicación"
-                                              [validar] = "true"
-                                              (keyup.enter)="recupera(termino,tipo)"
-                                              (keyup)="getTipos(tipo,$event)"
-                                              (click) = "seleccionaTipo(tipo)"
-                                              (actualizaEstado)="tipoValido = $event"
-                                              (actualizaValor)="tipo = $event"></app-angular-autocomplete>
-                  </div>
-                  <div *ngIf="tipo.codigo == 'Error'"class="col-md-5">
-                    <app-angular-autocomplete nombre ="Código de error"
-                                              requerido = "true"
-                                              placeholder="Código del error ..."></app-angular-autocomplete>
-                  </div>
 
-                </div>
-
-              </div>
-              <div *ngIf="tipo.codigo == 'Error'" class="col-md-6">
-                <div class="form-group">
-                  <app-angular-autocomplete nombre ="Descripción del error"
-                                            placeholder="Descripción del error ..."></app-angular-autocomplete>
-                </div>
-              </div>
-            </div>
-            <div *ngIf="false"class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                    <input class="form-control" placeholder="tipo">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                    <input class="form-control" placeholder="texto">
-                </div>
-              </div>
-            </div>
-            <hr>
-            <app-item-form></app-item-form>
-        </div>
-    </div>
-</div>
+<app-item-form ></app-item-form>

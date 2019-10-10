@@ -10,8 +10,7 @@ import { ModalWizardService } from './modal-wizard/modal-wizard.service';
 import { TicketFormService } from './ticket-form/ticket-form.service';
 import { ThemeService } from './theme/theme.service';
 import { NewManualService } from './new-manual/new-manual.service';
-
-
+import { TicketPublicService } from './ticket-public/ticket-public.service';
 
 @NgModule({
   imports: [
@@ -26,7 +25,8 @@ import { NewManualService } from './new-manual/new-manual.service';
     ModalWizardService,
     TicketFormService,
     ThemeService,
-    NewManualService
+    NewManualService,
+    TicketPublicService
   ]
 })
 export class ServicesModule { }

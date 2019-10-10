@@ -72,7 +72,8 @@ import { ImagenComponent } from './imagen/imagen.component';
     DragzoneMultipleComponent,
     CarrouselMultipleComponent,
     AccordionComponent,
-    ItemFormComponent
+    ItemFormComponent,
+    ImagenComponent
   ]
 })
 export class ComponentsModule { }
